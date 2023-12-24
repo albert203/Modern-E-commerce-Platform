@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <title>Document</title>
+    <!-- video recgnition -->
+    <!-- Βίντεο από τον χρήστη <a href="https://pixabay.com/el/users/humanoidevfx-12661853/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=video&amp;utm_content=25689">Humanoide VFX</a> από το <a href="https://pixabay.com/el//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=video&amp;utm_content=25689">Pixabay</a> -->
+  </head>
+  <body>
+    <div id="nav-container">
+      <!-- // CREATE A SOOT LOGO, SIMPLE, FROM SPIRITED AWAY -->
+      <div class="logo-container">
+        <img
+          class="logo-img"
+          src="logos/Untitled design.png"
+          alt="not loaded"
+        />
+        <h4 class="logo-text">Soot</h4>
+      </div>
+      <div class="nav-container">
+        <nav>
+          <ul class="ul-nav">
+            <li class="home"><a class="home-text" href="home.html">Home</a></li>
+            <li class="shop"><a id="style-5" href="shop.html">Shop</a></li>
+            <!-- <li class="contact"><a id="style-5" href="contact.html">Contact</a></li> -->
+            <!-- <li class="about"><a id="style-5"href="about.html">About</a></li> -->
+            <li class="login"><a id="style-5" href="login.html">Login</a></li>
+            <li class="Support">
+              <a id="style-5" href="about.html">Support</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <img class="bg-img" src="videos/anime-7687171.jpg" alt="not loaded" />
+    <div class="form-box">
+      <form class="form-login">
+        <h1 class="form-title">Sign In</h1>
+
+        <h3 class="email-title">Email</h3>
+        <input
+          class="input-container"
+          id="email-input"
+          type="Email"
+          autocomplete="email"
+          placeholder="Email"
+        />
+        <i class="email-icon"></i>
+
+        <h3 class="password-title">Password</h3>
+        <input
+          class="input-container"
+          id="password-input"
+          type="password"
+          placeholder="Password"
+        />
+        <i class="far fa-eye" id="togglePassword"></i>
+
+        <div class="remember-me-container">
+          <h4 class="remember-me-title">Remember me</h4>
+          <input class="remember-me-checkbox" type="checkbox" />
+        </div>
+
+        <div class="btn-container">
+          <button id="login-btn">Login</button>
+          <a class="forgot-password-title" href="#">forgot my password</a>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script src="js/script.js"></script>
+  <script>
+    document.querySelector(".mp4").playbackRate = 0.7;
+  </script>
+</html>

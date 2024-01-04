@@ -43,12 +43,12 @@
 // Sukana'sdomain expansion when clicking "shop" link
 
 // scrolling nav menu fades in and out using opacity
-const navbar = document.querySelector("#nav-container");
+const navbar = document.querySelector('#nav-container');
 let previousScrollY = 0;
 const fadeThreshold = 10;
 let isFadingOut = false;
 
-window.addEventListener("scroll", () => {
+window.addEventListener('scroll', () => {
   currentScrollY = window.scrollY;
 
   //fade out based on the direction and threshold
@@ -75,7 +75,7 @@ function FadeOutNavBar(scrollY) {
   let opacity = Math.max(0, 1 - (scrollY - fadeThreshold) / 200);
   if (opacity < 0.7) {
     navbar.style.opacity = 0.8;
-    navbar.style.transition = "opacity 0.5s";
+    navbar.style.transition = 'opacity 0.5s';
   } else {
     navbar.style.opacity = opacity;
   }
@@ -96,84 +96,84 @@ function FadeInNavBar() {
 // });
 
 // music player
-const audioPlayer = document.getElementById("audioPlayer");
-const progressBar = document.getElementById("progress-bar");
-const playBtn = document.getElementById("playBtn");
-const muteBtn = document.getElementById("muteBtn");
+const audioPlayer = document.getElementById('audioPlayer');
+const progressBar = document.getElementById('progress-bar');
+const playBtn = document.getElementById('playBtn');
+const muteBtn = document.getElementById('muteBtn');
 
 let isPlaying = false;
 
-playBtn.addEventListener("click", () => {
+playBtn.addEventListener('click', () => {
   if (isPlaying) {
     audioPlayer.pause();
-    playBtn.textContent = "⏵"; // Pause symbol
+    playBtn.textContent = '⏵'; // Pause symbol
     anime({
-      targets: "#progress-bar",
-      backgroundColor: "#555",
+      targets: '#progress-bar',
+      backgroundColor: '#555',
       duration: 500,
-      easing: "easeOut",
+      easing: 'easeOut',
     });
   } else {
     audioPlayer.play();
-    playBtn.textContent = "♫"; // Play symbol
+    playBtn.textContent = '♫'; // Play symbol
     anime({
-      targets: "#progress-bar",
-      backgroundColor: "#888",
+      targets: '#progress-bar',
+      backgroundColor: '#888',
       duration: 500,
-      easing: "easeIn",
+      easing: 'easeIn',
     });
   }
   isPlaying = !isPlaying;
 });
 
-muteBtn.addEventListener("click", () => {
+muteBtn.addEventListener('click', () => {
   audioPlayer.muted = !audioPlayer.muted;
   if (audioPlayer.muted) {
-    muteBtn.textContent = ""; // Mute symbol
+    muteBtn.textContent = ''; // Mute symbol
   } else {
-    muteBtn.textContent = ""; // Speaker symbol
+    muteBtn.textContent = ''; // Speaker symbol
   }
 });
 
-audioPlayer.addEventListener("timeupdate", () => {
+audioPlayer.addEventListener('timeupdate', () => {
   const progressWidth = (audioPlayer.currentTime / audioPlayer.duration) * 100;
   progressBar.style.width = `${progressWidth}%`;
 });
 
-audioPlayer.addEventListener("ended", () => {
+audioPlayer.addEventListener('ended', () => {
   isPlaying = false;
-  playBtn.textContent = "⏵"; // Pause symbol
+  playBtn.textContent = '⏵'; // Pause symbol
   anime({
-    targets: "#progress-bar",
-    backgroundColor: "#555",
+    targets: '#progress-bar',
+    backgroundColor: '#555',
     duration: 500,
-    easing: "easeOut",
+    easing: 'easeOut',
   });
 });
 
 // Animate progress bar on click
-progressBar.addEventListener("click", (event) => {
+progressBar.addEventListener('click', (event) => {
   const clickPosition = event.offsetX / progressBar.offsetWidth;
   const newTime = clickPosition * audioPlayer.duration;
   audioPlayer.currentTime = newTime;
   anime({
-    targets: "#progress-bar",
+    targets: '#progress-bar',
     width: `${clickPosition * 100}%`,
     duration: 300,
-    easing: "easeOut",
+    easing: 'easeOut',
   });
 });
 
 // Bonus: Add volume control
-const volumeSlider = document.createElement("input");
-volumeSlider.type = "range";
+const volumeSlider = document.createElement('input');
+volumeSlider.type = 'range';
 volumeSlider.min = 0;
 volumeSlider.max = 1;
 volumeSlider.value = audioPlayer.volume;
-volumeSlider.style.marginLeft = "10px";
+volumeSlider.style.marginLeft = '10px';
 controls.appendChild(volumeSlider);
 
-volumeSlider.addEventListener("change", () => {
+volumeSlider.addEventListener('change', () => {
   audioPlayer.volume = volumeSlider.value;
 });
 

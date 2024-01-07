@@ -1,54 +1,30 @@
 // import db from '../routes/queryRoutes';
-// import mysql from 'mysql';
+import express, { Request, Response } from 'express';
+import mysql from 'mysql2/promise';
 
-// const db = mysql.createConnection({
-//   host: Bun.env.DB_HOST,
-//   user: Bun.env.DB_USER,
-//   password: Bun.env.DB_PASSWORD,
-//   database: Bun.env.DB_DATABASE,
-// });
+// Define types for query results
+interface User {
+  // Define properties based on your table structure
+  id: number;
+  username: string;
+  email: string;
+  password: string;
+}
 
-/////////////////////////////////////////////////////////////////////////////////////
-// var connection;
+const db = mysql.createPool({
+  host: Bun.env.DB_HOST,
+  user: Bun.env.DB_USER,
+  password: Bun.env.DB_PASS,
+  database: Bun.env.DB_DATABASE,
+});
 
-// function handleDisconnect() {
-//   connection = mysql.createConnection(db_config); // Recreate the connection, since
-//   // the old one cannot be reused.
-
-//   connection.connect(function (err) {
-//     // The server is either down
-//     if (err) {
-//       // or restarting (takes a while sometimes).
-//       console.log('error when connecting to db:', err);
-//       setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
-//     } // to avoid a hot loop, and to allow our node script to
-//   }); // process asynchronous requests in the meantime.
-//   // If you're also serving http, display a 503 error.
-//   connection.on('error', function (err) {
-//     console.log('db error', err);
-//     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-//       // Connection to the MySQL server is usually
-//       handleDisconnect(); // lost due to either server restart, or a
-//     } else {
-//       // connnection idle timeout (the wait_timeout
-//       throw err; // server variable configures this)
-//     }
-//   });
-// }
-
-// handleDisconnect();
-
-/////////////////////////////////////////////////////////////////////////////////////
-
-// export const getAll = (req, res) => {
-//   db.query('SELECT * FROM root', (err, result) => {
-//     if (err) {
-//       console.log('Error: ', err);
-//     } else {
-//       res.send(result);
-//       console.log(result);
-//     }
-//   });
-// };
-// 172.28.80.1 as the host in mysql client on windows
-// 0.0.0.0 is the host for WSL2
+export const getAll = async (req: Request, res: Response) => {
+  try {
+    //an array of users
+    const [rows]: Array<User> = await db.execute('SELECT * FROM users');
+    res.json(rows);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).send('Error connecting to database');
+  }
+};

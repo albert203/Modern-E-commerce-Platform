@@ -15,3 +15,10 @@
 -- VALUES ('johndoe', 'johndoe@gmail.com', '123456');
 
 -- select * from users;
+
+
+-- more query stuff...........
+-- CREATE USER 'albert'@'localhost' IDENTIFIED BY 'password';
+-- GRANT ALL PRIVILEGES ON anime_store.* TO 'albert'@'loca
+-- lhost';
+

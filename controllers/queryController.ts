@@ -1,12 +1,12 @@
 // import db from '../routes/queryRoutes';
-import mysql from 'mysql';
+// import mysql from 'mysql';
 
-const db = mysql.createConnection({
-  host: Bun.env.DB_HOST,
-  user: Bun.env.DB_USER,
-  password: Bun.env.DB_PASSWORD,
-  database: Bun.env.DB_DATABASE,
-});
+// const db = mysql.createConnection({
+//   host: Bun.env.DB_HOST,
+//   user: Bun.env.DB_USER,
+//   password: Bun.env.DB_PASSWORD,
+//   database: Bun.env.DB_DATABASE,
+// });
 
 /////////////////////////////////////////////////////////////////////////////////////
 // var connection;
@@ -40,15 +40,15 @@ const db = mysql.createConnection({
 
 /////////////////////////////////////////////////////////////////////////////////////
 
-export const getAll = (req, res) => {
-  db.query('SELECT * FROM root', (err, result) => {
-    if (err) {
-      console.log('Error: ', err);
-    } else {
-      res.send(result);
-      console.log(result);
-    }
-  });
-};
+// export const getAll = (req, res) => {
+//   db.query('SELECT * FROM root', (err, result) => {
+//     if (err) {
+//       console.log('Error: ', err);
+//     } else {
+//       res.send(result);
+//       console.log(result);
+//     }
+//   });
+// };
 // 172.28.80.1 as the host in mysql client on windows
 // 0.0.0.0 is the host for WSL2

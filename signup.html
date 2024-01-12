@@ -32,10 +32,9 @@
             <li class="shop"><a id="style-5" href="shop.html">Shop</a></li>
             <!-- <li class="contact"><a id="style-5" href="contact.html">Contact</a></li> -->
             <!-- <li class="about"><a id="style-5"href="about.html">About</a></li> -->
-            <li class="login"><a id="style-5" href="login.html">Login</a></li>
-            <li class="Support">
-              <a id="style-5" href="about.html">Support</a>
-            </li>
+            <li class="signup"><a id="style-5" href="signup.html">Signup</a></li>
+            <li class="Support"><a id="style-5" href="about.html">Support</a></li>
+            
           </ul>
         </nav>
       </div>
@@ -43,39 +42,58 @@
 
     <img class="bg-img" src="videos/anime-7687171.jpg" alt="not loaded" />
     <div class="form-box">
-      <form class="form-login">
-        <h1 class="form-title">Sign In</h1>
-
-        <h3 class="email-title">Email</h3>
-        <input
-          class="input-container"
-          id="email-input"
-          type="Email"
-          autocomplete="email"
-          placeholder="Email"
+      
+      
+      <form class="form-login" action="/signup" method="post">
+        <h1 class="form-title">Sign Up</h1>
+    
+        <label for="first-name">First Name:</label> <input
+            id="first-name"
+            type="text"
+            autocomplete="given-name"
+            placeholder="First name"
+            required
+        />
+    
+        <label for="last-name">Last Name:</label> <input
+            id="last-name"
+            type="text"
+            autocomplete="family-name"
+            placeholder="Last name"
+            required
+        />
+    
+        <label for="email">Email:</label> <input
+            id="email"
+            type="email"
+            autocomplete="email"
+            placeholder="Email"
+            required
         />
         <i class="email-icon"></i>
-
-        <h3 class="password-title">Password</h3>
-        <input
-          class="input-container"
-          id="password-input"
-          type="password"
-          placeholder="Password"
+    
+        <label for="password">Password:</label> <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            required
         />
         <i class="far fa-eye" id="togglePassword"></i>
-
+        
         <div class="remember-me-container">
           <h4 class="remember-me-title">Remember me</h4>
           <input class="remember-me-checkbox" type="checkbox" />
         </div>
 
         <div class="btn-container">
-          <button id="login-btn">Login</button>
+          <button id="login-btn" type="submit">Login</button>
           <a class="forgot-password-title" href="#">forgot my password</a>
         </div>
-      </form>
-    </div>
+
+        </form>
+
+
+
   </body>
   <script src="js/script.js"></script>
   <script>

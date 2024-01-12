@@ -13,33 +13,6 @@
 //     }
 // )
 
-// const emailInput = document.querySelector('#email-input');
-// const passwordInput = document.querySelector('#password-input');
-// const loginButton = document.querySelector('#login-btn');
-// // if the login button is clicked,
-// // check if the email and password are correct
-// // if correct, display a success message
-// // if incorrect, display an error message in html
-
-// // form validation
-// loginButton.addEventListener('click', function (e){
-//     // get the values from the input fields
-//     const emailValue = emailInput.value;
-//     const passwordValue = passwordInput.value;
-//     // check if the values are correct
-//     if (emailValue === '' && passwordValue === ''){
-//         // give error message feedback within the input fields
-//         alert('Please fill in the email and password fields');
-//     } else if (emailValue === ''){
-//         alert('Please fill in the email field');
-//     } else if (passwordValue === ''){
-//         alert('Please fill in the password field');
-//     } else {
-//         alert('login successful');
-//     }
-//     e.preventDefault();
-// })
-
 // Sukana'sdomain expansion when clicking "shop" link
 
 // scrolling nav menu fades in and out using opacity
@@ -188,3 +161,22 @@ function updateProgressBar() {
 }
 
 updateProgressBar();
+
+//////////////////////////  SIGN UP FORM CREATE USER //////////////////////////
+
+
+
+loginbtn.addEventListener('click', (event) => {
+  
+
+  event.preventDefault();
+  const loginbtn = document.getElementById('login-btn');
+  const firstName = document.getElementById('first-name').value;
+  const lastName = document.getElementById('last-name').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  console.log('loginbtn clicked');
+  createUser(firstName, lastName, email, password);
+});
+

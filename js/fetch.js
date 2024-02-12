@@ -24,7 +24,7 @@ formSignup.addEventListener('submit', async (event) => {
       console.log(formData);
 
       try {
-        const response = fetch('/api/query/signupp', {
+        const response = fetch('/api/signupp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: formData,

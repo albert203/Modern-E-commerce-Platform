@@ -1,4 +1,5 @@
 -- Active: 1704598947293@@127.0.0.1@3306@anime_store
+
 -- Queries to create the database and the users table
 
 CREATE DATABASE IF NOT EXISTS anime_store;

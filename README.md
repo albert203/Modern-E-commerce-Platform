@@ -1,6 +1,6 @@
 # AnimatedLogin
-
-npm commands to run in terminal
+dsfsdfsf
+npm commands to run in termin
 
 ## These scripts can be found in package.json under "scripts":
 

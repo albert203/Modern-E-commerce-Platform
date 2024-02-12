@@ -1,7 +1,6 @@
 import express, { Request, Response} from 'express';
-import { getAll, createUser, createUserRest } from '../controllers/controller';
+import { getAll, createUser, createUserRest } from './controllers/controller';
 import mysql from 'mysql2/promise';
-
 
 const db = mysql.createPool({
   host: Bun.env.DB_HOST,
@@ -16,14 +15,15 @@ const app = express();
 
 const port = Bun.env.DB_PORT || 8000;
 
-app.get('/api/getall', getAll());
-app.post('/api/signup', createUser());
-app.post('/api/signupp', createUserRest());
-
 // this doesnt confirm the connection is working
 app.listen(port, () => {
   console.log(`Server is listening on port: ${port}`);
-}).use(express.json());
+});
+app.use(express.json());
+
+app.get('/api/getall', getAll);
+app.post('/api/signup', createUser);
+app.post('/api/signupp', createUserRest);
 
 export default db;
 

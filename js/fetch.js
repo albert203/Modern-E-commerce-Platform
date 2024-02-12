@@ -31,7 +31,7 @@ formSignup.addEventListener('submit', async (event) => {
         });
     
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error: ${response.status}`);
         }
     
         const result = await response.json();

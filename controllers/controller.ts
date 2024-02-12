@@ -1,4 +1,3 @@
-// import db from '../routes/queryRoutes';
 import express, { Request, Response } from 'express';
 import db from '../index.ts';
 

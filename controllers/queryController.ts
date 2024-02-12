@@ -33,36 +33,40 @@ export const getAll = async (req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    console.log('req.body', req.body);
-    // default static values that will be overwritten by the html form's data
-    const { firstName = 'testdefault', lastName = 'testdefault2', email = 'testdefault3', password = 'testdefault' } = req.body;
     
+    // default static values that will be overwritten by the html form's data
+    const { 
+      firstName = 'defaultFirstName', 
+      lastName = 'defaultLastName', 
+      email = 'default.test@gmail.com', 
+      password = 'defaultPassword' 
+    } = req.body;
+
     // Query using html form's data to create a user
     const [rows]: Array<User> = await db.execute('INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)', [firstName, lastName, email, password]);
-    res.json(rows);
     console.log('rows', rows);
-    // Send a 201 response with the user creation user data
-    res.status(201).json(rows);
+    res.json([rows]); // Send a JSON response with the newly created user
+
   } catch (error) {
-    console.error('Error creating user:', error);
     res.status(500).json({ error: 'Failed to create user' }); // Send a 500 Internal Server Error response
   }
 };
 
-// export const createUserQuery = async (
-//   firstName: string, 
-//   lastName: string, 
-//   email: string, 
-//   password: string
-//   ) => {
-//   try {
-//     const [rows]: Array<User> = await db.execute('INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)', [firstName, lastName, email, password]);
-//     // Assuming `db` is configured to interact with your database
+export const createUserRest = async (req: Request, res: Response) => {
+  // default static values that will be overwritten by the html form's data
+  const { firstName, lastName, email, password } = req.body;
 
-//     // Handle successful user creation, e.g., return the created user or redirect
-//   } catch (error) {
-//     throw new Error('Error creating user:', error); // Rethrow for better error handling
-//   }
-// };
+  try {
+    // Query using html form's data to create a user
+    const [rows]: Array<User> = await db.execute('INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)', [firstName, lastName, email, password]);
+    console.log('rows', rows);
+    res.json([rows]); // Send a JSON response with the newly created user
+
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create user' }); // Send a 500 Internal Server Error response
+  }
+};
+
+
 
   

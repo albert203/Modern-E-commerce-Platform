@@ -162,21 +162,7 @@ function updateProgressBar() {
 
 updateProgressBar();
 
-//////////////////////////  SIGN UP FORM CREATE USER //////////////////////////
 
 
 
-loginbtn.addEventListener('click', (event) => {
-  
-
-  event.preventDefault();
-  const loginbtn = document.getElementById('login-btn');
-  const firstName = document.getElementById('first-name').value;
-  const lastName = document.getElementById('last-name').value;
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-
-  console.log('loginbtn clicked');
-  createUser(firstName, lastName, email, password);
-});
 

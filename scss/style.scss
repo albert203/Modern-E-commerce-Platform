@@ -116,7 +116,7 @@
   width: 100vw;
 }
 
-.form-login {
+#form-signup {
   /* background: rgb(73, 23, 23); */
   align-self: center;
   /* background-color: #3f330d; */
@@ -140,7 +140,7 @@
 
 // make it so you click the form and it expands and makes login details visible
 
-.form-login:hover {
+#form-signup:hover {
   transition: 5s ease-in-out;
 }
 
@@ -196,7 +196,7 @@ label{
 
 
 @media (max-width: 576px) { /* Adjust for smaller screens */
-  .form-login {
+  #form-signup {
       padding: 15px;
   }
   

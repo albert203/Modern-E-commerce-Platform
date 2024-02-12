@@ -1,0 +1,233 @@
+index.ts-
+import express, { Request, Response} from 'express';
+import notesRouter from './routes/notesRoutes';
+import queryRouter from './routes/queryRoutes';
+
+// to post things we need to use middleware
+// if we do not write this we cannot get the req.body
+const app = express();
+
+// apply middleware one time only
+app.use(express.json()); 
+
+const port = Bun.env.DB_PORT || 8000;
+
+
+app.use('/api/notes', notesRouter);
+app.use('/api/query', queryRouter);
+
+// this doesnt confirm the connection is working
+app.listen(port, () => {
+  console.log(`Server is listening on port: ${port}`);
+});
+
+queryRoutes.ts-
+import express from 'express';
+import { getAll, createUser } from '../controllers/queryController';
+
+const queryRouter = express.Router();
+
+queryRouter.route('/getall').get(getAll);
+queryRouter.route('/signup').post(createUser); // Ensure consistency with client-side request URL
+
+export default queryRouter;
+
+query controller.ts-
+// import db from '../routes/queryRoutes';
+import express, { Request, Response } from 'express';
+import mysql from 'mysql2/promise';
+
+// Define types for query results
+interface User {
+  // Define properties based on your table structure
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+}
+
+const db = mysql.createPool({
+  host: Bun.env.DB_HOST,
+  user: Bun.env.DB_USER,
+  password: Bun.env.DB_PASS,
+  database: Bun.env.DB_DATABASE,
+});
+
+export const createUser = async (req: Request, res: Response) => {
+  try {
+    
+    // default static values that will be overwritten by the html form's data
+    const { 
+      firstName = 'testdefault', 
+      lastName = 'testdefault2', 
+      email = 'testdefault3', 
+      password = 'testdefault' 
+    } = req.body;
+
+    // Query using html form's data to create a user
+    const [rows]: Array<User> = await db.execute('INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)', [firstName, lastName, email, password]);
+    res.json([rows]); // Send a JSON response with the newly created user
+
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create user' }); // Send a 500 Internal Server Error response
+  }
+};
+fetch.js- 
+const formSignup = document.getElementById('form-signup');
+
+formSignup.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    // firstName = document.getElementById('first-name').value;
+    // lastName = document.getElementById('last-name').value;
+    // email = document.getElementById('email').value;
+    // password = document.getElementById('password').value;
+
+    const firstName = "sarah";
+    const lastName = "smith";
+    const email = "sarah.smith@gmail.com";
+    const password = "password";
+  
+    // Use the relative URL for the fetch request
+    try{
+        const fetchResponse = await fetch('/api/query/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ firstName, lastName, email, password })
+        });
+        // // Check for empty fetchResponse before parsing JSON
+        // if (fetchResponse.status === 204 || fetchResponse.status === 205) {
+        //     console.log('Empty fetchResponse received');
+        //     return;
+        // }
+        if (!fetchResponse.ok) {
+            throw new Error(`\nHTTP ERROR: ${fetchResponse.status}\n HTTP statusTest: (${fetchResponse.statusText})`);
+        }
+        
+        data = await fetchResponse.json();
+
+        console.log('fetchResponse data:', data);
+        console.log('First name:', firstName);
+        console.log('Last name:', lastName);
+        console.log('Email:', email);
+        console.log('Password', password);
+
+            // Log status code
+        console.log('fetchResponse status:', fetchResponse.status);
+
+        // Log headers (optional)
+        console.log('fetchResponse headers:', fetchResponse.headers);
+
+    } catch (error) {
+        console.error("Error: ", error);
+    }
+});
+signup.html-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <title>Document</title>
+    <!-- video recgnition -->
+    <!-- Βίντεο από τον χρήστη <a href="https://pixabay.com/el/users/humanoidevfx-12661853/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=video&amp;utm_content=25689">Humanoide VFX</a> από το <a href="https://pixabay.com/el//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=video&amp;utm_content=25689">Pixabay</a> -->
+  </head>
+  <body>
+    <div id="nav-container">
+      <!-- // CREATE A SOOT LOGO, SIMPLE, FROM SPIRITED AWAY -->
+      <div class="logo-container">
+        <img
+          class="logo-img"
+          src="logos/Untitled design.png"
+          alt="not loaded"
+        />
+        <h4 class="logo-text">Soot</h4>
+      </div>
+      <div class="nav-container">
+        <nav>
+          <ul class="ul-nav">
+            <li class="home"><a class="home-text" href="home.html">Home</a></li>
+            <li class="shop"><a id="style-5" href="shop.html">Shop</a></li>
+            <!-- <li class="contact"><a id="style-5" href="contact.html">Contact</a></li> -->
+            <!-- <li class="about"><a id="style-5"href="about.html">About</a></li> -->
+            <li class="signup"><a id="style-5" href="signup.html">Signup</a></li>
+            <li class="Support"><a id="style-5" href="about.html">Support</a></li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <img class="bg-img" src="videos/anime-7687171.jpg" alt="not loaded" />
+    <div class="form-box">
+      
+      
+      <form id="form-signup">
+        <h1 class="form-title">Sign Up</h1>
+    
+        <label for="first-name">First Name:</label> <input
+            id="first-name"
+            type="text"
+            autocomplete="given-name"
+            placeholder="First name"
+            required
+        />
+    
+        <label for="last-name">Last Name:</label> <input
+            id="last-name"
+            type="text"
+            autocomplete="family-name"
+            placeholder="Last name"
+            required
+        />
+    
+        <label for="email">Email:</label> <input
+            id="email"
+            type="email"
+            autocomplete="email"
+            placeholder="Email"
+            required
+        />
+        <i class="email-icon"></i>
+    
+        <label for="password">Password:</label> <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            required
+        />
+        <i class="far fa-eye" id="togglePassword"></i>
+        
+        <div class="remember-me-container">
+          <h4 class="remember-me-title">Remember me</h4>
+          <input class="remember-me-checkbox" type="checkbox" />
+        </div>
+
+        <div class="btn-container">
+          <button id="login-btn" type="submit">Login</button>
+          <a class="forgot-password-title" href="#">forgot my password</a>
+        </div>
+
+        </form>
+
+
+
+  </body>
+  <script src="js/fetch.js"></script>
+</html>
+
+
+
+
+  
+

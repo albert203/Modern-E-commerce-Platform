@@ -1,0 +1,27 @@
+{
+  "name": "animatedlogin",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun run index.ts",
+    "sass": "scss --watch scss:css",
+    "dev": "bun --watch index.ts",
+    "debug": "bun --inspect index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/mysql": "^2.15.25"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql-server": "^1.0.5",
+    "mysql2": "^3.6.5",
+    "nodemon": "^3.0.2",
+    "prettier": "^3.1.1"
+  }
+}

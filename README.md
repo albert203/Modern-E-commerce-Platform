@@ -23,3 +23,10 @@ npm commands to run in termin
 ## TODO
 
 - install yarn lockfiles for packages using bun.js
+
+
+
+## URL TO test getall
+
+- URL:
+<!-- $UBUNTUIP:$PORT/api/getall -->

@@ -17,7 +17,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/', express.static('public'));
+app.use(express.static('public'))
 
 // this doesnt confirm the connection is working
 app.get('/api/getall', getAll);

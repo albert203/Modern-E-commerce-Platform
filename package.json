@@ -10,18 +10,14 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "@types/mysql": "^2.15.25"
+    "@types/node": "^20.11.19"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
     "express": "^4.18.2",
-    "mysql-server": "^1.0.5",
     "mysql2": "^3.6.5",
-    "nodemon": "^3.0.2",
-    "prettier": "^3.1.1"
+    "nodemon": "^3.0.2"
   }
 }

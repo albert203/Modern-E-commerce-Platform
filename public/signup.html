@@ -47,23 +47,28 @@
       <form id="form-signup">
         <h1 class="form-title">Sign Up</h1>
     
-        <label for="first-name">First Name:</label> <input
+        <label for="first-name">First Name:</label> 
+        <input
             id="first-name"
             type="text"
             autocomplete="given-name"
             placeholder="First name"
             required
         />
+        <div class="validation-message"></div>
     
-        <label for="last-name">Last Name:</label> <input
+        <label for="last-name">Last Name:</label> 
+        <input
             id="last-name"
             type="text"
             autocomplete="family-name"
             placeholder="Last name"
             required
         />
+        <div class="validation-message"></div>
     
-        <label for="email">Email:</label> <input
+        <label for="email">Email:</label> 
+        <input
             id="email"
             type="email"
             autocomplete="email"
@@ -71,18 +76,33 @@
             required
         />
         <i class="email-icon"></i>
+        <div class="validation-message"></div>
     
-        <label for="password">Password:</label> <input
+        <label for="password">Password:</label> 
+        <input
             id="password"
             type="password"
             placeholder="Password"
             required
         />
         <i class="far fa-eye" id="togglePassword"></i>
+        <div class="validation-message"></div>
+
+        <label for="confirmPassword">Confirm Password:</label> 
+        <input
+            id="confirmpassword"
+            type="password"
+            placeholder="Password"
+            required
+        />
+        <i class="far fa-eye" id="toggleConfirmPassword"></i>
+        
+        <div class="validation-message"></div>
         
         <div class="remember-me-container">
           <h4 class="remember-me-title">Remember me</h4>
           <input class="remember-me-checkbox" type="checkbox" />
+          <label for="remember-me">Keep me signed in</label>
         </div>
 
         <div class="btn-container">
@@ -92,5 +112,6 @@
 
         </form>
   </body>
+  <script src="js/script.js"></script>
   <script src="js/fetch.js"></script>
 </html>

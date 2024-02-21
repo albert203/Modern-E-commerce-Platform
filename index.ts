@@ -24,11 +24,9 @@ app.get('/api/getall', getAll);
 app.post('/api/signup', createUser);
 app.post('/api/signupp', createUserRest);
 
-
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server is listening on port: ${port}`);
-});
-
+})
 
 export default db;
 

@@ -163,10 +163,10 @@
   pointer-events: auto;
   transform: translate(-50%, -50%) scale(1);
 }
-.signupForm {
+#signup_form {
   display: none;
 }
-.form_container.active .signupForm {
+.form_container.active #signup_form {
   display: block;
 }
 .form_container.active .login_form {

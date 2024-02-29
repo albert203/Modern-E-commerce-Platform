@@ -1,6 +1,6 @@
 //////////////////////////  SIGN UP FORM CREATE USER //////////////////////////
 
-const formSignup = document.getElementById('signupForm');
+const formSignup = document.getElementById('signup_form');
 
 formSignup.addEventListener('submit', async (event) => {
     

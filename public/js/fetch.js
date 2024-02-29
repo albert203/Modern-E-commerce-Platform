@@ -1,26 +1,25 @@
 //////////////////////////  SIGN UP FORM CREATE USER //////////////////////////
 
-const formSignup = document.getElementById('form-signup');
+const formSignup = document.getElementById('signupForm');
 
 formSignup.addEventListener('submit', async (event) => {
+    
     event.preventDefault();
 
-      const firstName = formSignup.elements.namedItem('first-name').value;
-      const lastName = formSignup.elements.namedItem('last-name').value;
-      const email = formSignup.elements.namedItem('email').value;
-      const password = formSignup.elements.namedItem('password').value;
-      // const firstName = document.getElementById('firstName').value;
-      // const lastName = document.getElementById('lastName').value;
-      // const email = document.getElementById('email').value;
-      // const password = document.getElementById('password').value;
+      const firstName = document.getElementById('first-name').value;
+      const lastName = document.getElementById('last-name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
     
       const formData = {
         firstName,
         lastName,
         email,
         password,
+        confirmPassword
       };
-
+      
       console.log(formData);
 
       try {

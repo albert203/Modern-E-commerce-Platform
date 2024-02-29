@@ -57,27 +57,24 @@ export const createUserRest = async (req: Request, res: Response) => {
   // create validation using joi
   const schema = Joi.object({
     firstName: Joi.string()
-        .required()
-        .max(50)
-        .label("firstName"),
+      .required()
+      .max(50),
     lastName: Joi.string()
-        .required()
-        .max(50)
-        .label("lastName"),
+      .required()
+      .max(50),
     email: Joi.string()
-        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+      .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
     password: Joi.string()
-        .required()
-        .min(12)
-        .pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$')) // Enforce complexity)
-        .error(new Error('Password must be at least 12 characters long and contain one lowercase letter, one uppercase letter, one number, and one special symbol.')) // Custom error message
-        .label("Password")
-    // confirmPassword: Joi.string()
-    //     .required()
-    //     .valid(Joi.ref('password')) // Ensure password match
-    //     .label("Confirm Password")
-    //     .error(new Error('Passwords do not match.')), // Custom error message
-  })
+      .required()
+      .min(12)
+      .pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$'))
+      .error(new Error('Password must be at least 12 characters long and contain one lowercase letter, one uppercase letter, one number, and one special symbol.')),
+    confirmPassword: Joi.string()
+      .required()
+      .valid(Joi.ref('password')) // ensure passwords match
+      .error(new Error('Passwords do not match.'))
+  });
+
   const { error, value } = schema.validate(req.body);
     if (error) {
       return res.status(400).json({ error: error.message }); // Bad request with specific error message
@@ -91,9 +88,9 @@ export const createUserRest = async (req: Request, res: Response) => {
       console.error('Error generating salt', err);
       return res.status(500).json({ error: 'Failed to hash password' });
     }
-    // Hash the password with the generated salt
-    const hashPassword = await bcrypt.hash(value.password, salt);
-    console.log('Hashed password:', hashPassword );
+  // Hash the password with the generated salt
+  const hashPassword = await bcrypt.hash(value.password, salt);
+  console.log('Hashed password:', hashPassword );
   const { firstName, lastName, email, password } = req.body;
 
   try {

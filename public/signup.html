@@ -5,11 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
-    <link />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-    />
+    
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
     <title>Document</title>
     <!-- video recgnition -->
     <!-- Βίντεο από τον χρήστη <a href="https://pixabay.com/el/users/humanoidevfx-12661853/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=video&amp;utm_content=25689">Humanoide VFX</a> από το <a href="https://pixabay.com/el//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=video&amp;utm_content=25689">Pixabay</a> -->
@@ -18,100 +16,201 @@
     <div id="nav-container">
       <!-- // CREATE A SOOT LOGO, SIMPLE, FROM SPIRITED AWAY -->
       <div class="logo-container">
-        <img
+        <!-- <img
           class="logo-img"
-          src="../logos/Untitled design.png"
-          alt="not loaded"
-        />
-        <h4 class="logo-text">Soot</h4>
+          src="#"
+          alt="Logo"
+        /> -->
+      <div class="logo-bg">
+        <h4 class="logo-text">The Logo</h4>
       </div>
+      </div>
+      
       <div class="nav-container">
         <nav>
           <ul class="ul-nav">
-            <li class="home"><a class="home-text" href="home.html">Home</a></li>
+            <li class="home"><a class="home-text" id="style-5" href="home.html">Home</a></li>
             <li class="shop"><a id="style-5" href="shop.html">Shop</a></li>
-            <!-- <li class="contact"><a id="style-5" href="contact.html">Contact</a></li> -->
-            <!-- <li class="about"><a id="style-5"href="about.html">About</a></li> -->
             <li class="signup"><a id="style-5" href="signup.html">Signup</a></li>
             <li class="Support"><a id="style-5" href="about.html">Support</a></li>
-            
+            <button class="button" id="form-open">Login</button>
           </ul>
         </nav>
       </div>
     </div>
 
-    <img class="bg-img" src="videos/anime-7687171.jpg" alt="not loaded" />
+    <!-- Home -->
+    <section class="home-section">
+      <div class="form_container">
+        <i class="uil uil-times form_close"></i>
+        <!-- Login From -->
+        <div class="form login_form">
+          <form action="#">
+            <h2>Login</h2>
+
+            <div class="input_box">
+              <input type="email" placeholder="Enter your email" required />
+              <i class="uil uil-envelope-alt email"></i>
+            </div>
+            <div class="input_box">
+              <input type="password" placeholder="Enter your password" required />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+
+            <div class="option_field">
+              <span class="checkbox">
+                <input type="checkbox" id="check" />
+                <label for="check">Remember me</label>
+              </span>
+              <a href="#" class="forgot_pw">Forgot password?</a>
+            </div>
+
+            <button class="form-button">Login Now</button>
+
+            <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
+          </form>
+        </div>
+
+        <!-- Signup From -->
+        <div class="form">
+          <form id="signupForm">
+            <h2>Signup</h2>
+
+            <div class="input_box">
+              <i class="gg--profile profileIcon"></i>
+              <input 
+                id="first-name"
+                type="text"
+                autocomplete="given-name"
+                placeholder="Enter first name"
+                required
+              />
+            </div>
+            <!-- <div class="validation-message"></div> -->
+
+            <div class="input_box">
+              <i class="gg--profile profileIcon"></i>
+              <input
+                id="last-name"
+                type="text"
+                autocomplete="family-name"
+                placeholder="Enter last name"
+                required
+              />
+            </div>
+            <!-- <div class="validation-message"></div> -->
+
+            <div class="input_box">
+              <input 
+                id="email"
+                type="email"
+                autocomplete="email"
+                placeholder="Email"
+                required
+              />
+              <i class="uil uil-envelope-alt email"></i>
+            </div>
+            <!-- <div class="validation-message"></div> -->
+            
+            <div class="input_box">
+              <input 
+                id="password"
+                type="password"
+                placeholder="Create Password"
+                required
+              />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+            <!-- <div class="validation-message"></div> -->
+
+            <div class="input_box">
+              <input 
+                id="confirm-password"
+                type="password"
+                placeholder="Confirm Password"
+                required
+              />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+            <!-- <div class="validation-message"></div> -->
+            <button class="form-button signup-button" type="submit">Signup Now</button>
+
+            <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- old html -->
+
+    <!-- <img class="bg-img" src="assets/images/workspace-1280538.jpg" alt="not loaded" />
+
     <div class="form-box">
-      
-      
       <form id="form-signup">
         <h1 class="form-title">Sign Up</h1>
-    
-        <label for="first-name">First Name:</label> 
-        <input
-            id="first-name"
-            type="text"
-            autocomplete="given-name"
-            placeholder="First name"
-            required
-        />
-        <div class="validation-message"></div>
-    
-        <label for="last-name">Last Name:</label> 
-        <input
-            id="last-name"
-            type="text"
-            autocomplete="family-name"
-            placeholder="Last name"
-            required
-        />
-        <div class="validation-message"></div>
-    
-        <label for="email">Email:</label> 
-        <input
-            id="email"
-            type="email"
-            autocomplete="email"
-            placeholder="Email"
-            required
-        />
-        <i class="email-icon"></i>
-        <div class="validation-message"></div>
-    
-        <label for="password">Password:</label> 
-        <input
-            id="password"
-            type="password"
-            placeholder="Password"
-            required
-        />
-        <i class="far fa-eye" id="togglePassword"></i>
+        
+        <div class="input_box">
+          <label for="first-name">First Name:</label> 
+          <input
+              id="first-name"
+              type="text"
+              autocomplete="given-name"
+              placeholder="First name"
+              required
+          />
+          </div>
         <div class="validation-message"></div>
 
-        <label for="confirmPassword">Confirm Password:</label> 
-        <input
-            id="confirmpassword"
-            type="password"
-            placeholder="Password"
-            required
-        />
-        <i class="far fa-eye" id="toggleConfirmPassword"></i>
-        
-        <div class="validation-message"></div>
-        
-        <div class="remember-me-container">
-          <h4 class="remember-me-title">Remember me</h4>
-          <input class="remember-me-checkbox" type="checkbox" />
-          <label for="remember-me">Keep me signed in</label>
+        <div class="input_box">
+          <label for="last-name">Last Name:</label> 
+          <input
+              id="last-name"
+              type="text"
+              autocomplete="family-name"
+              placeholder="Last name"
+              required
+          />
         </div>
+        <div class="validation-message"></div>
+    
+        <div class="input_box">
+          <label for="email">Email:</label> 
+          <input
+              id="email"
+              type="email"
+              autocomplete="email"
+              placeholder="Email"
+              required
+          />
+          <i class="email-icon"></i>
+        </div>
+        <div class="validation-message"></div>
+    
+        <div class="input_box">
+          <label for="password">Password:</label> 
+          <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              required
+          />
+          <i class="far fa-eye" id="togglePassword"></i>
+        </div>
+        <div class="validation-message"></div>
 
         <div class="btn-container">
           <button id="login-btn" type="submit">Login</button>
           <a class="forgot-password-title" href="#">forgot my password</a>
         </div>
 
-        </form>
+      </form> 
+    </div> -->
   </body>
+  <script src="js/login.js"></script>
   <script src="js/script.js"></script>
   <script src="js/fetch.js"></script>
 </html>

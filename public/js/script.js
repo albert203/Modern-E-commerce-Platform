@@ -1,27 +1,3 @@
-// Toggle password visibility
-const password = document.querySelector('#password');
-const confirmPassword = document.querySelector('#confirmpassword');
-
-// Wait for content to load first
-document.addEventListener('DOMContentLoaded', () => {
-  const togglePassword = document.querySelector('#togglePassword');
-  const toggleConfirmPassword = document.querySelector('#toggleConfirmPassword');
-
-  // On clicking the eye icon, toggle visibility
-  togglePassword.addEventListener('click', () => {
-    const type = password.type === 'password' ? 'text' : 'password';
-    password.setAttribute('type', type);
-    
-  });
-  // On clicking the confirm password eye icon, toggle visibility
-  toggleConfirmPassword.addEventListener('click', () => {
-    const type = confirmPassword.type === 'password' ? 'text' : 'password';
-    confirmPassword.setAttribute('type', type);
-  });
-});
-
-
-
 // scrolling nav menu fades in and out using opacity
 const navbar = document.querySelector('#nav-container');
 let previousScrollY = 0;

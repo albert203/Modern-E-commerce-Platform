@@ -1,10 +1,10 @@
-const formOpenBtn = document.querySelector("#form-open"),
-  home = document.querySelector(".home-section"),
-  formContainer = document.querySelector(".form_container"),
-  formCloseBtn = document.querySelector(".form_close"),
-  signupBtn = document.querySelector("#signup"),
-  loginBtn = document.querySelector("#login"),
-  pwShowHide = document.querySelectorAll(".pw_hide");
+const formOpenBtn = document.querySelector(".form-open")
+const formCloseBtn = document.querySelector(".form_close")
+const home = document.querySelector(".home-section")
+const formContainer = document.querySelector(".modal")
+const signupBtn = document.querySelector("#signup")
+const loginBtn = document.querySelector("#login")
+const pwShowHide = document.querySelectorAll(".pw_hide")
 
 formOpenBtn.addEventListener("click", () => home.classList.add("show"));
 formCloseBtn.addEventListener("click", () => home.classList.remove("show"));
@@ -33,4 +33,5 @@ loginBtn.addEventListener("click", (e) => {
   formContainer.classList.remove("active");
   formOpenBtn.textContent = "Login"
 });
+
 

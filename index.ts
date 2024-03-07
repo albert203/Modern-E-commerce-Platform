@@ -21,8 +21,7 @@ app.use(express.static('public'))
 
 // this doesnt confirm the connection is working
 app.get('/api/getall', getAll);
-app.post('/api/signup', createUser);
-app.post('/api/signupp', createUserRest);
+app.post('/api/signup', createUserRest);
 
 const server = app.listen(port, () => {
   console.log(`Server is listening on port: ${port}`);

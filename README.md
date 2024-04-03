@@ -37,7 +37,8 @@
 
 ## To use live server on WSL
 
-- run command: "sudo apt install wslu"
+- run command: 
+- ```sudo apt install wslu```
 
 ## Yarn Lockfiles 
 
@@ -48,4 +49,21 @@
 ## URL TO test getall
 
 - URL:
-<!-- $UBUNTUIP:$PORT/api/getall -->
+$UBUNTUIP:$PORT/api/getall
+
+## Running from a Docker container
+- Run Command to build container and run application: 
+- ```docker-compose up -d --build```
+
+- May also need to enable WSL integration in Docker desktop under settings > Resources > WSL Integration. 
+
+## TO enable mySQL queries within docker container
+
+- Enable in settings on docker desktop (if using WSL2): "Expose daemon on tcp://localhost:2375 without TLS", this will expose the mysql port to docker container
+- Enabling the option "Expose daemon on tcp://localhost:2375 without TLS" in Docker Desktop for WSL exposes the Docker daemon, which is the core process that manages Docker containers, to listen on a specific port (tcp://localhost:2375) without Transport Layer Security (TLS) encryption.
+- Note: there is security risks asscoiated when exposing your port. 
+
+- run command to enter mysql client within the msql docker container: 
+- ```docker exec -it <container_name> mysql -u <username> -p```
+- enter password when prompted
+- note that all queries under the init.sql file are run when building the docker container intially, as seen from docker-compose.yml

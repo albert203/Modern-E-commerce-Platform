@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # <Port Exposed> : <Bun.js app Port running inside the container>
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: mysql
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASS} 
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+    ports:
+      # <Port Exposed> : <MySQL Port running inside the container>
+      - '3306:3306'
+    # Where data will be persisted
+    volumes:
+      - mysql-data:/var/lib/mysql
+      # script to intialise 
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+# names our volume
+volumes:
+  mysql-data:

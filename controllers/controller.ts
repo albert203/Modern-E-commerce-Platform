@@ -24,7 +24,7 @@ export const getAll = async (req: Request, res: Response) => {
     res.json(rows);
   } catch (error) {
     console.error('Error fetching users:', error);
-    res.status(500).send('Error connecting to database');
+    res.status(500).json({ error: 'Error connecting to database', details: error.message });
   }
 };
 

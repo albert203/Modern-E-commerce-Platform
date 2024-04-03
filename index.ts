@@ -2,7 +2,7 @@ import express, { Request, Response} from 'express';
 import { getAll, createUser, createUserRest } from './controllers/controller';
 import mysql from 'mysql2/promise';
 
-const port = Bun.env.DB_PORT || 8000;
+const port = 3000;
 
 const db = mysql.createPool({
   host: Bun.env.DB_HOST,

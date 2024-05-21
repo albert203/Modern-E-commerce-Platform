@@ -1,11 +1,9 @@
 import express, { Request, Response } from 'express';
 // form validation and security
 import Joi, * as joi from 'joi';
-import * as bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 import db from '../index.ts';
-import { error } from 'console';
-import { abort } from 'process';
-import * as session from 'express-session';
+
 
 // Define types for query results
 interface User {

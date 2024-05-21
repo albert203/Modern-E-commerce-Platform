@@ -5,6 +5,7 @@ import * as bcrypt from 'bcryptjs';
 import db from '../index.ts';
 import { error } from 'console';
 import { abort } from 'process';
+import * as session from 'express-session';
 
 // Define types for query results
 interface User {
@@ -34,23 +35,38 @@ export const createUserRest = async (req: Request, res: Response) => {
   const userSchema = Joi.object({
     firstName: Joi.string()
       .required()
-      .max(50),
+      .max(50)
+      .messages({
+        'string.max': 'First name must be less than 50 characters.'
+      }),
     lastName: Joi.string()
       .required()
-      .max(50),
+      .max(50)
+      .messages({
+        'string.max': 'Last name must be less than 50 characters.'
+      }),
     email: Joi.string()
-        .required()
-        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+      .required()
+      .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+      .messages({
+        'string.email': 'Email must be valid.'
+      }),
     password: Joi.string()
       .required()
       .min(12)
-      .pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$'))
-      .error(new Error('Password must be at least 12 characters long and contain one lowercase letter, one uppercase letter, one number, and one special symbol.')),
+      .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/)
+      .messages({
+        'string.pattern.base': 'Password must be at least 12 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character.',
+        'any.required': 'Password is required.'
+      }),
     confirmPassword: Joi.string()
       .required()
-      .valid(Joi.ref('password')) // ensure passwords match
-      .error(new Error('Passwords do not match.')),
+      .valid(Joi.ref('password'))
+      .messages({
+        'any.only': 'Passwords do not match.'
+      })
   });
+
   // Validate user data
   const { error, value } = userSchema.validate(req.body, { abortEarly: false }); //abort early set to false ensures that the validation doesnt stop on first error
 
@@ -64,11 +80,18 @@ export const createUserRest = async (req: Request, res: Response) => {
         field: detail.context.key,
         message: detail.message,
       }));
+
+      errors.forEach((error) =>{
+        console.log(`Field: ${error.field}, ${error.message}`);
+      });
+      // if errors are found, return a 400 response with the errors
+      // this will be used to display the errors on the front end
       return res.status(400).json({ errors });
+
     } else {
       // Handle other unexpected errors
       console.error('Unexpected error:', error);
-      return res.status(500).json({ message: 'Internal server error' });
+      return res.status(500).json({ message: 'Bad Post Request' });
     }
   }
 
@@ -95,6 +118,7 @@ export const createUserRest = async (req: Request, res: Response) => {
           hashPassword // Hashed password before storing
         ]);
 
+
         // Send a JSON response with the newly created user
         res.json({
           message: `User ${value.firstName} ${value.lastName} (${value.email}) created successfully!`,
@@ -116,3 +140,36 @@ export const createUserRest = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to hash password' }); // Internal server error
   }
 };
+
+export const loginUser = async (req: Request, res: Response) => {
+  const {email, password} = req.body;
+
+  try{
+    const [rows]: Array<User> = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
+
+    if (rows.length === 0){
+      return res.status(401).json({
+        error: 'Invalid email or password'
+      })
+    }
+
+    const user = rows[0];
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid){
+      return res.status(401).json({
+        error: 'Invalid email or password'
+      });
+    }
+
+    req.session.userId = user.id;
+    req.session.username = `${user.firstname} ${user.lastname}`;
+
+    res.json({ message: 'Login Successful' })
+  } catch (error) {
+    console.error('Error during login', error);
+    res.status(500).json({ error: 'Internal server error'})
+  }
+  
+}

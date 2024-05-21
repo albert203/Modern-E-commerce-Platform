@@ -52,6 +52,9 @@
 $UBUNTUIP:$PORT/api/getall
 
 ## Running from a Docker container
+- make sure DB_HOST in .env 
+- is ```DB_HOST='db'```
+
 - Run Command to build container and run application: 
 - ```docker-compose up -d --build```
 

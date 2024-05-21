@@ -31,7 +31,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // Clear previous error messages
         clearErrorMessages();
 
-        if (errorData.errors) {
+        if (errorData.error === 'Email already exists') {
+          const errorElement = document.getElementById('emailError');
+          if (errorElement) {
+            errorElement.textContent = 'Email already exists';
+            errorElement.style.display = 'block';
+          }
+        } else if (errorData.errors) {
           // Display field-specific errors
           errorData.errors.forEach(error => {
             const errorElement = document.getElementById(`${error.field}Error`);

@@ -131,8 +131,16 @@ export const createUserRest = async (req: Request, res: Response) => {
   }
 };
 
+
+
 export const loginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
+
+  if (!email || !password){
+    return res.status(400).json({
+      error: 'Email and password are required'
+    })
+  } 
 
   try {
     const [rows]: Array<User> = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
@@ -145,6 +153,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
     const user = rows[0];
 
+    // compares password from the request with the hashed password in the database
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
@@ -153,6 +162,7 @@ export const loginUser = async (req: Request, res: Response) => {
       });
     }
 
+    // Set session variables if login is successful
     req.session.userId = user.id;
     req.session.username = `${user.firstname} ${user.lastname}`;
 
@@ -162,3 +172,13 @@ export const loginUser = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+// export const logoutUser = async (req: Request, res: Response) => {
+//   req.session.destroy((err) => {
+//     if (err) {
+//       console.error('Error destroying session', err);
+//       return res.status(500).json({ error: 'Internal server error' });
+//     }
+//     res.json({ message: 'Logout Successful' });
+//   });
+// };

@@ -33,7 +33,7 @@ app.get('/api/getall', getAll);
 app.post('/api/signup', createUserRest);
 
 // Log in an existing user and create a session
-app.post('api/login', loginUser);
+app.post('/api/login', loginUser);
 
 // Destroy the current session and log out the user
 // app.get('api/logout', logoutUser);

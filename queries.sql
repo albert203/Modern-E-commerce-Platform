@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 INSERT INTO users (firstname, lastname, email, password) 
-VALUES ('john', 'doe', 'johndoe@gmail.com', '123456');
+VALUES ('john', 'doe', 'johndoe@gmail.com', 'JohnDoe123456!');
 
 select * from users;
 

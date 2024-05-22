@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Clear previous error messages
         clearErrorMessages();
-
+        // if the form inputs are correct but email already exists
         if (errorData.error === 'Email already exists') {
           const errorElement = document.getElementById('emailError');
           if (errorElement) {

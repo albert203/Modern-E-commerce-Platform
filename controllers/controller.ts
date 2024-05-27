@@ -162,9 +162,12 @@ export const loginUser = async (req: Request, res: Response) => {
       });
     }
 
-    // Set session variables if login is successful
-    req.session.userId = user.id;
-    req.session.username = `${user.firstname} ${user.lastname}`;
+    req.session.user = {
+      id: user.id,
+      firstName: user.firstname,
+      lastName: user.lastname,
+      email: user.email
+    };
 
     res.json({ message: 'Login Successful' });
   } catch (error) {

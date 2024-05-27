@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <title>Profile</title>
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <img class="logo-img" src="/assets/images/logo.png" style="width:175px;" alt="Logo" />
+    </div>
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><a class="home-text" id="style-5" href="/home">Home</a></li>
+        <li class="nav-item"><a id="style-5" href="/shop">Shop</a></li>
+        <li class="nav-item"><a id="style-5" href="/profile">Profile</a></li>
+        <li class="nav-item"><a id="style-5" href="/about">Support</a></li>
+        <li class="nav-item"><a id="style-5" href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="profile-container">
+    <aside class="profile-aside">
+      <ul class="profile-aside-list">
+        <li class="profile-aside-item"><a href="#" onclick="showProfile()">Account Profile</a></li>
+        <li class="profile-aside-item"><a href="#" onclick="showSecurity()">Login and Security</a></li>
+        <li class="profile-aside-item"><a href="#" onclick="showOrders()">Billing and Orders</a></li>
+        <li class="profile-aside-item"><a href="#" onclick="showSettings()">General Settings</a></li>
+      </ul>
+    </aside>
+    <div class="profile-text-container">
+      <form>
+        <div class="profile-text">
+          <h1>Personal Info</h1>
+          <% if (user) { %>
+            <div>First Name: <%= user.firstName %></div>
+            <div>Last Name: <%= user.lastName %></div>
+            <div>Email: <%= user.email %></div>
+          <% } else { %>
+            <div>No user data available. Please log in.</div>
+          <% } %>
+          <button class="profile-edit-button">Edit</button>
+        </div>
+      </form>
+    </div>
+    <div class="login-security-container">
+      <form>
+        <div class="login-security-text">   
+          <h1>Login and Security</h1>
+          <div>Update Password</div>
+          <button class="profile-edit-button">Edit</button>
+        </div>
+      </form>
+    </div>
+    <div class="billing-orders-container">
+      <div class="section">
+        <h3>Billing Information</h3>
+        <form>
+          <label for="nameOnCard">Name on Card:</label><br>
+          <input type="text" id="nameOnCard" name="nameOnCard"><br>
+          <label for="cardNumber">Card Number:</label><br>
+          <input type="text" id="cardNumber" name="cardNumber"><br>
+        </form>
+      </div>
+      <div class="section">
+        <h3>Shipping Address</h3>
+        <form>
+          <label for="shippingAddress">Address:</label><br>
+          <input type="text" id="shippingAddress" name="shippingAddress"><br>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/profile.js"></script>
+</body>
+</html>

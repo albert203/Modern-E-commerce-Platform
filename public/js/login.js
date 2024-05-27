@@ -57,8 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error('Invalid email or password');
       }
 
-      // Redirect to dashboard or do something else on successful login
-      window.location.href = '/home.html';
+      // Redirect to Profile page if login is successful
+      window.location.href = '/profile';
     } catch (error) {
       // Display login error message
       loginError.textContent = error.message;

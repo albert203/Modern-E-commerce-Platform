@@ -1,5 +1,6 @@
 import express, { Request, Response} from 'express';
 import session from 'express-session';
+import path from 'path';
 import { getAll, createUserRest, loginUser } from './controllers/controller';
 import mysql from 'mysql2/promise';
 
@@ -24,9 +25,12 @@ const sessionMiddleware = session({
 // if we do not write this we cannot get the req.body
 const app = express();
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'public/views')); // Assuming your .ejs files are in 'public/views'
+
 app.use(express.json());
 app.use(sessionMiddleware);
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public'))); // Serve static files from 'public'
 
 // this doesnt confirm the connection is working
 app.get('/api/getall', getAll);
@@ -34,6 +38,32 @@ app.post('/api/signup', createUserRest);
 
 // Log in an existing user and create a session
 app.post('/api/login', loginUser);
+
+
+// Render EJS templates
+app.get('/profile', (req: Request, res: Response) => {
+  if (req.session.user) {
+    // Use the login user session data to render the profile page
+    const user = req.session.user; 
+    res.render('profile', { user });
+
+  } else {
+    return res.redirect('/signup'); // Redirect to login if session data is not available
+  }
+
+});
+
+app.get('/home', (req: Request, res: Response) => {
+  res.render('home');
+});
+
+app.get('/shop', (req: Request, res: Response) => {
+  res.render('shop');
+});
+
+app.get('/signup', (req: Request, res: Response) => {
+  res.render('signup');
+});
 
 // Destroy the current session and log out the user
 // app.get('api/logout', logoutUser);

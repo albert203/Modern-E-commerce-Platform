@@ -94,10 +94,6 @@
   z-index: -1; }
 
 
-
-
-
-
 /* TEST FORM */
 .nav-button {
   font-weight: bold;
@@ -634,5 +630,88 @@ article h1 {
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
 }
+
+
+
+
+
+/* PROFILE MANAGEMENT PAGE */
+.profile-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; 
+  top: 100px;
+  background-color: #7c9887f5;
+  border-top: #000 1px solid;
+  text-decoration: none;
+  font-family: "Old Standard TT", serif;
+  font-size: 1.1rem;
+  color: #fcfcfc;
+  text-transform: uppercase;
+
+  padding: 5rem;
+  width: 100%;
+  height: calc(100vh - 100px); /* Adjust the subtraction based on the top offset */
+}
+
+.profile-aside{
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #ffffff;
+  text-decoration: none;
+  font-family: "Old Standard TT", serif;
+  font-size: 1.1rem;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  border-radius: 10px;
+  width: 25%;
+  height: 100%;
+  margin-right: 20px;
+}
+
+.profile-aside-list{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 30px;
+  list-style: none;
+  color: #000;
+  line-height: 40px;
+}
+
+.profile-aside-list a{
+  text-decoration: none;
+  color: #000;
+}
+
+.profile-text-container{
+  display: flex;
+  background-color: #ffffff;
+  text-decoration: none;
+  font-family: "Old Standard TT", serif;
+  font-size: 1.1rem;
+  color: #000;
+  text-transform: uppercase;
+  border-radius: 10px;
+  width: 65%;
+  height: 100%;
+}
+
+.profile-text{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-left: 50px;
+  padding-top: 30px;
+  border-radius: 5px;
+  height: 100%;
+  width: 100%;
+  line-height: 40px;
+}
+
+
+
 
 

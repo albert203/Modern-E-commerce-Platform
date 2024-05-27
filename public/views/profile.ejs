@@ -12,7 +12,7 @@
 <body>
   <header class="header">
     <div class="logo-container">
-      <img class="logo-img" src="/assets/images/logo.png" style="width:175px;" alt="Logo" />
+      <img class="logo-img" src="../assets/images/Bright Colorful Playful Funny Donuts Food Circle Logo (1).png" style="width:175px;" alt="Logo" />
     </div>
     <nav class="nav">
       <ul class="nav-list">
@@ -42,10 +42,17 @@
             <div>First Name: <%= user.firstName %></div>
             <div>Last Name: <%= user.lastName %></div>
             <div>Email: <%= user.email %></div>
+            <button class="profile-edit-button" onclick="showEdit()">Edit</button>
+
+            <div class="hidden-edit hidden">
+              <button class="profile-cancel-button" onclick="cancelEdit()">Cancel</button>
+              <button class="profile-apply-button" onclick="applyEdit()">Apply</button>
+            </div>
+            
           <% } else { %>
             <div>No user data available. Please log in.</div>
           <% } %>
-          <button class="profile-edit-button">Edit</button>
+          
         </div>
       </form>
     </div>
@@ -78,6 +85,6 @@
     </div>
   </section>
 
-  <script src="/js/profile.js"></script>
+  <script src="../js/profile.js"></script>
 </body>
 </html>

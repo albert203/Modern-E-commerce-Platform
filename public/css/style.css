@@ -712,6 +712,10 @@ article h1 {
 }
 
 
+/* hides the edit button and reveals the cancel and apply button */
+.hidden{
+  display: none;
+}
 
 
 

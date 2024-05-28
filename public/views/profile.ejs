@@ -39,22 +39,35 @@
         <div class="profile-text">
           <h1>Personal Info</h1>
           <% if (user) { %>
-            <div>First Name: <%= user.firstName %></div>
-            <div>Last Name: <%= user.lastName %></div>
-            <div>Email: <%= user.email %></div>
-            <button class="profile-edit-button" onclick="showEdit()">Edit</button>
-
-            <div class="hidden-edit hidden">
-              <button class="profile-cancel-button" onclick="cancelEdit()">Cancel</button>
-              <button class="profile-apply-button" onclick="applyEdit()">Apply</button>
+            <div class="profile-text">
+              <div>First Name: <%= user.firstName %></div>
+              <div>Last Name: <%= user.lastName %></div>
+              <div>Email: <%= user.email %></div>
+              <button class="profile-edit-button">Edit</button>
             </div>
+            <% } else { %>
+              <div>No user data available. Please log in.</div>
+            <% } %>
+          </div>
+        </form>
+        
+        
+
             
-          <% } else { %>
-            <div>No user data available. Please log in.</div>
-          <% } %>
+            <form class="hidden-input-form hidden">
+              <label for="firstName">First Name:</label><br>
+              <input type="text" id="firstName" name="firstName" value="<%= user.firstName %>"><br>
+              <label for="lastName">Last Name:</label><br>
+              <input type="text" id="lastName" name="lastName" value="<%= user.lastName %>"><br>
+            </form>
+            <div class="hidden-edit hidden">
+              <button class="profile-cancel-button">Cancel</button>
+              <button class="profile-apply-button">Apply</button>
+            </div>
+            <div class="error-container"></div> <!-- Error container for validation messages -->
+            
           
-        </div>
-      </form>
+        
     </div>
     <div class="login-security-container">
       <form>

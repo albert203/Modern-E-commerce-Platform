@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 // form validation and security
 import Joi from 'joi';
 import bcrypt from 'bcryptjs';
@@ -185,3 +185,62 @@ export const loginUser = async (req: Request, res: Response) => {
 //     res.json({ message: 'Logout Successful' });
 //   });
 // };
+
+// Joi schema for updating the user profile (without email)
+const updateUserSchema = Joi.object({
+  firstName: Joi.string().required().max(50).messages({
+    'any.required': 'First name is required.',
+    'string.max': 'First name must be less than 50 characters.',
+  }),
+  lastName: Joi.string().required().max(50).messages({
+    'any.required': 'Last name is required.',
+    'string.max': 'Last name must be less than 50 characters.',
+  }),
+});
+
+export const updateUserProfile = async (req: Request, res: Response) => {
+  const { firstName, lastName } = req.body;
+  const userId = req.session.user?.id; // Safely access the user's ID from the session
+
+  if (!userId) {
+    return res.status(401).json({ error: 'Unauthorized' }); // Return 401 if no user ID is found in the session
+  }
+
+  try {
+    // Validate the input data using the Joi schema
+    const { error } = updateUserSchema.validate({ firstName, lastName }, { abortEarly: false });
+
+    if (error) {
+            const errors = error.details.map((detail) => ({
+                field: detail.context?.key,
+                message: detail.message,
+            }));
+            return res.status(400).json({ errors });
+        }
+
+    // Update the user in the database
+    await db.execute('UPDATE users SET firstname = ?, lastname = ? WHERE id = ?', [
+      firstName,
+      lastName,
+      userId,
+    ]);
+
+    // Update the session data
+    req.session.user = { ...req.session.user, firstname: firstName, lastname: lastName };
+
+    res.json({ firstName, lastName }); // Return the updated user data
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    res.status(500).json({ error: 'Internal server error' }); // Return a server error
+  }
+};
+
+
+export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  if (req.session && req.session.user) {
+    next();
+  } else {
+    res.status(401).json({ error: 'Unauthorized' });
+  }
+};  
+

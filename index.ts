@@ -1,7 +1,7 @@
 import express, { Request, Response} from 'express';
 import session from 'express-session';
 import path from 'path';
-import { getAll, createUserRest, loginUser } from './controllers/controller';
+import { getAll, createUserRest, loginUser, authMiddleware, updateUserProfile } from './controllers/controller';
 import mysql from 'mysql2/promise';
 
 
@@ -53,6 +53,9 @@ app.get('/profile', (req: Request, res: Response) => {
 
 });
 
+// Protect the /api/update-profile endpoint with authMiddleware
+app.post('/api/update-profile', authMiddleware, updateUserProfile);
+
 app.get('/home', (req: Request, res: Response) => {
   res.render('home');
 });
@@ -63,6 +66,16 @@ app.get('/shop', (req: Request, res: Response) => {
 
 app.get('/signup', (req: Request, res: Response) => {
   res.render('signup');
+});
+
+// Add the authMiddleware to the routes that require authentication
+app.get('/profile', authMiddleware, (req: Request, res: Response) => {
+  if (req.session.user) {
+    const user = req.session.user; 
+    res.render('profile', { user });
+  } else {
+    return res.redirect('/signup');
+  }
 });
 
 // Destroy the current session and log out the user

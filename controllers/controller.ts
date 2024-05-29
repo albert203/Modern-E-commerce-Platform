@@ -13,81 +13,80 @@ interface User {
   password: string;
 }
 
-// GET ALL 
+// GET ALL
 export const getAll = async (req: Request, res: Response) => {
   try {
     const [rows]: Array<User> = await db.execute('SELECT * FROM users');
     res.json(rows);
   } catch (error) {
     console.error('Error fetching users:', error);
-    res.status(500).json({ error: 'Error connecting to database', details: error.message });
+    res
+      .status(500)
+      .json({ error: 'Error connecting to database', details: error.message });
   }
 };
 
 // Create Joi schema for user input validation with custom error messages
 const userSchema = Joi.object({
-  firstName: Joi.string()
-    .required()
-    .max(50)
-    .messages({
-      'any.required': 'First name is required.',
-      'string.max': 'First name must be less than 50 characters.'
-    }),
-  lastName: Joi.string()
-    .required()
-    .max(50)
-    .messages({
-      'any.required': 'Last name is required.',
-      'string.max': 'Last name must be less than 50 characters.'
-    }),
+  firstName: Joi.string().required().max(50).messages({
+    'any.required': 'First name is required.',
+    'string.max': 'First name must be less than 50 characters.',
+  }),
+  lastName: Joi.string().required().max(50).messages({
+    'any.required': 'Last name is required.',
+    'string.max': 'Last name must be less than 50 characters.',
+  }),
   email: Joi.string()
     .required()
     .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
     .messages({
       'any.required': 'Email is required.',
-      'string.email': 'Email must be valid.'
+      'string.email': 'Email must be valid.',
     }),
   password: Joi.string()
     .required()
     .min(12)
-    .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/)
+    .pattern(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/
+    )
     .messages({
       'any.required': 'Password is required.',
       'string.min': 'Password must be at least 12 characters long.',
-      'string.pattern.base': 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character.'
+      'string.pattern.base':
+        'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character.',
     }),
-  confirmPassword: Joi.string()
-    .required()
-    .valid(Joi.ref('password'))
-    .messages({
-      'any.required': 'Confirm password is required.',
-      'any.only': 'Passwords do not match.'
-    })
+  confirmPassword: Joi.string().required().valid(Joi.ref('password')).messages({
+    'any.required': 'Confirm password is required.',
+    'any.only': 'Passwords do not match.',
+  }),
 });
 
 const checkDuplicateEmail = async (email: any) => {
   try {
     console.log('email:', email);
-    console.log("in checkDuplicateEmail function");
-    const [rows]: Array<User> = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
-    console.log("rows:", rows);
+    console.log('in checkDuplicateEmail function');
+    const [rows]: Array<User> = await db.execute(
+      'SELECT * FROM users WHERE email = ?',
+      [email]
+    );
+    console.log('rows:', rows);
     if (rows.length > 0) {
-      console.log("rows.length > 0");
+      console.log('rows.length > 0');
       return true;
     }
-    
   } catch (error) {
-    console.log("in checkDuplicateEmail function error");
+    console.log('in checkDuplicateEmail function error');
     console.error('Error checking for duplicate email in the database:', error);
     throw new Error('Error checking for duplicate email in the database');
   }
 };
 
-
 export const createUserRest = async (req: Request, res: Response) => {
   try {
     // Validate user data
-    const { error, value } = userSchema.validate(req.body, { abortEarly: false });
+    const { error, value } = userSchema.validate(req.body, {
+      abortEarly: false,
+    });
 
     if (error) {
       const errors = error.details.map((detail) => ({
@@ -110,12 +109,10 @@ export const createUserRest = async (req: Request, res: Response) => {
     const hashPassword = await bcrypt.hash(value.password, salt);
 
     // Insert user into the database
-    await db.execute('INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)', [
-      value.firstName,
-      value.lastName,
-      value.email,
-      hashPassword
-    ]);
+    await db.execute(
+      'INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)',
+      [value.firstName, value.lastName, value.email, hashPassword]
+    );
 
     res.json({
       message: `User ${value.firstName} ${value.lastName} (${value.email}) created successfully!`,
@@ -131,23 +128,24 @@ export const createUserRest = async (req: Request, res: Response) => {
   }
 };
 
-
-
 export const loginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  if (!email || !password){
+  if (!email || !password) {
     return res.status(400).json({
-      error: 'Email and password are required'
-    })
-  } 
+      error: 'Email and password are required',
+    });
+  }
 
   try {
-    const [rows]: Array<User> = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
+    const [rows]: Array<User> = await db.execute(
+      'SELECT * FROM users WHERE email = ?',
+      [email]
+    );
 
     if (rows.length === 0) {
       return res.status(401).json({
-        error: 'Invalid email or password'
+        error: 'Invalid email or password',
       });
     }
 
@@ -158,7 +156,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
     if (!isPasswordValid) {
       return res.status(401).json({
-        error: 'Invalid email or password'
+        error: 'Invalid email or password',
       });
     }
 
@@ -166,7 +164,7 @@ export const loginUser = async (req: Request, res: Response) => {
       id: user.id,
       firstName: user.firstname,
       lastName: user.lastname,
-      email: user.email
+      email: user.email,
     };
 
     res.json({ message: 'Login Successful' });
@@ -176,17 +174,19 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 };
 
-// export const logoutUser = async (req: Request, res: Response) => {
-//   req.session.destroy((err) => {
-//     if (err) {
-//       console.error('Error destroying session', err);
-//       return res.status(500).json({ error: 'Internal server error' });
-//     }
-//     res.json({ message: 'Logout Successful' });
-//   });
-// };
+export const authMiddleware = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (req.session && req.session.user) {
+    next();
+  } else {
+    res.status(401).json({ error: 'Unauthorized' });
+  }
+};
 
-// Joi schema for updating the user profile (without email)
+// Define the update user schema
 const updateUserSchema = Joi.object({
   firstName: Joi.string().required().max(50).messages({
     'any.required': 'First name is required.',
@@ -208,39 +208,49 @@ export const updateUserProfile = async (req: Request, res: Response) => {
 
   try {
     // Validate the input data using the Joi schema
-    const { error } = updateUserSchema.validate({ firstName, lastName }, { abortEarly: false });
+    const { error } = updateUserSchema.validate(
+      { firstName, lastName },
+      { abortEarly: false }
+    );
 
     if (error) {
-            const errors = error.details.map((detail) => ({
-                field: detail.context?.key,
-                message: detail.message,
-            }));
-            return res.status(400).json({ errors });
-        }
+      const errors = error.details.map((detail) => ({
+        field: detail.context?.key,
+        message: detail.message,
+      }));
+      return res.status(400).json({ errors });
+    }
 
     // Update the user in the database
-    await db.execute('UPDATE users SET firstname = ?, lastname = ? WHERE id = ?', [
-      firstName,
-      lastName,
-      userId,
-    ]);
+    await db.execute(
+      'UPDATE users SET firstname = ?, lastname = ? WHERE id = ?',
+      [firstName, lastName, userId]
+    );
+
+    // Log the session state before the update
+    console.log('Session before update:', req.session.user);
 
     // Update the session data
-    req.session.user = { ...req.session.user, firstname: firstName, lastname: lastName };
+    req.session.user = {
+      ...req.session.user,
+      firstName,
+      lastName,
+    };
 
-    res.json({ firstName, lastName }); // Return the updated user data
+    // Log the session state after the update
+    console.log('Session after update:', req.session.user);
+
+    // Save the session to ensure the changes are persistent
+    req.session.save((err) => {
+      if (err) {
+        console.error('Error saving session:', err);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+
+      res.json({ firstName, lastName }); // Return the updated user data
+    });
   } catch (error) {
     console.error('Error updating profile:', error);
     res.status(500).json({ error: 'Internal server error' }); // Return a server error
   }
 };
-
-
-export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
-  if (req.session && req.session.user) {
-    next();
-  } else {
-    res.status(401).json({ error: 'Unauthorized' });
-  }
-};  
-

@@ -1,9 +1,14 @@
-import express, { Request, Response} from 'express';
+import express, { Request, Response } from 'express';
 import session from 'express-session';
 import path from 'path';
-import { getAll, createUserRest, loginUser, authMiddleware, updateUserProfile } from './controllers/controller';
+import {
+  getAll,
+  createUserRest,
+  loginUser,
+  authMiddleware,
+  updateUserProfile,
+} from './controllers/controller';
 import mysql from 'mysql2/promise';
-
 
 const port = 3000;
 
@@ -18,7 +23,7 @@ const sessionMiddleware = session({
   secret: process.env.SESSION_SECRET || 'secret_key',
   resave: false, // prevents unnecessary session updates.
   saveUninitialized: false, // Set to false to not save empty sessions
-  cookie: { secure: false } // Set to 'true' in production for HTTPS to encrypt cookie data
+  cookie: { secure: false }, // Set to 'true' in production for HTTPS to encrypt cookie data
 });
 
 // to post things we need to use middleware
@@ -39,18 +44,15 @@ app.post('/api/signup', createUserRest);
 // Log in an existing user and create a session
 app.post('/api/login', loginUser);
 
-
 // Render EJS templates
 app.get('/profile', (req: Request, res: Response) => {
   if (req.session.user) {
     // Use the login user session data to render the profile page
-    const user = req.session.user; 
+    const user = req.session.user;
     res.render('profile', { user });
-
   } else {
     return res.redirect('/signup'); // Redirect to login if session data is not available
   }
-
 });
 
 // Protect the /api/update-profile endpoint with authMiddleware
@@ -71,7 +73,7 @@ app.get('/signup', (req: Request, res: Response) => {
 // Add the authMiddleware to the routes that require authentication
 app.get('/profile', authMiddleware, (req: Request, res: Response) => {
   if (req.session.user) {
-    const user = req.session.user; 
+    const user = req.session.user;
     res.render('profile', { user });
   } else {
     return res.redirect('/signup');
@@ -88,9 +90,6 @@ app.get('/profile', authMiddleware, (req: Request, res: Response) => {
 
 const server = app.listen(port, () => {
   console.log(`Server is listening on port: ${port}`);
-})
+});
 
 export default db;
-
-
-

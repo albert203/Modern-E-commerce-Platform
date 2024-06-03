@@ -11,68 +11,55 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
     />
     <title>Document</title>
-
-    <!-- video recgnition -->
-    <!-- Βίντεο από τον χρήστη <a href="https://pixabay.com/el/users/humanoidevfx-12661853/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=video&amp;utm_content=25689">Humanoide VFX</a> από το <a href="https://pixabay.com/el//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=video&amp;utm_content=25689">Pixabay</a> -->
   </head>
   <body>
-    <!-- <img class="bg-img" src="videos/photo-7752699.jpg" alt="not loaded"/> -->
-
     <!-- <div class="hamburger-menu">
             <i class="fas fa-bars"></i>
             <i class="fas fa-times"></i>
     </div> -->
 
-    <div id="soundbar">
-      <div id="progress-bar"></div>
-      <div id="controls">
-        <button id="playBtn">&#9658;</button>
-        <button id="muteBtn">&#128263;</button>
-      </div>
-    </div>
-    <audio
-      id="audioPlayer"
-      src="/music/Kiki's Delivery Service - Umi No Mieru Machi Piano.mp3"
-    >
-      Your browser does not support the audio element.
-    </audio>
-
-    <div id="nav-container">
-      <!-- // CREATE A SOOT LOGO, SIMPLE, FROM SPIRITED AWAY -->
+    <!-- Header -->
+    <header class="header">
       <div class="logo-container">
         <img
           class="logo-img"
-          src="logos/Untitled design.png"
-          alt="not loaded"
+          src="../assets/images/Bright Colorful Playful Funny Donuts Food Circle Logo (1).png"
+          alt="Logo"
         />
-        <h4 class="logo-text">Soot</h4>
+        <!-- <div class="logo-text-container">
+          <h4 class="logo-text">The Logo</h4>
+        </div> -->
       </div>
-      <div class="nav-container">
-        <nav>
-          <ul class="ul-nav">
-            <li class="home"><a class="home-text" href="/home">Home</a></li>
-            <li class="shop"><a id="style-5" href="/shop">Shop</a></li>
-            <!-- <li class="contact"><a id="style-5" href="contact.html">Contact</a></li> -->
-            <!-- <li class="about"><a id="style-5"href="about.html">About</a></li> -->
-            <li class="signup"><a id="style-5" href="/signup">Signup</a></li>
-            <li class="Support">
-              <a id="style-5" href="/about">Support</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
 
-    <article class="intro">
-      <p class="intro-text">
+      <nav class="nav">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a class="home-text" id="style-5" href="home.html">Home</a>
+          </li>
+          <li class="nav-item"><a id="style-5" href="shop.html">Shop</a></li>
+          <li class="nav-item">
+            <a id="style-5" href="signup.html">Signup</a>
+          </li>
+          <li class="nav-item">
+            <a id="style-5" href="about.html">Support</a>
+          </li>
+          <button class="nav-button form-open">Login</button>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="sub-header">
+      <p class="sub-header-text">
         <!-- and I am not just a website developer; I am a digital craftsman, a visionary architect of the virtual realm. With a passion for weaving code into captivating designs, I bring your wildest web dreams to life. As a relentless explorer of cutting-edge technologies and a connoisseur of user experience, I strive to create online spaces that leave visitors spellbound and eager to explore further. From elegant aesthetics to seamless functionality, I meticulously craft websites that become a seamless extension of your brand's identity. Join me on this digital odyssey, where the possibilities are limitless, and together, we shall build the online future. Welcome to the digital realm of endless possibilities!
              -->
-        "Winter Limited Sale 50% off all stocked products & art"
+
+        "Winter Limited Sale, up to 50% off all Activewear"
       </p>
-    </article>
+    </div>
+
     <section>
       <video class="mp4" autoplay loop muted poster="videos/animevid.mp4">
-        <source src="videos/animevid.mp4" type="video/mp4" />
+        <source src="" type="video/mp4" />
       </video>
     </section>
 

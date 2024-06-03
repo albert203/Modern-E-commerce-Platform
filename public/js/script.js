@@ -1,5 +1,5 @@
 // scrolling nav menu fades in and out using opacity
-const navbar = document.querySelector('#nav-container');
+const navbar = document.querySelector('.header');
 let previousScrollY = 0;
 const fadeThreshold = 10;
 let isFadingOut = false;
@@ -41,8 +41,13 @@ function FadeInNavBar() {
   navbar.style.opacity = 1;
 }
 
-
-
-
-
-
+function scrollToContent() {
+  const targetSection = document.querySelector('.categories-carousel');
+  const navbarHeight = 100; // Height of the fixed navbar
+  const scrollPosition =
+    targetSection.getBoundingClientRect().top + window.scrollY - navbarHeight;
+  window.scrollTo({
+    top: scrollPosition,
+    behavior: 'smooth',
+  });
+}

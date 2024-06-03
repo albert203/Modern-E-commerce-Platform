@@ -5,30 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
     <title>Document</title>
   </head>
   <body>
     <!-- Header -->
     <header class="header">
       <div class="logo-container">
-        <!-- <img class="logo-img" src="#" alt="Logo" /> -->
-        <div class="logo-text-container">
-          <h4 class="logo-text">The Logo</h4>
-        </div>
+        <img
+          class="logo-img"
+          src="../assets/images/Bright Colorful Playful Funny Donuts Food Circle Logo (1).png"
+          alt="Logo"
+        />
+        <!-- <div class="logo-text-container">
+              <h4 class="logo-text">The Logo</h4>
+            </div> -->
       </div>
-      
+
       <nav class="nav">
         <ul class="nav-list">
-          <li class="nav-item"><a class="home-text" id="style-5" href="home.html">Home</a></li>
+          <li class="nav-item">
+            <a class="home-text" id="style-5" href="home.html">Home</a>
+          </li>
           <li class="nav-item"><a id="style-5" href="shop.html">Shop</a></li>
-          <li class="nav-item"><a id="style-5" href="signup.html">Signup</a></li>
-          <li class="nav-item"><a id="style-5" href="about.html">Support</a></li>
+          <li class="nav-item">
+            <a id="style-5" href="signup.html">Signup</a>
+          </li>
+          <li class="nav-item">
+            <a id="style-5" href="about.html">Support</a>
+          </li>
           <button class="nav-button form-open">Login</button>
         </ul>
       </nav>
     </header>
+
+    <div class="sub-header">
+      <p class="sub-header-text">
+        <!-- and I am not just a website developer; I am a digital craftsman, a visionary architect of the virtual realm. With a passion for weaving code into captivating designs, I bring your wildest web dreams to life. As a relentless explorer of cutting-edge technologies and a connoisseur of user experience, I strive to create online spaces that leave visitors spellbound and eager to explore further. From elegant aesthetics to seamless functionality, I meticulously craft websites that become a seamless extension of your brand's identity. Join me on this digital odyssey, where the possibilities are limitless, and together, we shall build the online future. Welcome to the digital realm of endless possibilities!
+                 -->
+
+        "Winter Limited Sale, up to 50% off all Activewear"
+      </p>
+    </div>
 
     <!-- Section -->
     <section class="home-section">
@@ -36,46 +61,47 @@
         <i class="uil uil-times form_close"></i>
         <!-- Login Form -->
         <!-- Login Form -->
-<div class="form login_form">
-  <form id="loginForm" action="/api/login" method="POST">
-    <h2>Login</h2>
+        <div class="form login_form">
+          <form id="loginForm" action="/api/login" method="POST">
+            <h2>Login</h2>
 
-    <div class="input-group">
-      <input 
-        type="email"
-        name="email"
-        id="loginEmail" 
-        placeholder="Enter your email" />
-      <i class="uil uil-envelope-alt email"></i>
-    </div>
-    
-    <div class="input-group">
-      <input 
-        type="password" 
-        name="password"
-        id="loginPassword"
-        placeholder="Enter your password" />
-      <i class="uil uil-lock password"></i>
-      <i class="uil uil-eye-slash pw_hide"></i>
-    </div>
+            <div class="input-group">
+              <input
+                type="email"
+                name="email"
+                id="loginEmail"
+                placeholder="Enter your email"
+              />
+              <i class="uil uil-envelope-alt email"></i>
+            </div>
 
-    <div class="checkbox-group">
-      <span class="checkbox">
-        <input 
-          type="checkbox" 
-          id="check" />
-        <label for="check">Remember me</label>
-      </span>
-      <a class="forgot-password" href="#">Forgot password?</a>
-    </div>
+            <div class="input-group">
+              <input
+                type="password"
+                name="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+              />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
 
-    <button type="submit" class="form-button">Login Now</button>
-    <!-- error messages area -->
-    <div class="login_error" id="loginError"></div> 
-    <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
-  </form>
-</div>
+            <div class="checkbox-group">
+              <span class="checkbox">
+                <input type="checkbox" id="check" />
+                <label for="check">Remember me</label>
+              </span>
+              <a class="forgot-password" href="#">Forgot password?</a>
+            </div>
 
+            <button type="submit" class="form-button">Login Now</button>
+            <!-- error messages area -->
+            <div class="login_error" id="loginError"></div>
+            <div class="login_signup">
+              Don't have an account? <a href="#" id="signup">Signup</a>
+            </div>
+          </form>
+        </div>
 
         <!-- Sign-up Form -->
         <div class="form">
@@ -84,11 +110,12 @@
 
             <div class="input-group">
               <i class="gg--profile profileIcon"></i>
-              <input 
+              <input
                 id="first-name"
                 type="text"
                 autocomplete="given-name"
-                placeholder="Enter first name"/>
+                placeholder="Enter first name"
+              />
             </div>
             <div class="validation-message" id="firstNameError"></div>
 
@@ -98,42 +125,50 @@
                 id="last-name"
                 type="text"
                 autocomplete="family-name"
-                placeholder="Enter last name"/>
+                placeholder="Enter last name"
+              />
             </div>
             <div class="validation-message" id="lastNameError"></div>
 
             <div class="input-group">
-              <input 
+              <input
                 id="email"
                 type="email"
                 autocomplete="email"
-                placeholder="Email" />
+                placeholder="Email"
+              />
               <i class="uil uil-envelope-alt email"></i>
             </div>
             <div class="validation-message" id="emailError"></div>
-            
+
             <div class="input-group">
-              <input 
+              <input
                 id="password"
                 type="password"
-                placeholder="Create Password" />
+                placeholder="Create Password"
+              />
               <i class="uil uil-lock password"></i>
               <i class="uil uil-eye-slash pw_hide"></i>
             </div>
             <div class="validation-message" id="passwordError"></div>
 
             <div class="input-group">
-              <input 
+              <input
                 id="confirm-password"
                 type="password"
-                placeholder="Confirm Password" />
+                placeholder="Confirm Password"
+              />
               <i class="uil uil-lock password"></i>
               <i class="uil uil-eye-slash pw_hide"></i>
             </div>
             <div class="validation-message" id="confirmPasswordError"></div>
-            <button class="form-button signup-button" type="submit">Signup Now</button>
+            <button class="form-button signup-button" type="submit">
+              Signup Now
+            </button>
 
-            <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
+            <div class="login_signup">
+              Already have an account? <a href="#" id="login">Login</a>
+            </div>
           </form>
         </div>
       </div>

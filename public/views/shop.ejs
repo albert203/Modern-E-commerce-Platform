@@ -4,11 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link />
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <title>Document</title>
   </head>
@@ -21,24 +29,21 @@
           src="../assets/images/Bright Colorful Playful Funny Donuts Food Circle Logo (1).png"
           alt="Logo"
         />
-        <!-- <div class="logo-text-container">
-          <h4 class="logo-text">The Logo</h4>
-        </div> -->
       </div>
 
       <nav class="nav">
         <ul class="nav-list">
           <li class="nav-item">
-            <a class="home-text active" id="style-5" href="home.html">Home</a>
+            <a class="home-text" id="style-5" href="/home">Home</a>
           </li>
           <li class="nav-item">
-            <a id="style-5" href="shop.html">Shop</a>
+            <a id="style-5" href="/shop">Shop</a>
           </li>
           <li class="nav-item">
-            <a id="style-5" href="signup.html">Signup</a>
+            <a id="style-5" href="/signup">Signup</a>
           </li>
           <li class="nav-item">
-            <a id="style-5" href="about.html">Support</a>
+            <a id="style-5" href="/about">Support</a>
           </li>
           <button class="nav-button form-open">Login</button>
         </ul>
@@ -47,127 +52,393 @@
 
     <div class="sub-header">
       <p class="sub-header-text">
-        <!-- and I am not just a website developer; I am a digital craftsman, a visionary architect of the virtual realm. With a passion for weaving code into captivating designs, I bring your wildest web dreams to life. As a relentless explorer of cutting-edge technologies and a connoisseur of user experience, I strive to create online spaces that leave visitors spellbound and eager to explore further. From elegant aesthetics to seamless functionality, I meticulously craft websites that become a seamless extension of your brand's identity. Join me on this digital odyssey, where the possibilities are limitless, and together, we shall build the online future. Welcome to the digital realm of endless possibilities!
-             -->
-
         "Winter Limited Sale, up to 50% off all Activewear"
       </p>
     </div>
 
-    <!-- Carousel 1 (Image Carousel) -->
-    <div class="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img
-            src="../assets/images/francois-hurtaud-vZUMZrWDuEk-unsplash.jpg"
-            alt="Image 1"
-          />
+    <!-- Modal Login/Signup Form -->
+    <section class="home-section">
+      <div class="modal">
+        <i class="uil uil-times form_close"></i>
+        <!-- Login Form -->
+        <div class="form login_form">
+          <form id="loginForm" action="/api/login" method="POST">
+            <h2>Login</h2>
+            <div class="input-group">
+              <input
+                type="email"
+                name="email"
+                id="loginEmail"
+                placeholder="Enter your email"
+              />
+              <i class="uil uil-envelope-alt email"></i>
+            </div>
+            <div class="input-group">
+              <input
+                type="password"
+                name="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+              />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+            <div class="checkbox-group">
+              <span class="checkbox">
+                <input type="checkbox" id="check" />
+                <label for="check">Remember me</label>
+              </span>
+              <a class="forgot-password" href="#">Forgot password?</a>
+            </div>
+            <button type="submit" class="form-button">Login Now</button>
+            <div class="login_error" id="loginError"></div>
+            <div class="login_signup">
+              Don't have an account? <a href="#" id="signup">Signup</a>
+            </div>
+          </form>
         </div>
-        <div class="carousel-item">
-          <img
-            src="../assets/images/ihssan-rami-azouagh-rpOlZF0gdUA-unsplash.jpg"
-            alt="Image 2"
-          />
-        </div>
-        <div class="carousel-item">
-          <img
-            src="../assets/images/arun-sharma-UmmnAirqX4o-unsplash.jpg"
-            alt="Image 3"
-          />
-        </div>
-      </div>
-      <div class="carousel-dots">
-        <div class="dot active"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-      </div>
-    </div>
 
-    <div class="shopping-box" onclick="scrollToContent()">
-      <h2>
-        Discover Our <br />
-        Winter Collection
-      </h2>
-    </div>
-    <div class="scroll-btn" onclick="scrollToContent()">
-      <!-- Start Shopping Box -->
-      <button></button>
-      <div>&#x2193;</div>
-    </div>
-
-    <!-- categories carousal -->
-    <div class="categories-carousel">
-      <button class="carousel-btn prev-btn">&#10094;</button>
-      <div class="categories-container">
-        <div class="category">
-          <img src="../assets/images/brock-wegner-7yONARoUsbY-unsplash.jpg" />
-          <a href="#">
-            <span class="shop-text">Shop Mens</span>
-            <span class="category-name">Mens</span>
-          </a>
-        </div>
-        <div class="category">
-          <img src="../assets/images/arun-sharma-UmmnAirqX4o-unsplash.jpg" />
-          <a href="#">
-            <span class="shop-text">Shop Womans</span>
-            <span class="category-name">Womens</span>
-          </a>
-        </div>
-        <div class="category">
-          <img src="../assets/images/joshua-diaz-nXNyhCLh7G8-unsplash.jpg" />
-          <a href="#">
-            <span class="shop-text">Shop Activewear</span>
-            <span class="category-name">Activewear</span>
-          </a>
-        </div>
-        <div class="category">
-          <img
-            src="../assets/images/francois-hurtaud-vZUMZrWDuEk-unsplash.jpg"
-          />
-          <a href="#">
-            <span class="shop-text">Shop Accessories</span>
-            <span class="category-name">Accessories</span>
-          </a>
-        </div>
-        <div class="category">
-          <img
-            src="../assets/images/ihssan-rami-azouagh-rpOlZF0gdUA-unsplash.jpg"
-          />
-          <a href="#">
-            <span class="shop-text">Shop Discounts</span>
-            <span class="category-name">Discounts</span>
-          </a>
-        </div>
-        <div class="category">
-          <img
-            src="../assets/images/ihssan-rami-azouagh-rpOlZF0gdUA-unsplash.jpg"
-          />
-          <a href="#">
-            <span class="shop-text">Shop Discounts</span>
-            <span class="category-name">Discounts</span>
-          </a>
-        </div>
-        <div class="category">
-          <img
-            src="../assets/images/ihssan-rami-azouagh-rpOlZF0gdUA-unsplash.jpg"
-          />
-          <a href="#">
-            <span class="shop-text">Shop Discounts</span>
-            <span class="category-name">Discounts</span>
-          </a>
-        </div>
-        <div class="category">
-          <img
-            src="../assets/images/ihssan-rami-azouagh-rpOlZF0gdUA-unsplash.jpg"
-          />
-          <a href="#">
-            <span class="shop-text">Shop Discounts</span>
-            <span class="category-name">Discounts</span>
-          </a>
+        <!-- Sign-up Form -->
+        <div class="form">
+          <form id="signup_form">
+            <h2>Signup</h2>
+            <div class="input-group">
+              <i class="gg--profile profileIcon"></i>
+              <input
+                id="first-name"
+                type="text"
+                autocomplete="given-name"
+                placeholder="Enter first name"
+              />
+            </div>
+            <div class="validation-message" id="firstNameError"></div>
+            <div class="input-group">
+              <i class="gg--profile profileIcon"></i>
+              <input
+                id="last-name"
+                type="text"
+                autocomplete="family-name"
+                placeholder="Enter last name"
+              />
+            </div>
+            <div class="validation-message" id="lastNameError"></div>
+            <div class="input-group">
+              <input
+                id="email"
+                type="email"
+                autocomplete="email"
+                placeholder="Email"
+              />
+              <i class="uil uil-envelope-alt email"></i>
+            </div>
+            <div class="validation-message" id="emailError"></div>
+            <div class="input-group">
+              <input
+                id="password"
+                type="password"
+                placeholder="Create Password"
+              />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+            <div class="validation-message" id="passwordError"></div>
+            <div class="input-group">
+              <input
+                id="confirm-password"
+                type="password"
+                placeholder="Confirm Password"
+              />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+            <div class="validation-message" id="confirmPasswordError"></div>
+            <button class="form-button signup-button" type="submit">
+              Signup Now
+            </button>
+            <div class="login_signup">
+              Already have an account? <a href="#" id="login">Login</a>
+            </div>
+          </form>
         </div>
       </div>
-      <button class="carousel-btn next-btn">&#10095;</button>
-    </div>
+    </section>
+
+    <!-- shop and filter container -->
+    <main class="main-container">
+      <div class="filters-container" id="filters">
+        <h3 class="filter-title">Filter by</h3>
+        <form id="filterForm">
+          <!-- Filter by Category -->
+          <div class="filter-group">
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option value="">All</option>
+              <option value="men">Men</option>
+              <option value="women">Women</option>
+              <option value="kids">Kids</option>
+            </select>
+          </div>
+          <!-- Filter by Size -->
+          <div class="filter-group">
+            <label for="size">Size</label>
+            <select id="size" name="size">
+              <option value="">All Sizes</option>
+              <option value="xs">XS</option>
+              <option value="s">S</option>
+              <option value="m">M</option>
+              <option value="l">L</option>
+              <option value="xl">XL</option>
+            </select>
+          </div>
+          <!-- Filter by Color -->
+          <div class="filter-group">
+            <label for="color">Color</label>
+            <select id="color" name="color">
+              <option value="">All Colors</option>
+              <option value="black">Black</option>
+              <option value="white">White</option>
+              <option value="red">Red</option>
+              <option value="blue">Blue</option>
+              <option value="green">Green</option>
+              <option value="yellow">Yellow</option>
+            </select>
+          </div>
+          <!-- Filter by Brand -->
+          <div class="filter-group">
+            <label for="brand">Brand</label>
+            <select id="brand" name="brand">
+              <option value="">All Brands</option>
+              <option value="nike">Nike</option>
+              <option value="adidas">Adidas</option>
+              <option value="zara">Zara</option>
+              <option value="hm">H&M</option>
+              <option value="uniqlo">Uniqlo</option>
+            </select>
+          </div>
+          <!-- Filter by Price Range -->
+          <div class="filter-group">
+            <label for="priceRange">Price Range</label>
+            <div class="price-slider-container">
+              <input
+                type="range"
+                id="minPrice"
+                name="minPrice"
+                min="0"
+                max="500"
+                step="10"
+                value="0"
+              />
+              <input
+                type="range"
+                id="maxPrice"
+                name="maxPrice"
+                min="0"
+                max="500"
+                step="10"
+                value="500"
+              />
+            </div>
+            <div class="price-values">
+              <span id="minPriceValue">0</span>
+              <span id="dash">-</span>
+              <span id="maxPriceValue">500</span>
+            </div>
+          </div>
+          <!-- Filter by Rating -->
+          <div class="filter-group">
+            <label for="rating">Rating</label>
+            <select id="rating" name="rating">
+              <option value="">All Ratings</option>
+              <option value="5">5 Stars</option>
+              <option value="4">4 Stars & Up</option>
+              <option value="3">3 Stars & Up</option>
+              <option value="2">2 Stars & Up</option>
+              <option value="1">1 Star & Up</option>
+            </select>
+          </div>
+          <!-- Filter by Availability -->
+          <div class="filter-group">
+            <label for="availability">Availability</label>
+            <select id="availability" name="availability">
+              <option value="">All</option>
+              <option value="in-stock">In Stock</option>
+              <option value="out-of-stock">Out of Stock</option>
+            </select>
+          </div>
+          <!-- Apply Filters Button -->
+          <button type="submit" class="apply-filters-btn">Apply Filters</button>
+        </form>
+      </div>
+      <button class="filter-toggle" onclick="toggleFilters()">
+        <i class="fas fa-chevron-right icon"></i>
+      </button>
+      <div class="shop-container">
+        <div class="shop-grid">
+          <div class="shop-item">
+            <a class="" href="#">
+              <img
+                src="../assets/images/don-delfin-almonte-ebTNU_YTWgc-unsplash.jpg"
+                alt="Gotchii Tee"
+              />
+              <ul class="sizes-inner-container">
+                <li class="size-item">XS</li>
+                <li class="size-item">S</li>
+                <li class="size-item out-of-stock">M</li>
+                <li class="size-item">L</li>
+                <li class="size-item out-of-stock">XL</li>
+                <li class="size-item">XXL</li>
+              </ul>
+              <div class="item-details">
+                <h4 class="item-caption">Gotchii Tee</h4>
+                <h5 class="item-price">US$72</h5>
+              </div>
+            </a>
+          </div>
+          <div class="shop-item">
+            <a class="" href="#">
+              <img
+                src="../assets/images/don-delfin-almonte-ebTNU_YTWgc-unsplash.jpg"
+                alt="Gotchii Tee"
+              />
+              <ul class="sizes-inner-container">
+                <li class="size-item">XS</li>
+                <li class="size-item">S</li>
+                <li class="size-item out-of-stock">M</li>
+                <li class="size-item">L</li>
+                <li class="size-item out-of-stock">XL</li>
+                <li class="size-item">XXL</li>
+              </ul>
+              <div class="item-details">
+                <h4 class="item-caption">Gotchii Tee</h4>
+                <h5 class="item-price">US$72</h5>
+              </div>
+            </a>
+          </div>
+          <div class="shop-item">
+            <a class="" href="#">
+              <img
+                src="../assets/images/don-delfin-almonte-ebTNU_YTWgc-unsplash.jpg"
+                alt="Gotchii Tee"
+              />
+              <ul class="sizes-inner-container">
+                <li class="size-item">XS</li>
+                <li class="size-item">S</li>
+                <li class="size-item out-of-stock">M</li>
+                <li class="size-item">L</li>
+                <li class="size-item out-of-stock">XL</li>
+                <li class="size-item">XXL</li>
+              </ul>
+              <div class="item-details">
+                <h4 class="item-caption">Gotchii Tee</h4>
+                <h5 class="item-price">US$72</h5>
+              </div>
+            </a>
+          </div>
+          <div class="shop-item">
+            <a class="" href="#">
+              <img
+                src="../assets/images/don-delfin-almonte-ebTNU_YTWgc-unsplash.jpg"
+                alt="Gotchii Tee"
+              />
+              <ul class="sizes-inner-container">
+                <li class="size-item">XS</li>
+                <li class="size-item">S</li>
+                <li class="size-item out-of-stock">M</li>
+                <li class="size-item">L</li>
+                <li class="size-item out-of-stock">XL</li>
+                <li class="size-item">XXL</li>
+              </ul>
+              <div class="item-details">
+                <h4 class="item-caption">Gotchii Tee</h4>
+                <h5 class="item-price">US$72</h5>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="shop-grid">
+          <div class="shop-item">
+            <a class="" href="#">
+              <img
+                src="../assets/images/don-delfin-almonte-ebTNU_YTWgc-unsplash.jpg"
+                alt="Gotchii Tee"
+              />
+              <ul class="sizes-inner-container">
+                <li class="size-item">XS</li>
+                <li class="size-item">S</li>
+                <li class="size-item out-of-stock">M</li>
+                <li class="size-item">L</li>
+                <li class="size-item out-of-stock">XL</li>
+                <li class="size-item">XXL</li>
+              </ul>
+              <div class="item-details">
+                <h4 class="item-caption">Gotchii Tee</h4>
+                <h5 class="item-price">US$72</h5>
+              </div>
+            </a>
+          </div>
+          <div class="shop-item">
+            <a class="" href="#">
+              <img
+                src="../assets/images/don-delfin-almonte-ebTNU_YTWgc-unsplash.jpg"
+                alt="Gotchii Tee"
+              />
+              <ul class="sizes-inner-container">
+                <li class="size-item">XS</li>
+                <li class="size-item">S</li>
+                <li class="size-item out-of-stock">M</li>
+                <li class="size-item">L</li>
+                <li class="size-item out-of-stock">XL</li>
+                <li class="size-item">XXL</li>
+              </ul>
+              <div class="item-details">
+                <h4 class="item-caption">Gotchii Tee</h4>
+                <h5 class="item-price">US$72</h5>
+              </div>
+            </a>
+          </div>
+          <div class="shop-item">
+            <a class="" href="#">
+              <img
+                src="../assets/images/don-delfin-almonte-ebTNU_YTWgc-unsplash.jpg"
+                alt="Gotchii Tee"
+              />
+              <ul class="sizes-inner-container">
+                <li class="size-item">XS</li>
+                <li class="size-item">S</li>
+                <li class="size-item out-of-stock">M</li>
+                <li class="size-item">L</li>
+                <li class="size-item out-of-stock">XL</li>
+                <li class="size-item">XXL</li>
+              </ul>
+              <div class="item-details">
+                <h4 class="item-caption">Gotchii Tee</h4>
+                <h5 class="item-price">US$72</h5>
+              </div>
+            </a>
+          </div>
+          <div class="shop-item">
+            <a class="" href="#">
+              <img
+                src="../assets/images/don-delfin-almonte-ebTNU_YTWgc-unsplash.jpg"
+                alt="Gotchii Tee"
+              />
+              <ul class="sizes-inner-container">
+                <li class="size-item">XS</li>
+                <li class="size-item">S</li>
+                <li class="size-item out-of-stock">M</li>
+                <li class="size-item">L</li>
+                <li class="size-item out-of-stock">XL</li>
+                <li class="size-item">XXL</li>
+              </ul>
+              <div class="item-details">
+                <h4 class="item-caption">Gotchii Tee</h4>
+                <h5 class="item-price">US$72</h5>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
 
     <section class="mail-container">
       <div class="mail-text-wrapper">
@@ -181,7 +452,7 @@
             <input
               type="email"
               name="email"
-              id="email"
+              id="mail-email"
               placeholder="Enter your email"
             />
             <button class="mailing-btn">Subscribe</button>
@@ -196,130 +467,6 @@
         />
       </div>
     </section>
-
-    <!-- test -->
-    <!-- <section class="main-container"> -->
-    <!-- <div class="filters-container">
-        <h3 class="filter-title">Filter by</h3>
-        <ul class="filters">
-          <button class="filter-btn" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="art">Art</button>
-          <button class="filter-btn" data-filter="furniture">Furniture</button>
-          <button class="filter-btn" data-filter="clothing">Clothing</button>
-          <button class="filter-btn" data-filter="jewelry">Jewelry</button>
-        </ul>
-      </div>  -->
-
-    <!-- <main class="shop-container">
-        <ul class="shop-row">
-          <div class="shop-col">
-            <div class="shop-img">
-              <a href="#">
-                <img
-                  src="../assets/images/joshua-diaz-nXNyhCLh7G8-unsplash.jpg"
-                  alt="not loaded"
-                />
-                <h4 class="item_caption">Gold Plated Eco Watch</h4>
-                <h5>$75.99</h5>
-              </a>
-            </div>
-          </div>
-
-          <div class="shop-col">
-            <div class="shop-img">
-              <a href="#">
-                <img
-                  src="../assets/images/joshua-diaz-nXNyhCLh7G8-unsplash.jpg"
-                  alt="not loaded"
-                />
-                <h4 class="item_caption">Gold Plated Eco Watch</h4>
-                <h5>$75.99</h5>
-              </a>
-            </div>
-          </div>
-
-          <div class="shop-col">
-            <div class="shop-img">
-              <a href="#">
-                <img
-                  src="../assets/images/joshua-diaz-nXNyhCLh7G8-unsplash.jpg"
-                  alt="not loaded"
-                />
-                <h4 class="item_caption">Gold Plated Eco Watch</h4>
-                <h5>$75.99</h5>
-              </a>
-            </div>
-          </div>
-
-          <div class="shop-col">
-            <div class="shop-img">
-              <a href="#">
-                <img
-                  src="../assets/images/joshua-diaz-nXNyhCLh7G8-unsplash.jpg"
-                  alt="not loaded"
-                />
-                <h4 class="item_caption">Gold Plated Eco Watch</h4>
-                <h5>$75.99</h5>
-              </a>
-            </div>
-          </div>
-        </ul>
-
-        <ul class="shop-row">
-          <div class="shop-col">
-            <div class="shop-img">
-              <a href="#">
-                <img
-                  src="../assets/images/joshua-diaz-nXNyhCLh7G8-unsplash.jpg"
-                  alt="not loaded"
-                />
-                <h4 class="item_caption">Gold Plated Eco Watch</h4>
-                <h5>$75.99</h5>
-              </a>
-            </div>
-          </div>
-
-          <div class="shop-col">
-            <div class="shop-img">
-              <a href="#">
-                <img
-                  src="../assets/images/joshua-diaz-nXNyhCLh7G8-unsplash.jpg"
-                  alt="not loaded"
-                />
-                <h4 class="item_caption">Gold Plated Eco Watch</h4>
-                <h5>$75.99</h5>
-              </a>
-            </div>
-          </div>
-
-          <div class="shop-col">
-            <div class="shop-img">
-              <a href="#">
-                <img
-                  src="../assets/images/joshua-diaz-nXNyhCLh7G8-unsplash.jpg"
-                  alt="not loaded"
-                />
-                <h4 class="item_caption">Gold Plated Eco Watch</h4>
-                <h5>$75.99</h5>
-              </a>
-            </div>
-          </div>
-
-          <div class="shop-col">
-            <div class="shop-img">
-              <a href="#">
-                <img
-                  src="../assets/images/joshua-diaz-nXNyhCLh7G8-unsplash.jpg"
-                  alt="not loaded"
-                />
-                <h4 class="item_caption">Gold Plated Eco Watch</h4>
-                <h5>$75.99</h5>
-              </a>
-            </div>
-          </div>
-        </ul>
-      </main>
-    </section> -->
 
     <div class="socials-container">
       <!-- social media links -->
@@ -540,7 +687,7 @@
                 </g>
               </g>
             </svg>
-            <h1 class="text-socials">Pinterest</h1>
+            <h1 class="text-socials">Tiktok</h1>
           </a>
         </li>
       </ul>
@@ -562,8 +709,8 @@
               <div class="contact-content">
                 <span><i class="fas fa-map-marker-alt"></i></span>
                 <span>
-                  13335 Hartzog Road<br />
-                  Winter Garden, Florida<br />
+                  13335 Street Address<br />
+                  City, Country<br />
                 </span>
               </div>
             </li>
@@ -596,9 +743,9 @@
       type="text/javascript"
     ></script>
     <script src="../js/script.js"></script>
-    <script src="../js/carousel.js"></script>
     <script src="../js/categoriesCarousal.js"></script>
-    <script src="../js/login.js"></script>
     <script src="../js/fetch.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/filters.js"></script>
   </body>
 </html>

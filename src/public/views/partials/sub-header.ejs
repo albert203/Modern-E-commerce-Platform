@@ -1,0 +1,35 @@
+<!-- sub-header.ejs -->
+<style>
+.sub-header {
+    position: absolute;
+    top: var(--nav-height);
+    width: 100%;
+    height: var(--sub-header-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--tan);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    z-index: 100;
+}
+
+.sub-header-text {
+    color: var(--eerie-black);
+    font-size: 1rem;
+    font-family: 'Cardo', serif;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+}
+</style>
+
+<div class="sub-header">
+    <p class="sub-header-text">
+        "Winter Limited Sale, up to 50% off all Activewear"
+    </p>
+</div>

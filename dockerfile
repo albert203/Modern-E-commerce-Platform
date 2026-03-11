@@ -10,4 +10,4 @@ COPY . .
 RUN bun install
 
 # Set the command to execute your Bun.js application
-CMD ["bun", "run", "index.ts"]
+CMD ["bun", "run", "dev"]

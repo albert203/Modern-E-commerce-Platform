@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sway | Modern Fashion</title>
+    <meta name="description" content="Discover timeless elegance with Sway - curated fashion for the modern individual">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables (from globals.css) */
+        :root {
+            --background: oklch(0.98 0.005 60);
+            --foreground: oklch(0.2 0.02 30);
+            --card: oklch(1 0 0);
+            --card-foreground: oklch(0.2 0.02 30);
+            --popover: oklch(1 0 0);
+            --popover-foreground: oklch(0.2 0.02 30);
+            --primary: oklch(0.45 0.08 45);
+            --primary-foreground: oklch(0.98 0.005 60);
+            --secondary: oklch(0.95 0.01 60);
+            --secondary-foreground: oklch(0.2 0.02 30);
+            --muted: oklch(0.94 0.01 60);
+            --muted-foreground: oklch(0.45 0.02 30);
+            --accent: oklch(0.55 0.1 45);
+            --accent-foreground: oklch(0.98 0.005 60);
+            --destructive: oklch(0.577 0.245 27.325);
+            --destructive-foreground: oklch(0.577 0.245 27.325);
+            /* --border: oklch(0.922 0 0); */
+            --input: oklch(0.922 0 0);
+            --ring: oklch(0.708 0 0);
+            --radius: 0.625rem;
+        }
+
+        .dark {
+            --background: oklch(0.145 0 0);
+            --foreground: oklch(0.985 0 0);
+            --card: oklch(0.145 0 0);
+            --card-foreground: oklch(0.985 0 0);
+            --primary: oklch(0.985 0 0);
+            --primary-foreground: oklch(0.205 0 0);
+            --muted: oklch(0.269 0 0);
+            --muted-foreground: oklch(0.708 0 0);
+            --border: oklch(0.269 0 0);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.5;
+        }
+
+        .font-serif {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .hero-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-section {
+                padding: 2rem 2rem;
+            }
+        }
+
+        .hero-grid {
+            display: grid;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .hero-badge {
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2.25rem;
+            font-weight: 500;
+            line-height: 1.2;
+            color: var(--foreground);
+        }
+
+        @media (min-width: 640px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-title {
+                font-size: 3.75rem;
+            }
+        }
+
+        .hero-description {
+            max-width: 28rem;
+            color: var(--muted-foreground);
+            line-height: 1.75;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            background-color: var(--primary);
+            padding: 0.75rem 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--primary-foreground);
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            border: 1px solid rgba(var(--foreground), 0.2);
+            background-color: transparent;
+            padding: 0.75rem 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--foreground);
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(var(--foreground), 0.05);
+        }
+
+        .hero-image {
+            position: relative;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            border-radius: 1rem;
+            background-color: var(--muted);
+        }
+
+        .hero-image-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted-foreground);
+        }
+
+        .hero-image-icon {
+            text-align: center;
+        }
+
+        .hero-image-circle {
+            margin: 0 auto;
+            height: 4rem;
+            width: 4rem;
+            border-radius: 9999px;
+            background-color: rgba(var(--primary), 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-image-letter {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--primary);
+        }
+
+        /* Featured Categories Section */
+        .categories-section {
+            border-top: 1px solid var(--border);
+        }
+
+        .categories-container {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .categories-container {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .categories-container {
+                padding: 4rem 2rem;
+            }
+        }
+
+        .categories-header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .categories-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.875rem;
+            font-weight: 500;
+            color: var(--foreground);
+        }
+
+        .categories-span {
+            color: var(--accent);
+            transition: all 0.2s
+        }
+
+        .categories-span::before{
+
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .categories-grid {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .categories-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .category-card {
+            position: relative;
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            background-color: var(--muted);
+            text-decoration: none;
+        }
+
+        .category-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0);
+            transition: background-color 0.2s;
+        }
+
+        .category-card:hover .category-overlay {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .category-content {
+            position: absolute;
+            top:0;
+            left: 0;
+            padding: .5rem;
+        }
+
+        .category-name {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--foreground);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar" style="z-index: 100; position: relative;">
+        <p>Free shipping on orders over $120 | Fresh arrivals every week</p>
+    </div>
+
+    <%- include('partials/header') %>
+
+    <!-- Hero Section -->
+    <section>
+        <div class="hero-section">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <p class="hero-badge">Spring Collection 2026</p>
+                    <h1 class="hero-title">Timeless Elegance, Modern Spirit</h1>
+                    <p class="hero-description">
+                        Discover our curated selection of contemporary essentials, crafted with 
+                        premium materials and designed for effortless style.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn-primary">Shop Women</a>
+                        <a href="#" class="btn-secondary">Shop Men</a>
+                    </div>
+                </div>
+                
+                <div class="hero-image">
+                    <div class="hero-image-placeholder">
+                        <div class="hero-image-icon">
+                            <div class="hero-image-circle">
+                                <span class="hero-image-letter">S</span>
+                            </div>
+                            <p style="font-size: 0.875rem;">Hero Image</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="categories-section">
+        <div class="categories-container">
+            <div class="categories-header">
+                <h2 class="categories-title">Shop by <span class="categories-span">Category</span></h2>
+            </div>
+            <div class="categories-grid">
+                <a href="#" class="category-card">
+                    <div class="category-overlay"></div>
+                    <div class="category-content">
+                        <p class="category-name">Dresses</p>
+                    </div>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="category-overlay"></div>
+                    <div class="category-content">
+                        <p class="category-name">Outerwear</p>
+                    </div>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="category-overlay"></div>
+                    <div class="category-content">
+                        <p class="category-name">Knitwear</p>
+                    </div>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="category-overlay"></div>
+                    <div class="category-content">
+                        <p class="category-name">Accessories</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <%- include('partials/footer') %>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            if (mobileMenu.classList.contains('active')) {
+                menuIcon.style.display = 'none';
+                closeIcon.style.display = 'block';
+            } else {
+                menuIcon.style.display = 'block';
+                closeIcon.style.display = 'none';
+            }
+        });
+
+        // Desktop Mega Menu
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        navItems.forEach(item => {
+            const button = item.querySelector('.nav-button');
+            const megaMenu = item.querySelector('.mega-menu');
+            const chevron = item.querySelector('.chevron');
+            
+            item.addEventListener('mouseenter', () => {
+                megaMenu.classList.add('active');
+                chevron.classList.add('rotate');
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                megaMenu.classList.remove('active');
+                chevron.classList.remove('rotate');
+            });
+        });
+
+        // Mobile Submenu Toggle
+        const mobileNavButtons = document.querySelectorAll('.mobile-nav-button');
+        
+        mobileNavButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const submenu = button.nextElementSibling;
+                const chevron = button.querySelector('.chevron');
+                
+                // Close other submenus
+                document.querySelectorAll('.mobile-submenu').forEach(menu => {
+                    if (menu !== submenu) {
+                        menu.classList.remove('active');
+                        menu.previousElementSibling.querySelector('.chevron').classList.remove('rotate');
+                    }
+                });
+                
+                submenu.classList.toggle('active');
+                chevron.classList.toggle('rotate');
+            });
+        });
+
+        // Search Toggle
+        const searchToggle = document.getElementById('search-toggle');
+        const searchInputContainer = document.getElementById('search-input-container');
+        const searchInput = document.getElementById('search-input');
+        const searchClose = document.getElementById('search-close');
+        const searchIcon = document.getElementById('search-icon');
+
+        searchToggle.addEventListener('click', () => {
+            searchIcon.style.display = 'none';
+            searchInputContainer.style.display = 'block';
+            searchInput.focus();
+        });
+
+        searchClose.addEventListener('click', () => {
+            searchInputContainer.style.display = 'none';
+            searchIcon.style.display = 'block';
+        });
+
+        searchInput.addEventListener('blur', (e) => {
+            // Delay to allow click on close button
+            setTimeout(() => {
+                if (document.activeElement !== searchInput) {
+                    searchInputContainer.style.display = 'none';
+                    searchIcon.style.display = 'block';
+                }
+            }, 200);
+        });
+
+    </script>
+</body>
+</html>

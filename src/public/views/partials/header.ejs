@@ -1,0 +1,927 @@
+<style>
+/* =============================================================================
+   HEADER PARTIAL STYLES
+============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. ANNOUNCEMENT BAR
+----------------------------------------------------------------------------- */
+.announcement-bar {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    padding: 0.625rem;
+    text-align: center;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    z-index: 1050;
+}
+
+
+/* -----------------------------------------------------------------------------
+   2. HEADER SHELL
+----------------------------------------------------------------------------- */
+.header {
+    background-color: var(--card);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 10;
+}
+
+.header-container {
+    max-width: 96rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+}
+
+@media (min-width: 1024px) {
+    .header-content {
+        height: 4.5rem;
+    }
+    .header-container {
+        padding: 0 2rem;
+    }
+}
+
+
+/* -----------------------------------------------------------------------------
+   3. LOGO
+----------------------------------------------------------------------------- */
+.logo {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.875rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: -0.025em;
+    color: var(--foreground);
+    text-decoration: none;
+}
+
+@media (min-width: 1024px) {
+    .logo {
+        font-size: 2.25rem;
+    }
+}
+
+
+/* -----------------------------------------------------------------------------
+   4. MOBILE MENU BUTTON
+----------------------------------------------------------------------------- */
+.mobile-menu-btn {
+    display: flex;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--foreground);
+}
+
+@media (min-width: 1024px) {
+    .mobile-menu-btn {
+        display: none;
+    }
+}
+
+
+/* -----------------------------------------------------------------------------
+   5. DESKTOP NAV
+----------------------------------------------------------------------------- */
+.desktop-nav {
+    display: none;
+    gap: 0.25rem;
+}
+
+@media (min-width: 1024px) {
+    .desktop-nav {
+        display: flex;
+        justify-items: space-between;
+        align-items: center;
+    }
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--foreground);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.nav-button:hover {
+    color: var(--primary);
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--foreground);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: var(--primary);
+}
+
+.chevron {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.2s;
+}
+
+.chevron.rotate {
+    transform: rotate(180deg);
+}
+
+
+/* -----------------------------------------------------------------------------
+   6. MEGA MENU
+----------------------------------------------------------------------------- */
+.mega-menu {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    padding-top: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+    pointer-events: none;
+}
+
+.mega-menu.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.mega-menu-content {
+    width: 30rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    background-color: var(--card);
+    padding: 1.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.mega-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.mega-menu-section h3 {
+    margin-bottom: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted-foreground);
+}
+
+.mega-menu-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mega-menu-list a {
+    font-size: 0.875rem;
+    color: var(--foreground);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.mega-menu-list a:hover {
+    color: var(--primary);
+}
+
+.mega-menu-footer {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+}
+
+.mega-menu-footer a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.mega-menu-footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* -----------------------------------------------------------------------------
+   7. HEADER ACTIONS (search, account, cart icons)
+----------------------------------------------------------------------------- */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.icon-button {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--foreground);
+    transition: color 0.2s;
+}
+
+.icon-button:hover {
+    color: var(--primary);
+}
+
+.icon-button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.cart-badge {
+    position: absolute;
+    right: -0.125rem;
+    top: -0.125rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 9999px;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    font-size: 0.625rem;
+    font-weight: 500;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    width: 12rem;
+    border-radius: 9999px;
+    border: 1px solid var(--border);
+    background-color: var(--card);
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    outline: none;
+}
+
+@media (min-width: 640px) {
+    .search-input {
+        width: 16rem;
+    }
+}
+
+.search-input:focus {
+    ring: 2px;
+    ring-color: rgba(var(--primary), 0.2);
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.5rem);
+    width: 12rem;
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 11;
+}
+
+.dropdown-menu.active {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: var(--foreground);
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.dropdown-menu a:hover {
+    background-color: var(--muted);
+}
+
+.hidden-mobile {
+    display: none;
+}
+
+@media (min-width: 640px) {
+    .hidden-mobile {
+        display: flex;
+    }
+}
+
+
+/* -----------------------------------------------------------------------------
+   8. MOBILE MENU
+----------------------------------------------------------------------------- */
+.mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.mobile-menu.active {
+    max-height: 500px;
+}
+
+.mobile-menu-content {
+    border-top: 1px solid var(--border);
+    padding: 1rem;
+}
+
+.mobile-nav-item {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+}
+
+.mobile-nav-button {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--foreground);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.mobile-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.mobile-submenu.active {
+    max-height: 24rem;
+    padding-bottom: 0.5rem;
+}
+
+.mobile-submenu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    padding-left: 1rem;
+}
+
+.mobile-submenu-grid a {
+    padding: 0.25rem 0;
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+    text-decoration: none;
+}
+
+.mobile-submenu-grid a:hover {
+    color: var(--primary);
+}
+
+
+/* -----------------------------------------------------------------------------
+   9. UNDERLAY
+----------------------------------------------------------------------------- */
+.underlay.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    height: 100svh;
+    width: 100svw;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+
+/* -----------------------------------------------------------------------------
+   10. LOGIN / SIGNUP MODAL
+----------------------------------------------------------------------------- */
+.modal {
+    position: fixed;
+    max-width: 450px;
+    min-width: 320px;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.2);
+    z-index: 100;
+    border: 1px solid #ccc;
+    background: var(--background);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-out;
+}
+
+#login_modal.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.form_close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #0b0217;
+    font-size: 22px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.modal h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #0b0217;
+    text-align: center;
+}
+
+#login_form {
+    display: none;
+}
+
+#login_form.active {
+    display: block;
+}
+
+#signup_form {
+    display: none;
+}
+
+#signup_form.active {
+    display: block;
+}
+
+
+/* -----------------------------------------------------------------------------
+   11. MODAL FORM INPUTS
+----------------------------------------------------------------------------- */
+.input-group {
+    position: relative;
+    margin-top: 30px;
+    width: 100%;
+    height: 40px;
+}
+
+.input-group input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 0 30px;
+    color: #333;
+    background-color: var(--background);
+    transition: all 0.2s ease;
+    border-bottom: 1.5px solid #aaaaaa;
+}
+
+.input-group input:focus {
+    border-color: #7d2ae8;
+}
+
+.input-group i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #707070;
+}
+
+.input-group i.email,
+.input-group i.profileIcon {
+    left: 0;
+}
+
+.input-group i.password {
+    left: 0;
+}
+
+.input-group input:focus ~ i.email,
+.input-group input:focus ~ i.password {
+    color: var(--accent);
+}
+
+.input-group i.pw_hide {
+    right: 0;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.checkbox-group {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal a {
+    color: #7d2ae8;
+    font-size: 12px;
+}
+
+.modal a:hover {
+    text-decoration: underline;
+}
+
+.checkbox {
+    display: flex;
+    column-gap: 8px;
+    white-space: nowrap;
+}
+
+.checkbox input {
+    accent-color: #7d2ae8;
+}
+
+.checkbox label {
+    font-size: 12px;
+    cursor: pointer;
+    user-select: none;
+    color: #0b0217;
+}
+
+.modal .form-button {
+    background: #7d2ae8;
+    margin-top: 30px;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 10px;
+}
+
+.form-button {
+    font-family: 'Cormorant Garamond', serif;
+    padding: 12px 35px;
+    border: 2px solid #fff;
+    color: #fff;
+    background: transparent;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.form-button:active {
+    transform: scale(0.98);
+}
+
+.login_signup {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.validation-message {
+    color: red;
+}
+
+#loginError {
+    color: red;
+}
+</style>
+<head>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+</head>
+
+<header class="header">
+    <div class="header-container">
+        <div class="header-content">
+            <div style="display: flex; align-items: center; gap: 1rem;">       
+                <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                    <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" x2="20" y1="12" y2="12"></line>
+                        <line x1="4" x2="20" y1="6" y2="6"></line>
+                        <line x1="4" x2="20" y1="18" y2="18"></line>
+                    </svg>
+                    <svg id="close-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 6 6 18"></path>
+                        <path d="m6 6 12 12"></path>
+                    </svg>
+                    <span class="sr-only">Menu</span>
+                </button>
+
+                <div style="">
+                    <a href="/" class="logo">Sway</a>
+                </div>
+            </div>
+
+            <nav class="desktop-nav">
+                <div class="nav-item" data-category="women">
+                    <button class="nav-button">
+                        Women
+                        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    </button>
+                    <div class="mega-menu">
+                        <div class="mega-menu-content">
+                            <div class="mega-menu-grid">
+                                <div class="mega-menu-section">
+                                    <h3>Featured</h3>
+                                    <ul class="mega-menu-list">
+                                        <li><a href="#">New Arrivals</a></li>
+                                        <li><a href="#">Best Sellers</a></li>
+                                        <li><a href="#">Sale</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-section">
+                                    <h3>Categories</h3>
+                                    <ul class="mega-menu-list">
+                                        <li><a href="#">Dresses</a></li>
+                                        <li><a href="#">Tops</a></li>
+                                        <li><a href="#">Bottoms</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mega-menu-footer">
+                                <a href="#">View All Women →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-item" data-category="men">
+                    <button class="nav-button">
+                        Men
+                        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    </button>
+                    <div class="mega-menu">
+                        <div class="mega-menu-content">
+                            <div class="mega-menu-grid">
+                                <div class="mega-menu-section">
+                                    <h3>Featured</h3>
+                                    <ul class="mega-menu-list">
+                                        <li><a href="#">New Arrivals</a></li>
+                                        <li><a href="#">Best Sellers</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-section">
+                                    <h3>Categories</h3>
+                                    <ul class="mega-menu-list">
+                                        <li><a href="#">Shirts</a></li>
+                                        <li><a href="#">Pants</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mega-menu-footer">
+                                <a href="#">View All Men →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-item" data-category="collections">
+                    <button class="nav-button">
+                        Collections
+                        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    </button>
+                    <div class="mega-menu">
+                        <div class="mega-menu-content">
+                            <div class="mega-menu-grid">
+                                <div class="mega-menu-section">
+                                    <h3>Featured</h3>
+                                    <ul class="mega-menu-list">
+                                        <li><a href="#">New Arrivals</a></li>
+                                        <li><a href="#">Best Sellers</a></li>
+                                        <li><a href="#">Sale</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-section">
+                                    <h3>Categories</h3>
+                                    <ul class="mega-menu-list">
+                                        <li><a href="#">Summer 2026</a></li>
+                                        <li><a href="#">Winter 2025</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mega-menu-footer">
+                                <a href="#">View Latest Collections →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="nav-link">About</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="search-container">
+                    <button class="icon-button" id="search-toggle">
+                        <svg id="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </svg>
+                        <span class="sr-only">Search</span>
+                    </button>
+                    <div id="search-input-container" style="display: none; position: absolute; right: 0; top: 50%; transform: translateY(-50%);">
+                        <input type="text" placeholder="Search..." class="search-input" id="search-input">
+                        <button class="icon-button" id="search-close" style="position: absolute; right: 0.25rem; top: 50%; transform: translateY(-50%);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 6 6 18"></path>
+                                <path d="m6 6 12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div style="position: relative;">
+                    <button class="icon-button" id="account-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span class="sr-only">Account</span>
+                    </button>
+                    <div class="dropdown-menu" id="account-dropdown">
+                        <a href="#">Sign In</a>
+                        <a href="#">Create Account</a>
+                        <a href="#">Order History</a>
+                    </div>
+                </div>
+
+                <button class="icon-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                        <path d="M3 6h18"></path>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="cart-badge">2</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-content">
+            <div class="mobile-nav-item">
+                <button class="mobile-nav-button" data-mobile-category="women">
+                    <span>Women</span>
+                    <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                </button>
+                <div class="mobile-submenu">
+                    <div class="mobile-submenu-grid">
+                        <a href="#">New Arrivals</a>
+                        <a href="#">Sale</a>
+                        <a href="#">Dresses</a>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="nav-link" style="display: block; padding: 0.5rem 0;">About</a>
+        </div>
+    </div>
+</header>
+
+
+<div class="underlay"></div>
+<section class="home-section">
+    <div class="modal" id="login_modal">
+    <i class="uil uil-times form_close"></i>
+    <!-- Login Form -->
+    <div class="form">
+        <form id="login_form" action="/api/login" method="POST">
+        <h2>Login</h2>
+
+        <div class="input-group">
+            <input type="email" name="email" id="loginEmail" placeholder="Enter your email"/>
+            <i class="uil uil-envelope-alt email"></i>
+        </div>
+
+        <div class="input-group">
+            <input type="password" name="password"
+            id="loginPassword"
+            placeholder="Enter your password"
+            />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+        </div>
+
+        <div class="checkbox-group">
+            <span class="checkbox">
+            <input type="checkbox" id="check" />
+            <label for="check">Remember me</label>
+            </span>
+            <a class="forgot-password" href="#">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="form-button">Login Now</button>
+        <!-- error messages area -->
+        <div class="login_error" id="loginError"></div>
+        <div class="login_signup">
+            Don't have an account? <a href="#" id="signup">Signup</a>
+        </div>
+        </form>
+    </div>
+
+    <!-- Sign-up Form -->
+    <div class="form">
+        <form id="signup_form">
+        <h2>Signup</h2>
+
+        <div class="input-group">
+            <i class="gg--profile profileIcon"></i>
+            <input id="first-name" 
+            type="text"
+            autocomplete="given-name"
+            placeholder="Enter first name"
+            />
+        </div>
+        <div class="validation-message" id="firstNameError"></div>
+
+        <div class="input-group">
+            <i class="gg--profile profileIcon"></i>
+            <input
+            id="last-name"
+            type="text"
+            autocomplete="family-name"
+            placeholder="Enter last name"
+            />
+        </div>
+        <div class="validation-message" id="lastNameError"></div>
+
+        <div class="input-group">
+            <input
+            id="email"
+            type="email"
+            autocomplete="email"
+            placeholder="Email"
+            />
+            <i class="uil uil-envelope-alt email"></i>
+        </div>
+        <div class="validation-message" id="emailError"></div>
+
+        <div class="input-group">
+            <input
+            id="password"
+            type="password"
+            placeholder="Create Password"
+            />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+        </div>
+        <div class="validation-message" id="passwordError"></div>
+
+        <div class="input-group">
+            <input
+            id="confirm-password"
+            type="password"
+            placeholder="Confirm Password"
+            />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+        </div>
+        <div class="validation-message" id="confirmPasswordError"></div>
+        <button class="form-button signup-button" type="submit">
+            Signup Now
+        </button>
+
+        <div class="login_signup">
+            Already have an account? <a href="#" id="login">Login</a>
+        </div>
+        </form>
+    </div>
+    </div>
+</section>
+
+<script src="../../js/header.js"></script>
+<script src="../../js/login.js"></script>
+<!-- <script src="js/fetch.js"></script>  -->

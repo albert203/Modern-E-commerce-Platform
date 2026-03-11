@@ -1,0 +1,377 @@
+<style>
+/* Social Media Section */
+.social-section {
+    background-color: var(--card);
+    border-top: 1px solid var(--border);
+}
+
+.social-container {
+    max-width: 96rem;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+}
+
+@media (min-width: 640px) {
+    .social-container {
+        padding: 3rem 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .social-container {
+        padding: 3rem 2rem;
+    }
+}
+
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .social-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+}
+
+.social-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: var(--card);
+    color: var(--foreground);
+    transition: all 0.3s ease;
+}
+
+.social-card:hover .social-icon-wrapper {
+    background-color: var(--border);
+}
+
+.social-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--foreground);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: var(--card);
+    border-top: 1px solid var(--border);
+    color: var(--foreground);
+}
+
+.footer-container {
+    max-width: 96rem;
+    margin: 0 auto;
+    padding: 4rem 1rem 2rem;
+}
+
+@media (min-width: 640px) {
+    .footer-container {
+        padding: 4rem 1.5rem 2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .footer-container {
+        padding: 4rem 2rem 2rem;
+    }
+}
+
+.footer-content {
+    display: grid;
+    gap: 3rem;
+    padding-bottom: 3rem;
+}
+
+@media (min-width: 1024px) {
+    .footer-content {
+        grid-template-columns: 1fr 2fr;
+        gap: 4rem;
+    }
+}
+
+.footer-brand {
+    max-width: 20rem;
+}
+
+.footer-logo {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2.25rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: -0.025em;
+    color: var(--foreground);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.footer-description {
+    color: var(--muted-foreground);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+}
+
+.footer-social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    background-color: var(--muted);
+    color: var(--foreground);
+    transition: all 0.2s;
+}
+
+.footer-social-link:hover {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+}
+
+.footer-links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+@media (min-width: 640px) {
+    .footer-links-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.footer-links-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-links-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--foreground);
+    margin-bottom: 1rem;
+}
+
+.footer-links-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.footer-link {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color: var(--primary);
+}
+
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.footer-copyright {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+}
+
+.footer-bottom-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-bottom-link {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-bottom-link:hover {
+    color: var(--primary);
+}
+
+.footer-divider {
+    color: var(--muted-foreground);
+}
+
+</style>
+
+<!-- Social Media Section -->
+<section class="social-section">
+    <div class="social-container">
+        <div class="social-grid">
+            <a href="#" class="social-card">
+                <div class="social-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19,3h-14c-1.105,0 -2,0.895 -2,2v14c0,1.105 0.895,2 2,2h7.621v-6.961h-2.343v-2.725h2.343v-2.005c0,-2.324 1.421,-3.591 3.495,-3.591c0.699,-0.002 1.397,0.034 2.092,0.105v2.43h-1.428c-1.13,0 -1.35,0.534 -1.35,1.322v1.735h2.7l-0.351,2.725h-2.365v6.965h3.586c1.105,0 2,-0.895 2,-2v-14c0,-1.105 -0.895,-2 -2,-2z"></path>
+                    </svg>
+                </div>
+                <span class="social-name">Facebook</span>
+            </a>
+            <a href="#" class="social-card">
+                <div class="social-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8,3c-2.761,0 -5,2.239 -5,5v8c0,2.761 2.239,5 5,5h8c2.761,0 5,-2.239 5,-5v-8c0,-2.761 -2.239,-5 -5,-5zM18,5c0.552,0 1,0.448 1,1c0,0.552 -0.448,1 -1,1c-0.552,0 -1,-0.448 -1,-1c0,-0.552 0.448,-1 1,-1zM12,7c2.761,0 5,2.239 5,5c0,2.761 -2.239,5 -5,5c-2.761,0 -5,-2.239 -5,-5c0,-2.761 2.239,-5 5,-5zM12,9c-1.65685,0 -3,1.34315 -3,3c0,1.65685 1.34315,3 3,3c1.65685,0 3,-1.34315 3,-3c0,-1.65685 -1.34315,-3 -3,-3z"></path>
+                    </svg>
+                </div>
+                <span class="social-name">Instagram</span>
+            </a>
+            <a href="#" class="social-card">
+                <div class="social-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12,2c-5.523,0 -10,4.477 -10,10c0,4.237 2.636,7.855 6.356,9.312c-0.087,-0.791 -0.167,-2.005 0.035,-2.868c0.182,-0.78 1.172,-4.971 1.172,-4.971c0,0 -0.299,-0.599 -0.299,-1.484c0,-1.391 0.806,-2.428 1.809,-2.428c0.853,0 1.265,0.641 1.265,1.408c0,0.858 -0.546,2.141 -0.828,3.329c-0.236,0.996 0.499,1.807 1.481,1.807c1.777,0 3.143,-1.874 3.143,-4.579c0,-2.394 -1.72,-4.068 -4.177,-4.068c-2.845,0 -4.515,2.134 -4.515,4.34c0,0.859 0.331,1.781 0.744,2.282c0.082,0.099 0.094,0.186 0.07,0.287c-0.078,0.308 -0.252,0.995 -0.288,1.131c-0.045,0.182 -0.147,0.221 -0.341,0.134c-1.28,-0.525 -2.078,-2.171 -2.078,-3.501c0,-2.845 2.063,-5.464 5.956,-5.464c3.124,0 5.554,2.229 5.554,5.204c0,3.1 -1.952,5.599 -4.655,5.599c-0.908,0 -1.764,-0.473 -2.064,-1.028c0,0 -0.492,1.872 -0.614,2.329c-0.221,0.85 -0.656,1.702 -1.062,2.364c0.777,0.24 1.597,0.368 2.451,0.368c5.523,0 10,-4.477 10,-10c0,-5.523 -4.477,-10 -10,-10z"></path>
+                    </svg>
+                </div>
+                <span class="social-name">Pinterest</span>
+            </a>
+            <a href="#" class="social-card">
+                <div class="social-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z"></path>
+                    </svg>
+                </div>
+                <span class="social-name">Twitter</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-content">
+            <!-- Logo and Description -->
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">Sway</a>
+                <p class="footer-description">
+                    Quality products, perfectly crafted for the modern individual. Discover timeless elegance.
+                </p>
+                <div class="footer-social-links">
+                    <a href="#" class="footer-social-link" aria-label="Facebook">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="Instagram">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="Twitter">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="Pinterest">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12,2c-5.523,0 -10,4.477 -10,10c0,4.237 2.636,7.855 6.356,9.312c-0.087,-0.791 -0.167,-2.005 0.035,-2.868c0.182,-0.78 1.172,-4.971 1.172,-4.971c0,0 -0.299,-0.599 -0.299,-1.484c0,-1.391 0.806,-2.428 1.809,-2.428c0.853,0 1.265,0.641 1.265,1.408c0,0.858 -0.546,2.141 -0.828,3.329c-0.236,0.996 0.499,1.807 1.481,1.807c1.777,0 3.143,-1.874 3.143,-4.579c0,-2.394 -1.72,-4.068 -4.177,-4.068c-2.845,0 -4.515,2.134 -4.515,4.34c0,0.859 0.331,1.781 0.744,2.282c0.082,0.099 0.094,0.186 0.07,0.287c-0.078,0.308 -0.252,0.995 -0.288,1.131c-0.045,0.182 -0.147,0.221 -0.341,0.134c-1.28,-0.525 -2.078,-2.171 -2.078,-3.501c0,-2.845 2.063,-5.464 5.956,-5.464c3.124,0 5.554,2.229 5.554,5.204c0,3.1 -1.952,5.599 -4.655,5.599c-0.908,0 -1.764,-0.473 -2.064,-1.028c0,0 -0.492,1.872 -0.614,2.329c-0.221,0.85 -0.656,1.702 -1.062,2.364c0.777,0.24 1.597,0.368 2.451,0.368c5.523,0 10,-4.477 10,-10c0,-5.523 -4.477,-10 -10,-10z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="footer-links-grid">
+                <div class="footer-links-section">
+                    <h3 class="footer-links-title">Shop</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="#" class="footer-link">Women</a></li>
+                        <li><a href="#" class="footer-link">Men</a></li>
+                        <li><a href="#" class="footer-link">Collections</a></li>
+                        <li><a href="#" class="footer-link">New Arrivals</a></li>
+                        <li><a href="#" class="footer-link">Sale</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-section">
+                    <h3 class="footer-links-title">Support</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="#" class="footer-link">Contact Us</a></li>
+                        <li><a href="#" class="footer-link">Shipping</a></li>
+                        <li><a href="#" class="footer-link">Returns</a></li>
+                        <li><a href="#" class="footer-link">Size Guide</a></li>
+                        <li><a href="#" class="footer-link">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-section">
+                    <h3 class="footer-links-title">Company</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="#" class="footer-link">About Us</a></li>
+                        <li><a href="#" class="footer-link">Careers</a></li>
+                        <li><a href="#" class="footer-link">Sustainability</a></li>
+                        <li><a href="#" class="footer-link">Press</a></li>
+                        <li><a href="#" class="footer-link">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-section">
+                    <h3 class="footer-links-title">Legal</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="#" class="footer-link">Terms of Service</a></li>
+                        <li><a href="#" class="footer-link">Cookie Policy</a></li>
+                        <li><a href="#" class="footer-link">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p class="footer-copyright">&copy; 2026 Sway. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#" class="footer-bottom-link">Privacy</a>
+                <span class="footer-divider">•</span>
+                <a href="#" class="footer-bottom-link">Terms</a>
+                <span class="footer-divider">•</span>
+                <a href="#" class="footer-bottom-link">Sitemap</a>
+            </div>
+        </div>
+    </div>
+</footer>

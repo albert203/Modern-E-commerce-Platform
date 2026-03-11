@@ -2,13 +2,13 @@
 
 -- Queries to create the database and the users table
 
-CREATE DATABASE IF NOT EXISTS anime_store;
+CREATE DATABASE IF NOT EXISTS clothing_db;
 
 CREATE USER 'albert'@'localhost' IDENTIFIED BY 'password';
 
-GRANT ALL PRIVILEGES ON anime_store.* TO 'albert'@'localhost';
+GRANT ALL PRIVILEGES ON clothing_db.* TO 'albert'@'localhost';
 
-USE anime_store;
+USE clothing_db;
 
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,

@@ -1,8 +1,11 @@
-import express, { Request, Response, NextFunction } from 'express';
+// controllers/controller.ts
+
+import express from 'express';
+import type { Request, Response, NextFunction } from 'express';
 // form validation and security
 import Joi from 'joi';
 import bcrypt from 'bcryptjs';
-import db from '../index.ts';
+import db from '../src/middleware/index.ts';
 
 // Define types for query results
 interface User {

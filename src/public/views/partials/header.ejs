@@ -12,34 +12,30 @@
     padding: 0.625rem;
     text-align: center;
     font-size: 0.875rem;
-    letter-spacing: 0.05em;
-    z-index: 1050;
+    letter-spacing: 0.1em;
+    z-index: 5;
 }
-
 
 /* -----------------------------------------------------------------------------
    2. HEADER SHELL
 ----------------------------------------------------------------------------- */
 .header {
     background-color: var(--card);
-    border-bottom: 1px solid var(--border);
+    box-shadow: #aea8b3 1px 1px 1px 0px, #aea8b3 0px 1px 1px 0px  inset;
     position: relative;
-    z-index: 10;
+    z-index: 5;
 }
-
 .header-container {
     max-width: 96rem;
     margin: 0 auto;
     padding: 0 1rem;
 }
-
 .header-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 4rem;
 }
-
 @media (min-width: 1024px) {
     .header-content {
         height: 4.5rem;
@@ -48,7 +44,6 @@
         padding: 0 2rem;
     }
 }
-
 
 /* -----------------------------------------------------------------------------
    3. LOGO
@@ -62,13 +57,11 @@
     color: var(--foreground);
     text-decoration: none;
 }
-
 @media (min-width: 1024px) {
     .logo {
         font-size: 2.25rem;
     }
 }
-
 
 /* -----------------------------------------------------------------------------
    4. MOBILE MENU BUTTON
@@ -80,7 +73,6 @@
     cursor: pointer;
     color: var(--foreground);
 }
-
 @media (min-width: 1024px) {
     .mobile-menu-btn {
         display: none;
@@ -614,7 +606,7 @@
 <head>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>
-    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <link rel="stylesheet" href="/css/global.css"/>
 </head>
 
 <header class="header">
@@ -923,5 +915,4 @@
 </section>
 
 <script src="../../js/header.js"></script>
-<script src="../../js/login.js"></script>
 <!-- <script src="js/fetch.js"></script>  -->

@@ -1,117 +1,90 @@
-const profileText = document.querySelector('.profile-text');
-const editButton = document.querySelector('.profile-edit-button');
-const hiddenInputForm = document.querySelector('.hidden-input-form');
-const cancelButton = document.querySelector('.profile-cancel-button');
-const applyButton = document.querySelector('.profile-apply-button');
+// ─── Element refs ───────────────────────────────────────────────────────────
+const editBtn        = document.querySelector('.profile-edit-button');
+const editPanel      = document.querySelector('.edit-panel');
+const cancelBtn      = document.querySelector('.profile-cancel-button');
+const saveBtn        = document.querySelector('.profile-apply-button');
+const errorContainer = document.querySelector('.error-container');
 
-document.addEventListener('DOMContentLoaded', async () => {
-  if (editButton) {
-    editButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      profileText.classList.add('hidden');
-      editButton.classList.add('hidden');
-      hiddenInputForm.classList.remove('hidden');
-      cancelButton.parentElement.classList.remove('hidden');
-      applyButton.parentElement.classList.remove('hidden');
-    });
-  }
-
-  if (cancelButton) {
-    cancelButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      profileText.classList.remove('hidden');
-      editButton.classList.remove('hidden');
-      hiddenInputForm.classList.add('hidden');
-      cancelButton.parentElement.classList.add('hidden');
-      applyButton.parentElement.classList.add('hidden');
-    });
-  }
-
-  if (applyButton) {
-    applyButton.addEventListener('click', async (e) => {
-      e.preventDefault();
-
-      const firstName = document.querySelector('#firstName').value;
-      const lastName = document.querySelector('#lastName').value;
-      const errorContainer = document.querySelector('.error-container');
-
-      // Clear previous error messages
-      errorContainer.innerHTML = '';
-
-      try {
-        const response = await fetch('/api/update-profile', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ firstName, lastName }),
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-
-          profileText.innerHTML = `
-                <div>First Name: ${data.firstName}</div>
-                <div>Last Name: ${data.lastName}</div>
-                <button class="profile-edit-button">Edit</button>
-        `;
-          profileText.classList.remove('hidden');
-          editButton.classList.remove('hidden');
-          hiddenInputForm.classList.add('hidden');
-          cancelButton.parentElement.classList.add('hidden');
-          applyButton.parentElement.classList.add('hidden');
-          errorContainer.innerHTML =
-            'First and last name updated successfully.';
-        } else {
-          const errorData = await response.json();
-          if (errorData.errors) {
-            errorData.errors.forEach((error) => {
-              const errorElement = document.createElement('div');
-              errorElement.textContent = error.message;
-              errorElement.classList.add('error-message');
-              errorContainer.appendChild(errorElement);
-            });
-          }
-        }
-      } catch (error) {
-        console.error('Error during fetch:', error);
-      }
-    });
-  }
-});
-
-let lastOpenedSection = 'profile';
-
-function showSection(section) {
-  // Hide the last opened section if it exists
-  if (lastOpenedSection) {
-    document
-      .getElementById(lastOpenedSection + '-section')
-      .classList.add('hidden');
-  }
-
-  // Show the current section
-  document.getElementById(section + '-section').classList.remove('hidden');
-
-  // Update the last opened section
-  lastOpenedSection = section;
+// ─── Toggle helpers ──────────────────────────────────────────────────────────
+function openEditPanel() {
+  editPanel.classList.add('open');
+  editBtn.classList.add('hidden');
+  errorContainer.innerHTML = '';
+  console.log('Edit panel opened');
 }
 
-function handleSectionToggle(section) {
-  switch (section) {
-    case 'profile':
-      showSection('profile');
-      break;
-    case 'security':
-      showSection('security');
-      break;
-    case 'orders':
-      showSection('orders');
-      break;
-    case 'settings':
-      showSection('settings');
-      break;
-    default:
-      console.error('Unknown section:', section);
-  }
+function closeEditPanel() {
+  editPanel.classList.remove('open');
+  editBtn.classList.remove('hidden');
+  errorContainer.innerHTML = '';
+}
+
+// ─── Display helpers ─────────────────────────────────────────────────────────
+function updateDisplayName(firstName, lastName) {
+  document.querySelector('.user-name').textContent = `${firstName} ${lastName}`;
+}
+
+function showError(message) {
+  const el = document.createElement('p');
+  el.className = 'edit-error';
+  el.textContent = message;
+  errorContainer.appendChild(el);
+}
+
+function showSuccess(message) {
+  errorContainer.innerHTML = `<p class="edit-success">${message}</p>`;
+}
+
+// ─── Event listeners ─────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  editBtn?.addEventListener('click', openEditPanel);
+  cancelBtn?.addEventListener('click', closeEditPanel);
+
+  saveBtn?.addEventListener('click', async () => {
+    const firstName = document.querySelector('#firstName').value.trim();
+    const lastName  = document.querySelector('#lastName').value.trim();
+    errorContainer.innerHTML = '';
+
+    // Basic client-side guard
+    if (!firstName || !lastName) {
+      showError('First and last name are required.');
+      return;
+    }
+
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+
+    try {
+      const res = await fetch('/api/update-profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ firstName, lastName }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        updateDisplayName(data.firstName, data.lastName);
+        showSuccess('Profile updated.');
+        // Close after a brief moment so user sees the confirmation
+        setTimeout(closeEditPanel, 1200);
+      } else {
+        (data.errors ?? []).forEach(err => showError(err.message));
+      }
+    } catch {
+      showError('Something went wrong. Please try again.');
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Save Changes';
+    }
+  });
+});
+
+// ─── Sidebar section switching ───────────────────────────────────────────────
+let activeSection = 'profile';
+
+function showSection(section) {
+  document.getElementById(`${activeSection}-section`)?.classList.add('hidden');
+  document.getElementById(`${section}-section`)?.classList.remove('hidden');
+  activeSection = section;
 }

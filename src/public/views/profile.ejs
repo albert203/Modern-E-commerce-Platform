@@ -4,215 +4,329 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Shopify - Premium Activewear & Fashion. Enjoy up to 50% off in our Winter Sale. Elevate your style with our curated collections.">
-    <meta property="og:title" content="Shopify | Premium Activewear & Fashion">
-    <meta property="og:description" content="Discover our winter collection with up to 50% off. Shop premium activewear and elevate your style.">
-    <meta property="og:image" content="/assets/images/social-preview.jpg">
 
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/global.css">
-    <title>Profile</title>
-    
-    <link rel="preconnect" href="https://unicons.iconscout.com">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/global.css">
+
+    <title>Profile — Sway</title>
 
     <style>
-        .profile-container {
-            max-width: 1100px;
-            padding: 2rem 1.5rem;
+        /* ─── Base ─────────────────────────────────────────────── */
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── Page Shell ────────────────────────────────────────── */
+        .profile-page {
+            max-width: 68rem;
             margin: 0 auto;
-            min-height: 100vh;
+            padding: 2.5rem 1rem;
         }
 
-        .glass-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(247, 231, 231, 0.6));
-            border-radius: 0.5rem;
-            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-        }
+        @media (min-width: 640px)  { .profile-page { padding: 2.5rem 1.5rem; } }
+        @media (min-width: 1024px) { .profile-page { padding: 3rem 2rem; } }
 
-        .profile-header {
+        /* ─── Profile Header Card ───────────────────────────────── */
+        .profile-header-card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem 2rem;
             margin-bottom: 2rem;
-        }
-
-        .profile-header-content {
-            padding: 1rem;
-            
-        }
-
-        .profile-info {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
             gap: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        .avatar-section {
-            position: relative;
+        .profile-header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
         }
 
+        /* Avatar */
         .avatar {
-            width: 6rem;
-            height: 6rem;
+            width: 4.5rem;
+            height: 4.5rem;
             border-radius: 50%;
-            border: 2px solid #ebd1b6;
-            background-color: #fff;
+            border: 1.5px solid var(--border);
+            background-color: var(--muted);
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.5rem;
-            font-weight: 600;
-            color: #8b6f47;
-        }
-
-        .user-details {
-            flex: 1;
-        }
-
-        .user-header {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--primary);
+            flex-shrink: 0;
         }
 
         .user-name {
-            font-size: 1.5rem;
-            font-weight: bold;
             font-family: 'Cormorant Garamond', serif;
-            color: #111827;
-            margin-bottom: 0.5rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: var(--foreground);
+            line-height: 1.2;
+            margin-bottom: 0.2rem;
         }
 
         .user-email {
-            color: #6b7280;
-            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+            margin-bottom: 0.6rem;
         }
 
-        .user-stats {
+        .user-meta {
             display: flex;
             align-items: center;
             gap: 1rem;
-            font-size: 0.875rem;
-            color: #6b7280;
+            flex-wrap: wrap;
         }
 
-        .stat-item {
+        .meta-item {
             display: flex;
             align-items: center;
-            gap: 0.25rem;
+            gap: 0.35rem;
+            font-size: 0.8rem;
+            color: var(--muted-foreground);
         }
+
+        .meta-item i { font-size: 0.75rem; }
 
         .badge {
-            background-color: rgba(235, 209, 182, 0.2);
-            color: #8b6f47;
-            border: 1px solid #ebd1b6;
-            padding: 0.25rem 0.5rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        .profile-actions {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .btn {
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-            text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
+            padding: 0.2rem 0.65rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--primary);
+            background-color: var(--muted);
         }
 
-        .btn-outline {
-            border: 1px solid #ebd1b6;
-            color: #8b6f47;
-            background: transparent;
+        /* Header actions */
+        .profile-header-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-shrink: 0;
         }
 
-        .btn-outline:hover {
-            background-color: rgba(235, 209, 182, 0.1);
+        /* ── Edit Panel ─────────────────────────────────────────── */
+.edit-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s ease;
+    overflow: hidden;
+    width: 100%;
+}
+
+.edit-panel.open {
+    grid-template-rows: 1fr;
+}
+
+.edit-panel-inner {
+    min-height: 0;
+    padding: 0 0.25rem;
+    transition: padding 0.35s ease;
+}
+
+.edit-panel.open .edit-panel-inner {
+    padding: 1.25rem;
+}
+
+/* ── Top border that appears when open ──────────────────── */
+.edit-panel.open .edit-panel-inner {
+    border-top: 1px solid var(--border);
+    margin-top: 1.25rem;
+}
+
+/* ── Fields row ─────────────────────────────────────────── */
+.edit-fields {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+}
+
+.edit-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+    min-width: 160px; 
+    max-width: 350px;
+}
+
+.edit-field-group label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+}
+
+.edit-input {
+    padding: 0.55rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--foreground);
+    background-color: var(--background);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    width: 100%;
+}
+
+.edit-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--primary) 15%, transparent);
+}
+
+/* ── Actions row ─────────────────────────────────────────── */
+.edit-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ── Feedback ────────────────────────────────────────────── */
+.error-container {
+    margin-top: 0.6rem;
+    min-height: 1rem;   /* prevents layout shift when messages appear */
+}
+
+.edit-error   { font-size: 0.8rem; color: #dc2626; }
+.edit-success { font-size: 0.8rem; color: #16a34a; }
+
+        /* ─── Buttons ───────────────────────────────────────────── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.55rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            border: none;
+            white-space: nowrap;
         }
 
         .btn-primary {
-            background-color: #ebd1b6;
-            color: #8b6f47;
+            background-color: var(--primary);
+            color: var(--primary-foreground);
         }
 
-        .btn-primary:hover {
-            background-color: #d4c0a1;
+        .btn-primary:hover { opacity: 0.88; }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: var(--foreground);
         }
 
-        .tabs-container {
-            margin-bottom: 1.5rem;
+        .btn-outline:hover { background-color: var(--muted); }
+
+        .btn-ghost {
+            background: none;
+            border: none;
+            color: var(--muted-foreground);
+            padding: 0.55rem 0.75rem;
         }
 
-        .tabs {
+        .btn-ghost:hover { color: var(--foreground); }
+
+        .btn-sm {
+            padding: 0.35rem 0.9rem;
+            font-size: 0.75rem;
+        }
+
+        /* ─── Tabs ──────────────────────────────────────────────── */
+        .tabs-bar {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(235, 209, 182, 0.2);
-            border-radius: 0.5rem;
+            background-color: var(--muted);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
             padding: 0.25rem;
+            margin-bottom: 2rem;
         }
 
         .tab-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            background: none;
+            gap: 0.4rem;
+            padding: 0.55rem 0.75rem;
+            border-radius: calc(var(--radius) - 2px);
             border: none;
+            background: none;
             cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--muted-foreground);
             transition: all 0.2s;
-            color: #374151;
+            letter-spacing: 0.02em;
         }
 
-        .tab-btn:hover:not(.active) {
-            background-color: #f3f4f6;
-        }
+        .tab-btn i { font-size: 0.75rem; }
+
+        .tab-btn:hover:not(.active) { color: var(--foreground); }
 
         .tab-btn.active {
-            background-color: #ebd1b6;
-            color: #8b6f47;
+            background-color: var(--card);
+            color: var(--primary);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
         }
 
-        .tab-content {
-            display: block;
-        }
-
-        .tab-content.hidden {
-            display: none;
-        }
-
+        /* ─── Section Header ────────────────────────────────────── */
         .section-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 1.5rem;
+            gap: 1rem;
         }
 
         .section-title {
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.5rem;
-            font-weight: bold;
-            color: #111827;
-            flex: 1;
+            font-weight: 500;
+            color: var(--foreground);
         }
 
+        /* ─── Tab Content ───────────────────────────────────────── */
+        .tab-content { display: block; }
+        .tab-content.hidden { display: none; }
+
+        /* ─── Card Base ─────────────────────────────────────────── */
+        .card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+
+        /* ─── Orders ────────────────────────────────────────────── */
         .orders-list {
             display: flex;
             flex-direction: column;
@@ -223,39 +337,49 @@
             padding: 1.5rem;
         }
 
-        .order-header {
+        .order-top {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-
-        .order-info {
-            display: flex;
-            align-items: center;
+            margin-bottom: 1.25rem;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        .order-details h3 {
+        .order-meta h3 {
             font-weight: 600;
-            color: #111827;
-            margin-bottom: 0.25rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
+            font-size: 0.9rem;
+            color: var(--foreground);
+            margin-bottom: 0.2rem;
         }
 
-        .order-details p {
-            font-size: 0.875rem;
-            color: #6b7280;
+        .order-meta p {
+            font-size: 0.8rem;
+            color: var(--muted-foreground);
+        }
+
+        .order-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.35rem;
+        }
+
+        .order-amount {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--foreground);
         }
 
         .order-status {
-            padding: 0.25rem 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            padding: 0.2rem 0.65rem;
             border-radius: 9999px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
         }
 
         .status-delivered {
@@ -264,36 +388,16 @@
         }
 
         .status-processing {
-            background-color: rgba(235, 209, 182, 0.2);
-            color: #8b6f47;
+            background-color: var(--muted);
+            color: var(--primary);
+            border: 1px solid var(--border);
         }
 
-        .order-total {
-            text-align: right;
-        }
-
-        .order-total p {
-            font-weight: 600;
-            color: #111827;
-            margin-bottom: 0.25rem;
-        }
-
-        .order-total button {
-            background: none;
-            border: none;
-            color: #8b6f47;
-            cursor: pointer;
-            font-size: 0.875rem;
-        }
-
-        .order-total button:hover {
-            background-color: rgba(235, 209, 182, 0.1);
-        }
-
-        .order-items {
+        .order-items-row {
             display: flex;
             gap: 1rem;
             overflow-x: auto;
+            padding-bottom: 0.25rem;
         }
 
         .order-item {
@@ -303,100 +407,96 @@
             flex-shrink: 0;
         }
 
-        .item-image {
-            width: 4rem;
-            height: 4rem;
-            border-radius: 0.5rem;
-            background-color: #e5e7eb;
-            border: 1px solid rgba(235, 209, 182, 0.2);
+        .item-thumb {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: calc(var(--radius) - 2px);
+            background-color: var(--muted);
+            border: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #9ca3af;
+            color: var(--muted-foreground);
+            font-size: 1rem;
         }
 
-        .item-details h4 {
+        .item-info h4 {
+            font-size: 0.8rem;
             font-weight: 500;
-            color: #111827;
-            font-size: 0.875rem;
-            margin-bottom: 0.25rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
+            color: var(--foreground);
+            margin-bottom: 0.15rem;
         }
 
-        .item-details p {
+        .item-info p {
             font-size: 0.75rem;
-            color: #6b7280;
-            margin-bottom: 0.25rem;
+            color: var(--muted-foreground);
         }
 
         .item-price {
             font-size: 0.75rem;
             font-weight: 500;
-            color: #8b6f47;
+            color: var(--primary);
+            margin-top: 0.15rem;
         }
 
+        /* ─── Wishlist ──────────────────────────────────────────── */
         .wishlist-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.25rem;
         }
 
         .wishlist-card {
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: box-shadow 0.25s ease;
         }
 
         .wishlist-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
         }
 
-        .wishlist-image {
+        .wishlist-img {
             position: relative;
-            width: 100%;
-            height: 12rem;
+            height: 11rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 2.25rem;
+            background-color: var(--muted);
         }
 
         .wishlist-heart {
             position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
+            top: 0.6rem;
+            right: 0.6rem;
             width: 2rem;
             height: 2rem;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(4px);
-            border: none;
+            background-color: var(--card);
+            border: 1px solid var(--border);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: #ef4444;
+            color: var(--primary);
+            font-size: 0.75rem;
+            transition: all 0.2s;
         }
 
-        .wishlist-heart:hover {
-            background-color: #fff;
-        }
+        .wishlist-heart:hover { background-color: var(--muted); }
 
-        .wishlist-content {
-            padding: 1rem;
+        .wishlist-body {
+            padding: 0.9rem 1rem 1rem;
         }
 
         .wishlist-title {
-            font-weight: 600;
-            color: #111827;
-            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: var(--foreground);
+            margin-bottom: 0.35rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 100%;
         }
 
         .wishlist-rating {
@@ -404,154 +504,96 @@
             align-items: center;
             gap: 0.25rem;
             margin-bottom: 0.75rem;
+            font-size: 0.75rem;
+            color: var(--muted-foreground);
         }
 
-        .wishlist-rating i {
-            color: #fbbf24;
-        }
-
-        .wishlist-rating span {
-            font-size: 0.875rem;
-            color: #6b7280;
-        }
+        .wishlist-rating i { color: #f59e0b; font-size: 0.7rem; }
 
         .wishlist-footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
-        }
-
-        .wishlist-prices {
-            display: flex;
-            align-items: center;
             gap: 0.5rem;
-            flex: 1;
         }
 
-        .current-price {
+        .price-current {
             font-weight: 600;
-            color: #111827;
+            font-size: 0.875rem;
+            color: var(--foreground);
         }
 
-        .original-price {
-            font-size: 0.875rem;
-            color: #6b7280;
+        .price-original {
+            font-size: 0.75rem;
+            color: var(--muted-foreground);
             text-decoration: line-through;
+            margin-left: 0.25rem;
         }
 
-        .add-to-cart {
-            background-color: #ebd1b6;
-            color: #8b6f47;
-            border: none;
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-            cursor: pointer;
-        }
-
-        .add-to-cart:hover {
-            background-color: #d4c0a1;
-        }
-
+        /* ─── Addresses ─────────────────────────────────────────── */
         .addresses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
         }
 
         .address-card {
-            border-radius: 0.5rem;
+            overflow: hidden;
         }
 
-        .address-card.default {
-            border: 2px solid #ebd1b6;
-        }
-
-        .address-card:not(.default) {
-            border: 1px solid #d1d5db;
-        }
-
-        .address-header {
-            padding: 1rem 1rem 0.75rem;
-            border-bottom: 1px solid rgba(235, 209, 182, 0.1);
-        }
-
-        .address-header-content {
+        .address-card-head {
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .address-title {
-            font-size: 1.125rem;
+        .address-label {
+            font-size: 0.875rem;
             font-weight: 600;
+            color: var(--foreground);
         }
 
-        .address-body {
+        .address-card-body {
             padding: 1rem;
         }
 
-        .address-details {
-            margin-bottom: 1rem;
+        .address-lines p {
+            font-size: 0.8rem;
+            color: var(--muted-foreground);
+            line-height: 1.7;
         }
 
-        .address-details p {
-            margin-bottom: 0.5rem;
-            color: #6b7280;
-        }
-
-        .address-details p:first-child {
+        .address-lines p:first-child {
             font-weight: 500;
-            color: #111827;
+            color: var(--foreground);
         }
 
         .address-actions {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            margin-top: 1rem;
         }
 
-        .btn-sm {
-            padding: 0.25rem 0.75rem;
-            font-size: 0.875rem;
-        }
-
-        .btn-ghost {
-            background: none;
-            border: none;
-            color: #6b7280;
-            cursor: pointer;
-        }
-
-        .btn-ghost:hover {
-            color: #374151;
-        }
-
+        /* ─── Payment ───────────────────────────────────────────── */
         .payment-list {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: 0.75rem;
+            margin-bottom: 1.75rem;
         }
 
         .payment-card {
-            padding: 1.5rem;
-        }
-
-        .payment-card.default {
-            border: 2px solid #ebd1b6;
-        }
-
-        .payment-card:not(.default) {
-            border: 1px solid #d1d5db;
-        }
-
-        .payment-content {
+            padding: 1.25rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        .payment-info {
+        .payment-left {
             display: flex;
             align-items: center;
             gap: 1rem;
@@ -560,587 +602,458 @@
         .card-brand {
             width: 3rem;
             height: 2rem;
-            border-radius: 0.25rem;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 0.75rem;
-            font-weight: bold;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: #fff;
+            flex-shrink: 0;
         }
 
-        .card-brand.visa {
-            background: linear-gradient(135deg, #1e3a8a, #1e40af);
-        }
+        .card-brand.visa       { background: linear-gradient(135deg, #1e3a8a, #1e40af); }
+        .card-brand.mastercard { background: linear-gradient(135deg, #dc2626, #b91c1c); }
 
-        .card-brand.mastercard {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-        }
-
-        .card-details h4 {
-            font-weight: 500;
-            color: #111827;
-            margin-bottom: 0.25rem;
-        }
-
-        .card-details p {
+        .card-info h4 {
             font-size: 0.875rem;
-            color: #6b7280;
+            font-weight: 500;
+            color: var(--foreground);
+            margin-bottom: 0.15rem;
+        }
+
+        .card-info p {
+            font-size: 0.75rem;
+            color: var(--muted-foreground);
         }
 
         .payment-actions {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
+        /* ─── Divider ───────────────────────────────────────────── */
         .divider {
             border: none;
-            border-top: 1px solid #d1d5db;
-            margin: 1.5rem 0;
+            border-top: 1px solid var(--border);
+            margin: 1.75rem 0;
         }
 
-        .notifications-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(4px);
-            border-radius: 0.5rem;
+        /* ─── Notifications ─────────────────────────────────────── */
+        .notif-card {
+            overflow: hidden;
         }
 
-        .notifications-header {
-            padding: 1rem;
-            border-bottom: 1px solid #e5e7eb;
+        .notif-head {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
         }
 
-        .notifications-title {
-            font-size: 1.125rem;
+        .notif-title {
+            font-size: 0.9rem;
             font-weight: 600;
+            color: var(--foreground);
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            margin-bottom: 0.2rem;
         }
 
-        .notifications-title i {
-            color: #8b6f47;
+        .notif-title i { color: var(--primary); font-size: 0.85rem; }
+
+        .notif-subtitle {
+            font-size: 0.8rem;
+            color: var(--muted-foreground);
         }
 
-        .notifications-subtitle {
-            font-size: 0.875rem;
-            color: #6b7280;
-            margin-top: 0.25rem;
+        .notif-body {
+            padding: 0.25rem 0;
         }
 
-        .notifications-body {
-            padding: 1rem;
-        }
-
-        .notification-item {
+        .notif-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 1rem;
+            gap: 1rem;
+            padding: 0.9rem 1.25rem;
+            border-bottom: 1px solid var(--border);
         }
 
-        .notification-item:last-child {
-            margin-bottom: 0;
-        }
+        .notif-item:last-child { border-bottom: none; }
 
-        .notification-details h4 {
+        .notif-detail h4 {
+            font-size: 0.85rem;
             font-weight: 500;
-            margin-bottom: 0.25rem;
+            color: var(--foreground);
+            margin-bottom: 0.15rem;
         }
 
-        .notification-details p {
-            font-size: 0.875rem;
-            color: #6b7280;
+        .notif-detail p {
+            font-size: 0.775rem;
+            color: var(--muted-foreground);
         }
 
-        @media (min-width: 768px) {
-            .profile-info {
-                flex-direction: row;
-                align-items: center;
-            }
+        /* ─── Utility ───────────────────────────────────────────── */
+        .hidden { display: none; }
 
-            .user-header {
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-            }
 
-            .section-header {
-                flex-direction: row;
-                align-items: center;
-            }
-
-            .order-header {
-                flex-direction: row;
-                align-items: center;
-            }
-
-            .payment-content {
-                flex-direction: row;
-                align-items: center;
-            }
-
-            .notification-item {
-                flex-direction: row;
-                align-items: center;
-            }
-
-            .wishlist-footer {
-                flex-direction: row;
-                align-items: center;
-            }
-
-            .address-header-content {
-                flex-direction: row;
-                align-items: center;
-            }
+        .profile-header-card {
+            flex-wrap: wrap; 
         }
 
-        .hidden {
-            display: none;
+        .edit-panel {
+            width: 100%;    
         }
-
-        .flex {
-            display: flex;
-        }
-
-        .items-center {
-            align-items: center;
-        }
-
-        .justify-between {
-            justify-content: space-between;
-        }
-
-        .gap-1 { gap: 0.25rem; }
-        .gap-2 { gap: 0.5rem; }
-        .gap-3 { gap: 0.75rem; }
-        .gap-4 { gap: 1rem; }
-        .gap-6 { gap: 1.5rem; }
-
-        .text-sm { font-size: 0.875rem; }
-        .text-base { font-size: 1rem; }
-        .text-lg { font-size: 1.125rem; }
-        .text-xl { font-size: 1.25rem; }
-        .text-2xl { font-size: 1.5rem; }
-
-        .font-medium { font-weight: 500; }
-        .font-semibold { font-weight: 600; }
-        .font-bold { font-weight: bold; }
-
-        .text-gray-500 { color: #6b7280; }
-        .text-gray-600 { color: #4b5563; }
-        .text-gray-900 { color: #111827; }
-
-        .mb-2 { margin-bottom: 0.5rem; }
-        .mb-3 { margin-bottom: 0.75rem; }
-        .mb-4 { margin-bottom: 1rem; }
-        .mb-6 { margin-bottom: 1.5rem; }
-
-        .mt-1 { margin-top: 0.25rem; }
-        .mt-4 { margin-top: 1rem; }
     </style>
 </head>
 <body class="<%= typeof hasSubheader !== 'undefined' ? (hasSubheader ? 'has-subheader' : '') : '' %>">
-    <%- include('partials/header') %>
     <% if (typeof hasSubheader !== 'undefined' && hasSubheader) { %>
         <%- include('partials/sub-header') %>
     <% } %>
+    <%- include('partials/header') %>
 
-    <div class="profile-container">
-        <div class="glass-card profile-header">
-            <div class="profile-header-content">
-                <div class="profile-info">
-                    <div class="avatar-section">
-                        <div class="avatar">
-                            <% if (user) { %>
-                                <%= user.firstName.charAt(0) + user.lastName.charAt(0) %>
-                            <% } else { %>
-                                SJ
-                            <% } %>
+    <div class="profile-page">
+
+        <div class="profile-header-card">
+
+            <!-- ── Display row ── -->
+            <div class="profile-header-left">
+                <div class="avatar">
+                    <% if (user) { %>
+                        <%= user.firstName.charAt(0) %><%= user.lastName.charAt(0) %>
+                    <% } else { %>
+                        SJ
+                    <% } %>
+                </div>
+                <div>
+                    <h1 class="user-name">
+                        <% if (user) { %>
+                            <%= user.firstName %> <%= user.lastName %>
+                        <% } else { %>
+                            Guest User
+                        <% } %>
+                    </h1>
+                    <p class="user-email">
+                        <% if (user) { %>
+                            <%= user.email %>
+                        <% } else { %>
+                            guest@email.com
+                        <% } %>
+                    </p>
+                    <div class="user-meta">
+                        <span class="meta-item"><i class="fas fa-box"></i> 12 Orders</span>
+                        <span class="meta-item"><i class="fas fa-heart"></i> 8 Saved</span>
+                        <span class="badge">VIP Member</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-header-actions">
+                <button class="btn btn-outline btn-sm">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+                <button class="btn btn-primary btn-sm profile-edit-button">Edit Profile</button>
+            </div>
+
+            <div class="edit-panel open">
+                <div class="edit-panel-inner">
+                    <div class="edit-fields">
+                        <div class="edit-field-group">
+                            <label for="firstName">First Name</label>
+                            <input id="firstName" type="text" class="edit-input"
+                                value="<%= user ? user.firstName : '' %>"
+                                placeholder="First name">
+                        </div>
+                        <div class="edit-field-group">
+                            <label for="lastName">Last Name</label>
+                            <input id="lastName" type="text" class="edit-input"
+                                value="<%= user ? user.lastName : '' %>"
+                                placeholder="Last name">
                         </div>
                     </div>
+                    <div class="edit-actions">
+                        <button class="btn btn-primary btn-sm profile-apply-button">Save Changes</button>
+                        <button class="btn btn-outline btn-sm profile-cancel-button">Cancel</button>
+                    </div>
+                    <div class="error-container"></div>
+                </div>
+            </div>
 
-                    <div class="user-details">
-                        <div class="user-header">
-                            <div>
-                                <h1 class="user-name">
-                                    <% if (user) { %>
-                                        <%= user.firstName %> <%= user.lastName %>
-                                    <% } else { %>
-                                        Guest User
-                                    <% } %>
-                                </h1>
-                                <p class="user-email">
-                                    <% if (user) { %>
-                                        <%= user.email %>
-                                    <% } else { %>
-                                        guest@email.com
-                                    <% } %>
-                                </p>
-                                <div class="user-stats">
-                                    <span class="stat-item">
-                                        <i class="fas fa-box"></i>
-                                        12 Orders
-                                    </span>
-                                    <span class="stat-item">
-                                        <i class="fas fa-heart"></i>
-                                        8 Favorites
-                                    </span>
-                                    <span class="badge">
-                                        VIP Member
-                                    </span>
-                                </div>
+        </div>
+
+        <!-- ── Tabs ── -->
+        <div class="tabs-bar">
+            <button class="tab-btn active" data-tab="orders" onclick="showTab('orders')">
+                <i class="fas fa-box"></i> Orders
+            </button>
+            <button class="tab-btn" data-tab="wishlist" onclick="showTab('wishlist')">
+                <i class="fas fa-heart"></i> Wishlist
+            </button>
+            <button class="tab-btn" data-tab="addresses" onclick="showTab('addresses')">
+                <i class="fas fa-map-marker-alt"></i> Addresses
+            </button>
+            <button class="tab-btn" data-tab="payment" onclick="showTab('payment')">
+                <i class="fas fa-credit-card"></i> Payment
+            </button>
+        </div>
+
+        <!-- ── Orders ── -->
+        <div id="orders-tab" class="tab-content">
+            <div class="section-header">
+                <h2 class="section-title">Order History</h2>
+                <button class="btn btn-outline btn-sm">View All</button>
+            </div>
+            <div class="orders-list">
+
+                <div class="card order-card">
+                    <div class="order-top">
+                        <div>
+                            <div class="order-meta">
+                                <h3>ORD-001</h3>
+                                <p>Dec 15, 2024</p>
                             </div>
-
-                            <div class="profile-actions">
-                                <button class="btn btn-outline">
-                                    <i class="fas fa-cog"></i>
-                                    Settings
-                                </button>
-                                <button class="btn btn-primary">Edit Profile</button>
+                        </div>
+                        <div class="order-right">
+                            <span class="order-amount">$129.99</span>
+                            <span class="order-status status-delivered">Delivered</span>
+                            <button class="btn btn-ghost btn-sm" style="padding: 0; font-size: 0.75rem;">View Details</button>
+                        </div>
+                    </div>
+                    <div class="order-items-row">
+                        <div class="order-item">
+                            <div class="item-thumb"><i class="fas fa-tshirt"></i></div>
+                            <div class="item-info">
+                                <h4>Organic Cotton T-Shirt</h4>
+                                <p>M · White</p>
+                                <p class="item-price">$29.99</p>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="item-thumb"><i class="fas fa-vest"></i></div>
+                            <div class="item-info">
+                                <h4>Denim Jacket</h4>
+                                <p>L · Blue</p>
+                                <p class="item-price">$99.99</p>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="card order-card">
+                    <div class="order-top">
+                        <div class="order-meta">
+                            <h3>ORD-002</h3>
+                            <p>Dec 8, 2024</p>
+                        </div>
+                        <div class="order-right">
+                            <span class="order-amount">$89.99</span>
+                            <span class="order-status status-processing">Processing</span>
+                            <button class="btn btn-ghost btn-sm" style="padding: 0; font-size: 0.75rem;">View Details</button>
+                        </div>
+                    </div>
+                    <div class="order-items-row">
+                        <div class="order-item">
+                            <div class="item-thumb"><i class="fas fa-tshirt"></i></div>
+                            <div class="item-info">
+                                <h4>Wool Sweater</h4>
+                                <p>M · Beige</p>
+                                <p class="item-price">$89.99</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <div>
-            <div class="tabs-container">
-                <div class="tabs">
-                    <button onclick="showTab('orders')" class="tab-btn active" data-tab="orders">
-                        <i class="fas fa-box"></i>
-                        Orders
-                    </button>
-                    <button onclick="showTab('wishlist')" class="tab-btn" data-tab="wishlist">
-                        <i class="fas fa-heart"></i>
-                        Wishlist
-                    </button>
-                    <button onclick="showTab('addresses')" class="tab-btn" data-tab="addresses">
-                        <i class="fas fa-map-marker-alt"></i>
-                        Addresses
-                    </button>
-                    <button onclick="showTab('payment')" class="tab-btn" data-tab="payment">
-                        <i class="fas fa-credit-card"></i>
-                        Payment
-                    </button>
+        <!-- ── Wishlist ── -->
+        <div id="wishlist-tab" class="tab-content hidden">
+            <div class="section-header">
+                <h2 class="section-title">My Wishlist</h2>
+                <button class="btn btn-outline btn-sm">Share Wishlist</button>
+            </div>
+            <div class="wishlist-grid">
+
+                <div class="card wishlist-card">
+                    <div class="wishlist-img" style="background-color: var(--muted);">
+                        <i class="fas fa-tshirt" style="color: var(--muted-foreground);"></i>
+                        <button class="wishlist-heart"><i class="fas fa-heart"></i></button>
+                    </div>
+                    <div class="wishlist-body">
+                        <p class="wishlist-title">Silk Blouse</p>
+                        <div class="wishlist-rating"><i class="fas fa-star"></i> 4.8</div>
+                        <div class="wishlist-footer">
+                            <span><span class="price-current">$79.99</span><span class="price-original">$99.99</span></span>
+                            <button class="btn btn-primary btn-sm">Add to Cart</button>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="card wishlist-card">
+                    <div class="wishlist-img" style="background-color: var(--muted);">
+                        <i class="fas fa-shoe-prints" style="color: var(--muted-foreground);"></i>
+                        <button class="wishlist-heart"><i class="fas fa-heart"></i></button>
+                    </div>
+                    <div class="wishlist-body">
+                        <p class="wishlist-title">Leather Boots</p>
+                        <div class="wishlist-rating"><i class="fas fa-star"></i> 4.9</div>
+                        <div class="wishlist-footer">
+                            <span class="price-current">$159.99</span>
+                            <button class="btn btn-primary btn-sm">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card wishlist-card">
+                    <div class="wishlist-img" style="background-color: var(--muted);">
+                        <i class="fas fa-mitten" style="color: var(--muted-foreground);"></i>
+                        <button class="wishlist-heart"><i class="fas fa-heart"></i></button>
+                    </div>
+                    <div class="wishlist-body">
+                        <p class="wishlist-title">Cashmere Scarf</p>
+                        <div class="wishlist-rating"><i class="fas fa-star"></i> 4.7</div>
+                        <div class="wishlist-footer">
+                            <span><span class="price-current">$49.99</span><span class="price-original">$69.99</span></span>
+                            <button class="btn btn-primary btn-sm">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ── Addresses ── -->
+        <div id="addresses-tab" class="tab-content hidden">
+            <div class="section-header">
+                <h2 class="section-title">Saved Addresses</h2>
+                <button class="btn btn-primary btn-sm">Add Address</button>
+            </div>
+            <div class="addresses-grid">
+
+                <div class="card address-card">
+                    <div class="address-card-head">
+                        <span class="address-label">Home</span>
+                        <span class="badge">Default</span>
+                    </div>
+                    <div class="address-card-body">
+                        <div class="address-lines">
+                            <p><% if (user) { %><%= user.firstName %> <%= user.lastName %><% } else { %>John Doe<% } %></p>
+                            <p>123 Fashion Street</p>
+                            <p>New York, NY 10001</p>
+                            <p>United States</p>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                        <div class="address-actions">
+                            <button class="btn btn-outline btn-sm">Edit</button>
+                            <button class="btn btn-ghost btn-sm">Remove</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card address-card">
+                    <div class="address-card-head">
+                        <span class="address-label">Work</span>
+                    </div>
+                    <div class="address-card-body">
+                        <div class="address-lines">
+                            <p><% if (user) { %><%= user.firstName %> <%= user.lastName %><% } else { %>John Doe<% } %></p>
+                            <p>456 Business Ave</p>
+                            <p>New York, NY 10002</p>
+                            <p>United States</p>
+                            <p>+1 (555) 987-6543</p>
+                        </div>
+                        <div class="address-actions">
+                            <button class="btn btn-outline btn-sm">Edit</button>
+                            <button class="btn btn-ghost btn-sm">Remove</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ── Payment ── -->
+        <div id="payment-tab" class="tab-content hidden">
+            <div class="section-header">
+                <h2 class="section-title">Payment Methods</h2>
+                <button class="btn btn-primary btn-sm">Add Payment</button>
             </div>
 
-            <div id="orders-tab" class="tab-content">
-                <div class="section-header">
-                    <h2 class="section-title">Order History</h2>
-                    <button class="btn btn-outline">
-                        View All Orders
-                    </button>
-                </div>
+            <div class="payment-list">
 
-                <div class="orders-list">
-                    <div class="glass-card order-card">
-                        <div class="order-header">
-                            <div class="order-info">
-                                <div class="order-details">
-                                    <h3>ORD-001</h3>
-                                    <p>Dec 15, 2024</p>
-                                </div>
-                                <span class="order-status status-delivered">
-                                    Delivered
-                                </span>
-                            </div>
-                            <div class="order-total">
-                                <p>$129.99</p>
-                                <button>View Details</button>
-                            </div>
+                <div class="card payment-card">
+                    <div class="payment-left">
+                        <div class="card-brand visa">VISA</div>
+                        <div class="card-info">
+                            <h4>•••• •••• •••• 4242</h4>
+                            <p>Expires 12/26</p>
                         </div>
-
-                        <div class="order-items">
-                            <div class="order-item">
-                                <div class="item-image">
-                                    <i class="fas fa-tshirt"></i>
-                                </div>
-                                <div class="item-details">
-                                    <h4>Organic Cotton T-Shirt</h4>
-                                    <p>M • White</p>
-                                    <p class="item-price">$29.99</p>
-                                </div>
-                            </div>
-                            <div class="order-item">
-                                <div class="item-image">
-                                    <i class="fas fa-vest"></i>
-                                </div>
-                                <div class="item-details">
-                                    <h4>Denim Jacket</h4>
-                                    <p>L • Blue</p>
-                                    <p class="item-price">$99.99</p>
-                                </div>
-                            </div>
-                        </div>
+                        <span class="badge">Default</span>
                     </div>
-
-                    <div class="glass-card order-card">
-                        <div class="order-header">
-                            <div class="order-info">
-                                <div class="order-details">
-                                    <h3>ORD-002</h3>
-                                    <p>Dec 8, 2024</p>
-                                </div>
-                                <span class="order-status status-processing">
-                                    Processing
-                                </span>
-                            </div>
-                            <div class="order-total">
-                                <p>$89.99</p>
-                                <button>View Details</button>
-                            </div>
-                        </div>
-
-                        <div class="order-items">
-                            <div class="order-item">
-                                <div class="item-image">
-                                    <i class="fas fa-sweater"></i>
-                                </div>
-                                <div class="item-details">
-                                    <h4>Wool Sweater</h4>
-                                    <p>M • Beige</p>
-                                    <p class="item-price">$89.99</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="payment-actions">
+                        <button class="btn btn-outline btn-sm">Edit</button>
+                        <button class="btn btn-ghost btn-sm">Remove</button>
                     </div>
                 </div>
+
+                <div class="card payment-card">
+                    <div class="payment-left">
+                        <div class="card-brand mastercard">MC</div>
+                        <div class="card-info">
+                            <h4>•••• •••• •••• 8888</h4>
+                            <p>Expires 08/27</p>
+                        </div>
+                    </div>
+                    <div class="payment-actions">
+                        <button class="btn btn-outline btn-sm">Edit</button>
+                        <button class="btn btn-ghost btn-sm">Remove</button>
+                    </div>
+                </div>
+
             </div>
 
-            <div id="wishlist-tab" class="tab-content hidden">
-                <div class="section-header">
-                    <h2 class="section-title">My Wishlist</h2>
-                    <button class="btn btn-outline">
-                        Share Wishlist
-                    </button>
+            <hr class="divider">
+
+            <div class="card notif-card">
+                <div class="notif-head">
+                    <p class="notif-title"><i class="fas fa-bell"></i> Notification Preferences</p>
+                    <p class="notif-subtitle">Choose how you want to receive updates about your orders and account.</p>
                 </div>
-
-                <div class="wishlist-grid">
-                    <div class="glass-card wishlist-card">
-                        <div class="wishlist-image" style="background: linear-gradient(135deg, #fce7f3, #fbcfe8);">
-                            <i class="fas fa-tshirt" style="color: #ec4899;"></i>
-                            <button class="wishlist-heart">
-                                <i class="fas fa-heart"></i>
-                            </button>
+                <div class="notif-body">
+                    <div class="notif-item">
+                        <div class="notif-detail">
+                            <h4>Order Updates</h4>
+                            <p>Get notified about order status changes</p>
                         </div>
-                        <div class="wishlist-content">
-                            <h3 class="wishlist-title">Silk Blouse</h3>
-                            <div class="wishlist-rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.8</span>
-                            </div>
-                            <div class="wishlist-footer">
-                                <div class="wishlist-prices">
-                                    <span class="current-price">$79.99</span>
-                                    <span class="original-price">$99.99</span>
-                                </div>
-                                <button class="add-to-cart">Add to Cart</button>
-                            </div>
-                        </div>
+                        <button class="btn btn-outline btn-sm">Email + SMS</button>
                     </div>
-
-                    <div class="glass-card wishlist-card">
-                        <div class="wishlist-image" style="background: linear-gradient(135deg, #f3e8ff, #e9d5ff);">
-                            <i class="fas fa-shoe-prints" style="color: #8b5cf6;"></i>
-                            <button class="wishlist-heart">
-                                <i class="fas fa-heart"></i>
-                            </button>
+                    <div class="notif-item">
+                        <div class="notif-detail">
+                            <h4>Promotions</h4>
+                            <p>Receive exclusive offers and sales</p>
                         </div>
-                        <div class="wishlist-content">
-                            <h3 class="wishlist-title">Leather Boots</h3>
-                            <div class="wishlist-rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.9</span>
-                            </div>
-                            <div class="wishlist-footer">
-                                <div class="wishlist-prices">
-                                    <span class="current-price">$159.99</span>
-                                </div>
-                                <button class="add-to-cart">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-card wishlist-card">
-                        <div class="wishlist-image" style="background: linear-gradient(135deg, #f3f4f6, #e5e7eb);">
-                            <i class="fas fa-scarf" style="color: #6b7280;"></i>
-                            <button class="wishlist-heart">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                        </div>
-                        <div class="wishlist-content">
-                            <h3 class="wishlist-title">Cashmere Scarf</h3>
-                            <div class="wishlist-rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.7</span>
-                            </div>
-                            <div class="wishlist-footer">
-                                <div class="wishlist-prices">
-                                    <span class="current-price">$49.99</span>
-                                    <span class="original-price">$69.99</span>
-                                </div>
-                                <button class="add-to-cart">Add to Cart</button>
-                            </div>
-                        </div>
+                        <button class="btn btn-outline btn-sm">Email Only</button>
                     </div>
                 </div>
             </div>
 
-            <div id="addresses-tab" class="tab-content hidden">
-                <div class="section-header">
-                    <h2 class="section-title">Saved Addresses</h2>
-                    <button class="btn btn-primary">Add New Address</button>
-                </div>
-
-                <div class="addresses-grid">
-                    <div class="glass-card address-card default">
-                        <div class="address-header">
-                            <div class="address-header-content">
-                                <h3 class="address-title">Home</h3>
-                                <span class="badge">Default</span>
-                            </div>
-                        </div>
-                        <div class="address-body">
-                            <div class="address-details">
-                                <p>
-                                    <% if (user) { %>
-                                        <%= user.firstName %> <%= user.lastName %>
-                                    <% } else { %>
-                                        John Doe
-                                    <% } %>
-                                </p>
-                                <p>123 Fashion Street</p>
-                                <p>New York, NY 10001</p>
-                                <p>United States</p>
-                                <p>+1 (555) 123-4567</p>
-                            </div>
-                            <div class="address-actions">
-                                <button class="btn btn-outline btn-sm">Edit</button>
-                                <button class="btn btn-ghost btn-sm">Remove</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-card address-card">
-                        <div class="address-header">
-                            <h3 class="address-title">Work</h3>
-                        </div>
-                        <div class="address-body">
-                            <div class="address-details">
-                                <p>
-                                    <% if (user) { %>
-                                        <%= user.firstName %> <%= user.lastName %>
-                                    <% } else { %>
-                                        John Doe
-                                    <% } %>
-                                </p>
-                                <p>456 Business Ave</p>
-                                <p>New York, NY 10002</p>
-                                <p>United States</p>
-                                <p>+1 (555) 987-6543</p>
-                            </div>
-                            <div class="address-actions">
-                                <button class="btn btn-outline btn-sm">Edit</button>
-                                <button class="btn btn-ghost btn-sm">Remove</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="payment-tab" class="tab-content hidden">
-                <div class="section-header">
-                    <h2 class="section-title">Payment Methods</h2>
-                    <button class="btn btn-primary">Add Payment Method</button>
-                </div>
-
-                <div class="payment-list">
-                    <div class="glass-card payment-card default">
-                        <div class="payment-content">
-                            <div class="payment-info">
-                                <div class="card-brand visa">VISA</div>
-                                <div class="card-details">
-                                    <h4>•••• •••• •••• 4242</h4>
-                                    <p>Expires 12/26</p>
-                                </div>
-                                <span class="badge">Default</span>
-                            </div>
-                            <div class="payment-actions">
-                                <button class="btn btn-outline btn-sm">Edit</button>
-                                <button class="btn btn-ghost btn-sm">Remove</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-card payment-card">
-                        <div class="payment-content">
-                            <div class="payment-info">
-                                <div class="card-brand mastercard">MC</div>
-                                <div class="card-details">
-                                    <h4>•••• •••• •••• 8888</h4>
-                                    <p>Expires 08/27</p>
-                                </div>
-                            </div>
-                            <div class="payment-actions">
-                                <button class="btn btn-outline btn-sm">Edit</button>
-                                <button class="btn btn-ghost btn-sm">Remove</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr class="divider">
-
-                <div class="notifications-card">
-                    <div class="notifications-header">
-                        <h3 class="notifications-title">
-                            <i class="fas fa-bell"></i>
-                            Notification Preferences
-                        </h3>
-                        <p class="notifications-subtitle">Choose how you want to receive updates about your orders and account.</p>
-                    </div>
-                    <div class="notifications-body">
-                        <div class="notification-item">
-                            <div class="notification-details">
-                                <h4>Order Updates</h4>
-                                <p>Get notified about order status changes</p>
-                            </div>
-                            <button class="btn btn-outline btn-sm">Email + SMS</button>
-                        </div>
-                        <div class="notification-item">
-                            <div class="notification-details">
-                                <h4>Promotions</h4>
-                                <p>Receive exclusive offers and sales</p>
-                            </div>
-                            <button class="btn btn-outline btn-sm">Email Only</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
     <%- include('partials/footer') %>
 
     <script>
-        let activeTab = 'orders';
-        function showTab(tabName) {
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(content => content.classList.add('hidden'));
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            tabBtns.forEach(btn => btn.classList.remove('active'));
-            document.getElementById(tabName + '-tab').classList.remove('hidden');
-            const activeBtn = document.querySelector(`[data-tab="${tabName}"]`);
-            activeBtn.classList.add('active');
-            activeTab = tabName;
+        function showTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tab);
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.toggle('hidden', content.id !== `${tab}-tab`);
+            });
         }
-        document.addEventListener('DOMContentLoaded', function() {
-            showTab('orders');
-        });
     </script>
+
+    <script src="/js/profile.js"></script>
 </body>
 </html>

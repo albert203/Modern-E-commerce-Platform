@@ -165,3 +165,90 @@ document.addEventListener('DOMContentLoaded', () => {
     signupForm.classList.remove('active');
     checkAuthState();
 });
+
+
+// Mobile Menu Toggle
+const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+const menuIcon = document.getElementById('menu-icon');
+const closeIcon = document.getElementById('close-icon');
+
+mobileMenuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active');
+    if (mobileMenu.classList.contains('active')) {
+        menuIcon.style.display = 'none';
+        closeIcon.style.display = 'block';
+    } else {
+        menuIcon.style.display = 'block';
+        closeIcon.style.display = 'none';
+    }
+});
+
+// Desktop Mega Menu
+const navItems = document.querySelectorAll('.nav-item');
+
+navItems.forEach(item => {
+    const button = item.querySelector('.nav-button');
+    const megaMenu = item.querySelector('.mega-menu');
+    const chevron = item.querySelector('.chevron');
+    
+    item.addEventListener('mouseenter', () => {
+        megaMenu.classList.add('active');
+        chevron.classList.add('rotate');
+    });
+    
+    item.addEventListener('mouseleave', () => {
+        megaMenu.classList.remove('active');
+        chevron.classList.remove('rotate');
+    });
+});
+
+// Mobile Submenu Toggle
+const mobileNavButtons = document.querySelectorAll('.mobile-nav-button');
+
+mobileNavButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const submenu = button.nextElementSibling;
+        const chevron = button.querySelector('.chevron');
+        
+        // Close other submenus
+        document.querySelectorAll('.mobile-submenu').forEach(menu => {
+            if (menu !== submenu) {
+                menu.classList.remove('active');
+                menu.previousElementSibling.querySelector('.chevron').classList.remove('rotate');
+            }
+        });
+        
+        submenu.classList.toggle('active');
+        chevron.classList.toggle('rotate');
+    });
+});
+
+// Search Toggle
+const searchToggle = document.getElementById('search-toggle');
+const searchInputContainer = document.getElementById('search-input-container');
+const searchInput = document.getElementById('search-input');
+const searchClose = document.getElementById('search-close');
+const searchIcon = document.getElementById('search-icon');
+
+searchToggle.addEventListener('click', () => {
+    searchIcon.style.display = 'none';
+    searchInputContainer.style.display = 'block';
+    searchInput.focus();
+});
+
+searchClose.addEventListener('click', () => {
+    searchInputContainer.style.display = 'none';
+    searchIcon.style.display = 'block';
+});
+
+searchInput.addEventListener('blur', (e) => {
+    // Delay to allow click on close button
+    setTimeout(() => {
+        if (document.activeElement !== searchInput) {
+            searchInputContainer.style.display = 'none';
+            searchIcon.style.display = 'block';
+        }
+    }, 200);
+});
+

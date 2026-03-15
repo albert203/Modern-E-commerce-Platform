@@ -160,7 +160,6 @@
 }
 
 .shopping-box h2 {
-    font-family: 'Cardo', serif;
     font-weight: 600;
     font-style: normal;
 }
@@ -318,7 +317,6 @@
     font-size: 15px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    font-family: 'Cardo', serif;
     font-weight: 400;
     font-style: normal;
 }
@@ -670,7 +668,6 @@
 }
 
 .profile-tabs {
-    font-family: 'Old Standard TT', serif;
     font-size: 1.1rem;
     color: #000;
     text-transform: uppercase;
@@ -695,7 +692,6 @@
     display: flex;
     background-color: var(--tan);
     text-decoration: none;
-    font-family: 'Old Standard TT', serif;
     font-size: 1.1rem;
     color: var(--eerie-black);
     text-transform: uppercase;
@@ -749,7 +745,6 @@
     font-size: 1.2rem;
     color: #fff;
     font-weight: 600;
-    font-family: 'Cormorant Garamond', serif;
     padding-top: 10px;
 }
 

@@ -12,6 +12,7 @@ interface User {
     lastname: string;
     email: string;
     password: string;
+    is_admin: number;
 }
 
 // ─── Validation Schemas ───────────────────────────────────────────────────────
@@ -138,6 +139,7 @@ export async function loginUser(req: Request, res: Response) {
             lastName: user.lastname,
             email: user.email,
         };
+        req.session.isAdmin = user.is_admin === 1;
 
         res.json({ message: 'Login Successful' });
     } catch (error) {
@@ -221,5 +223,15 @@ export async function updateUserProfile(req: Request, res: Response) {
     } catch (error) {
         console.error('Error updating profile:', error);
         res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+export async function getProducts(req: Request, res: Response) {
+    try {
+        const [rows]: any = await db.execute('SELECT * FROM products WHERE stock > 0');
+        res.json(rows);
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).json({ error: 'Error fetching products' });
     }
 }

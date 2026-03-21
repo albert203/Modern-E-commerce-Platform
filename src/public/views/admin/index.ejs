@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Sway</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--background);
+            color: var(--foreground);
+            min-height: 100vh;
+        }
+        .admin-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .admin-header h1 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+        }
+        .admin-header-right { display: flex; align-items: center; gap: 1rem; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            transition: opacity 0.15s;
+        }
+        .btn:hover { opacity: 0.85; }
+        .btn-primary { background: var(--primary); color: var(--primary-foreground); }
+        .btn-ghost { background: none; border: 1px solid var(--border); color: var(--muted-foreground); }
+        .btn-danger {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--tertiary);
+            font-size: 0.75rem;
+            padding: 0.35rem 0.75rem;
+        }
+        .admin-body { padding: 2rem; max-width: 1100px; margin: 0 auto; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted-foreground);
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+        thead tr { border-bottom: 1px solid var(--border); }
+        th {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted-foreground);
+        }
+        td { padding: 0.875rem 1rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--muted); }
+        .product-thumb {
+            width: 3rem;
+            height: 3.75rem;
+            object-fit: cover;
+            border-radius: 0.25rem;
+            background: var(--muted);
+            display: block;
+        }
+        .thumb-placeholder {
+            width: 3rem;
+            height: 3.75rem;
+            background: var(--muted);
+            border-radius: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            color: var(--muted-foreground);
+        }
+        .stock-badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        .stock-ok  { background: #e6f0ef; color: var(--tertiary); }
+        .stock-low { background: #f5ede9; color: var(--primary); }
+        .stock-out { background: var(--muted); color: var(--muted-foreground); }
+        .actions { display: flex; gap: 0.5rem; align-items: center; }
+        .empty {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--muted-foreground);
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+<header class="admin-header">
+    <h1>Sway — Admin</h1>
+    <div class="admin-header-right">
+        <a href="/shop" class="btn btn-ghost" target="_blank">View Store</a>
+        <a href="/admin/logout" class="btn btn-ghost">Logout</a>
+    </div>
+</header>
+
+<div class="admin-body">
+    <div class="section-header">
+        <span class="section-title">Products (<%= products.length %>)</span>
+        <a href="/admin/products/new" class="btn btn-primary">+ Add Product</a>
+    </div>
+
+    <% if (products.length === 0) { %>
+        <div class="empty">No products yet — add your first one.</div>
+    <% } else { %>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Was</th>
+                    <th>Variant</th>
+                    <th>Stock</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(p => { %>
+                <tr>
+                    <td>
+                        <% if (p.image && !p.image.startsWith('/')) { %>
+                            <%
+                              const thumbUrl = `https://res.cloudinary.com/${cloudName}/image/upload/w_120,q_auto,f_auto/${p.image}`;
+                            %>
+                            <img class="product-thumb" src="<%= thumbUrl %>" alt="<%= p.name %>" />
+                        <% } else if (p.image) { %>
+                            <img class="product-thumb" src="<%= p.image %>" alt="<%= p.name %>" />
+                        <% } else { %>
+                            <div class="thumb-placeholder">No img</div>
+                        <% } %>
+                    </td>
+                    <td><strong><%= p.name %></strong></td>
+                    <td>$<%= parseFloat(p.price).toFixed(2) %></td>
+                    <td><%= p.original_price ? '$' + parseFloat(p.original_price).toFixed(2) : '—' %></td>
+                    <td><%= p.variant || '—' %></td>
+                    <td>
+                        <% if (p.stock === 0) { %>
+                            <span class="stock-badge stock-out">Out of stock</span>
+                        <% } else if (p.stock <= 3) { %>
+                            <span class="stock-badge stock-low"><%= p.stock %> left</span>
+                        <% } else { %>
+                            <span class="stock-badge stock-ok"><%= p.stock %> in stock</span>
+                        <% } %>
+                    </td>
+                    <td>
+                        <div class="actions">
+                            <a href="/admin/products/<%= p.id %>/edit" class="btn btn-ghost">Edit</a>
+                            <form method="POST" action="/admin/products/<%= p.id %>/delete"
+                                  onsubmit="return confirm('Delete <%= p.name %>?')">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</div>
+
+</body>
+</html>

@@ -1,35 +1,36 @@
 // src/public/js/header.js
+
+// ─── Auth Modal ───────────────────────────────────────────────────────────────
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ─── Elements ─────────────────────────────────────────────────────────────
-
-    const accountToggle = document.getElementById('account-toggle');
+    const accountToggle   = document.getElementById('account-toggle');
     const accountDropdown = document.getElementById('account-dropdown');
-    const modal = document.getElementById('login_modal');
-    const underlay = document.querySelector('.underlay');
-    const formClose = document.querySelector('.form_close');
-    const loginForm = document.getElementById('login_form');
-    const signupForm = document.getElementById('signup_form');
-    const loginError = document.getElementById('loginError');
-    const signupLink = document.getElementById('signup');
-    const loginLink = document.getElementById('login');
-    const pwToggles = document.querySelectorAll('.pw_hide');
+    const authModal       = document.getElementById('login_modal');
+    const modalOverlay    = document.querySelector('.underlay');
+    const modalClose      = document.querySelector('.form_close');
+    const loginForm       = document.getElementById('login_form');
+    const signupForm      = document.getElementById('signup_form');
+    const loginError      = document.getElementById('loginError');
+    const signupLink      = document.getElementById('signup');
+    const loginLink       = document.getElementById('login');
+    const passwordToggles = document.querySelectorAll('.pw_hide');
 
-    let isLoggedIn = false;
+    let userLoggedIn = false;
 
-    // ─── Modal ────────────────────────────────────────────────────────────────
+    // ── Modal helpers ──────────────────────────────────────────────────────────
 
-    function openModal(formToShow = 'login') {
-        if (isLoggedIn) return;
-        modal.classList.add('active');
-        underlay.classList.add('active');
+    function openAuthModal(form = 'login') {
+        if (userLoggedIn) return;
+        authModal.classList.add('active');
+        modalOverlay.classList.add('active');
         accountDropdown.classList.remove('active');
-        formToShow === 'login' ? showLoginForm() : showSignupForm();
+        form === 'login' ? showLoginForm() : showSignupForm();
     }
 
-    function closeModal() {
-        modal.classList.remove('active');
-        underlay.classList.remove('active');
+    function closeAuthModal() {
+        authModal.classList.remove('active');
+        modalOverlay.classList.remove('active');
         accountDropdown.classList.remove('active');
     }
 
@@ -43,12 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
         loginForm.classList.remove('active');
     }
 
-    // ─── Account Toggle ───────────────────────────────────────────────────────
+    // ── Account toggle ─────────────────────────────────────────────────────────
 
     accountToggle.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (!isLoggedIn) {
-            modal.classList.contains('active') ? closeModal() : openModal('login');
+        if (!userLoggedIn) {
+            authModal.classList.contains('active') ? closeAuthModal() : openAuthModal('login');
         } else {
             accountDropdown.classList.toggle('active');
         }
@@ -60,195 +61,182 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    underlay.addEventListener('click', closeModal);
-    formClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', closeAuthModal);
+    modalClose.addEventListener('click', closeAuthModal);
     signupLink.addEventListener('click', (e) => { e.preventDefault(); showSignupForm(); });
-    loginLink.addEventListener('click', (e) => { e.preventDefault(); showLoginForm(); });
+    loginLink.addEventListener('click',  (e) => { e.preventDefault(); showLoginForm(); });
 
-    // ─── Dropdown Contents ────────────────────────────────────────────────────
+    // ── Dropdown menus ─────────────────────────────────────────────────────────
 
     function showLoggedInMenu() {
-        isLoggedIn = true;
+        userLoggedIn = true;
         accountDropdown.classList.remove('active');
         accountDropdown.innerHTML = `
             <a href="/profile">My Profile</a>
-            <a href="#" id="logout_btn">Log Out</a>
+            <a href="#" id="logout-btn">Log Out</a>
         `;
-        document.getElementById('logout_btn').addEventListener('click', (e) => {
+        document.getElementById('logout-btn').addEventListener('click', (e) => {
             e.preventDefault();
             handleLogout();
         });
     }
 
     function showLoggedOutMenu() {
-        isLoggedIn = false;
+        userLoggedIn = false;
         accountDropdown.classList.remove('active');
         accountDropdown.innerHTML = `
-            <a href="#" id="open_signup">Create Account</a>
+            <a href="#" id="open-signup">Create Account</a>
             <a href="#">Order History</a>
         `;
-        document.getElementById('open_signup').addEventListener('click', (e) => {
+        document.getElementById('open-signup').addEventListener('click', (e) => {
             e.preventDefault();
-            openModal('signup');
+            openAuthModal('signup');
         });
     }
 
-    // ─── Auth State ───────────────────────────────────────────────────────────
+    // ── Auth state ─────────────────────────────────────────────────────────────
 
     async function checkAuthState() {
         try {
-            const response = await fetch('/api/user');
-            const data = await response.json();
+            const res  = await fetch('/api/user');
+            const data = await res.json();
             data.loggedIn ? showLoggedInMenu() : showLoggedOutMenu();
-        } catch (error) {
-            console.error('Error checking auth state:', error);
+        } catch (err) {
+            console.error('checkAuthState error:', err);
         }
     }
 
-    // ─── Password Toggle ──────────────────────────────────────────────────────
+    // ── Password visibility ────────────────────────────────────────────────────
 
-    pwToggles.forEach((icon) => {
+    passwordToggles.forEach((icon) => {
         icon.addEventListener('click', () => {
-            const input = icon.parentElement.querySelector('input');
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.replace('uil-eye-slash', 'uil-eye');
-            } else {
-                input.type = 'password';
-                icon.classList.replace('uil-eye', 'uil-eye-slash');
-            }
+            const input    = icon.parentElement.querySelector('input');
+            const isHidden = input.type === 'password';
+            input.type = isHidden ? 'text' : 'password';
+            icon.classList.replace(
+                isHidden ? 'uil-eye-slash' : 'uil-eye',
+                isHidden ? 'uil-eye'       : 'uil-eye-slash'
+            );
         });
     });
 
-    // ─── Login Submission ─────────────────────────────────────────────────────
+    // ── Login submit ───────────────────────────────────────────────────────────
 
-    loginForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        const formData = new FormData(loginForm);
-        const formDataObject = Object.fromEntries(formData.entries());
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const payload = Object.fromEntries(new FormData(loginForm).entries());
 
         try {
-            const response = await fetch(loginForm.action, {
-                method: loginForm.method,
+            const res = await fetch(loginForm.action, {
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formDataObject),
+                body: JSON.stringify(payload),
             });
 
-            if (response.ok) {
-                closeModal();
+            if (res.ok) {
+                closeAuthModal();
                 showLoggedInMenu();
             } else {
                 throw new Error('Invalid email or password');
             }
-        } catch (error) {
-            loginError.textContent = error.message;
+        } catch (err) {
+            loginError.textContent = err.message;
         }
     });
 
-    // ─── Logout ───────────────────────────────────────────────────────────────
+    // ── Logout ─────────────────────────────────────────────────────────────────
 
     async function handleLogout() {
         try {
-            const response = await fetch('/api/logout', { method: 'POST' });
-            if (response.ok) {
+            const res = await fetch('/api/logout', { method: 'POST' });
+            if (res.ok) {
                 showLoggedOutMenu();
                 window.location.href = '/';
             }
-        } catch (error) {
-            console.error('Logout failed:', error);
+        } catch (err) {
+            console.error('handleLogout error:', err);
         }
     }
 
-    // ─── Init ─────────────────────────────────────────────────────────────────
+    // ── Init ───────────────────────────────────────────────────────────────────
 
-    loginForm.classList.add('active');
-    signupForm.classList.remove('active');
+    showLoginForm();
     checkAuthState();
 });
 
+// ─── Mobile Menu ──────────────────────────────────────────────────────────────
 
-// Mobile Menu Toggle
-const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-const mobileMenu = document.getElementById('mobile-menu');
-const menuIcon = document.getElementById('menu-icon');
-const closeIcon = document.getElementById('close-icon');
+const mobileToggle  = document.getElementById('mobile-menu-toggle');
+const mobileMenu    = document.getElementById('mobile-menu');
+const hamburgerIcon = document.getElementById('menu-icon');
+const closeIcon     = document.getElementById('close-icon');
 
-mobileMenuToggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('active');
-    if (mobileMenu.classList.contains('active')) {
-        menuIcon.style.display = 'none';
-        closeIcon.style.display = 'block';
-    } else {
-        menuIcon.style.display = 'block';
-        closeIcon.style.display = 'none';
-    }
+mobileToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('active');
+    hamburgerIcon.style.display = isOpen ? 'none'  : 'block';
+    closeIcon.style.display     = isOpen ? 'block' : 'none';
 });
 
-// Desktop Mega Menu
-const navItems = document.querySelectorAll('.nav-item');
+// ─── Desktop Mega Menu ────────────────────────────────────────────────────────
 
-navItems.forEach(item => {
-    const button = item.querySelector('.nav-button');
-    const megaMenu = item.querySelector('.mega-menu');
-    const chevron = item.querySelector('.chevron');
-    
-    item.addEventListener('mouseenter', () => {
+document.querySelectorAll('.nav-item').forEach((navItem) => {
+    const megaMenu = navItem.querySelector('.mega-menu');
+    const chevron  = navItem.querySelector('.chevron');
+
+    navItem.addEventListener('mouseenter', () => {
         megaMenu.classList.add('active');
         chevron.classList.add('rotate');
     });
-    
-    item.addEventListener('mouseleave', () => {
+
+    navItem.addEventListener('mouseleave', () => {
         megaMenu.classList.remove('active');
         chevron.classList.remove('rotate');
     });
 });
 
-// Mobile Submenu Toggle
-const mobileNavButtons = document.querySelectorAll('.mobile-nav-button');
+// ─── Mobile Submenu ───────────────────────────────────────────────────────────
 
-mobileNavButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const submenu = button.nextElementSibling;
-        const chevron = button.querySelector('.chevron');
-        
-        // Close other submenus
-        document.querySelectorAll('.mobile-submenu').forEach(menu => {
+document.querySelectorAll('.mobile-nav-button').forEach((btn) => {
+    btn.addEventListener('click', () => {
+        const submenu = btn.nextElementSibling;
+        const chevron = btn.querySelector('.chevron');
+
+        document.querySelectorAll('.mobile-submenu').forEach((menu) => {
             if (menu !== submenu) {
                 menu.classList.remove('active');
                 menu.previousElementSibling.querySelector('.chevron').classList.remove('rotate');
             }
         });
-        
+
         submenu.classList.toggle('active');
         chevron.classList.toggle('rotate');
     });
 });
 
-// Search Toggle
-const searchToggle = document.getElementById('search-toggle');
-const searchInputContainer = document.getElementById('search-input-container');
-const searchInput = document.getElementById('search-input');
-const searchClose = document.getElementById('search-close');
-const searchIcon = document.getElementById('search-icon');
+// ─── Search ───────────────────────────────────────────────────────────────────
 
-searchToggle.addEventListener('click', () => {
-    searchIcon.style.display = 'none';
-    searchInputContainer.style.display = 'block';
+const searchToggle    = document.getElementById('search-toggle');
+const searchContainer = document.getElementById('search-input-container');
+const searchInput     = document.getElementById('search-input');
+const searchClose     = document.getElementById('search-close');
+const searchIcon      = document.getElementById('search-icon');
+
+function openSearch() {
+    searchIcon.style.display      = 'none';
+    searchContainer.style.display = 'block';
     searchInput.focus();
-});
+}
 
-searchClose.addEventListener('click', () => {
-    searchInputContainer.style.display = 'none';
-    searchIcon.style.display = 'block';
-});
+function closeSearch() {
+    searchContainer.style.display = 'none';
+    searchIcon.style.display      = 'block';
+}
 
-searchInput.addEventListener('blur', (e) => {
-    // Delay to allow click on close button
+searchToggle.addEventListener('click', openSearch);
+searchClose.addEventListener('click', closeSearch);
+
+searchInput.addEventListener('blur', () => {
     setTimeout(() => {
-        if (document.activeElement !== searchInput) {
-            searchInputContainer.style.display = 'none';
-            searchIcon.style.display = 'block';
-        }
+        if (document.activeElement !== searchInput) closeSearch();
     }, 200);
 });
-

@@ -1,57 +1,83 @@
 /* =============================================================================
    GLOBAL STYLES
    File: css/global.css
-   Description: Global CSS variables and base styles for the e-commerce platform.
+   Palette: Sway Editorial
+   Primary #8A6152 · Secondary #362F2D · Tertiary #4E716F · Neutral #FDFBF9
+============================================================================= */
 
-
-/* -----------------------------------------------------------------------------
-   1. CSS VARIABLES
------------------------------------------------------------------------------ */
 :root {
-    --background: oklch(0.98 0.005 60);
-    --foreground: oklch(0.2 0.02 30);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.2 0.02 30);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.2 0.02 30);
-    --primary: oklch(0.45 0.08 45);
-    --primary-foreground: oklch(0.98 0.005 60);
-    --secondary: oklch(0.95 0.01 60);
-    --secondary-foreground: oklch(0.2 0.02 30);
-    --muted: oklch(0.94 0.01 60);
-    --muted-foreground: oklch(0.45 0.02 30);
-    --accent: oklch(0.55 0.1 45);
-    --accent-foreground: oklch(0.98 0.005 60);
-    --destructive: oklch(0.577 0.245 27.325);
-    --destructive-foreground: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --radius: 0.625rem;
+    /* ── Base ──────────────────────────────────────────────────────────── */
+    --background:          #FDFBF9;   /* Neutral warm off-white              */
+    --foreground:          #362F2D;   /* Secondary deep brown                */
+
+    /* ── Surfaces ──────────────────────────────────────────────────────── */
+    --card:                #F5F3F0;   /* Slightly lifted warm surface        */
+    --card-foreground:     #362F2D;
+
+    /* ── Brand ─────────────────────────────────────────────────────────── */
+    --primary:             #8A6152;   /* Terracotta — buttons, CTAs, links   */
+    --primary-foreground:  #FDFBF9;
+
+    --secondary:           #362F2D;   /* Deep brown — inverted surfaces      */
+    --secondary-foreground:#FDFBF9;
+
+    --tertiary:            #4E716F;   /* Teal — sale, accents, highlights    */
+    --tertiary-foreground: #FDFBF9;
+
+    /* ── Muted / UI chrome ─────────────────────────────────────────────── */
+    --muted:               #EDE9E5;   /* Subtle tinted background            */
+    --muted-foreground:    #7A6E6A;   /* De-emphasised text                  */
+
+    /* ── Borders & inputs ──────────────────────────────────────────────── */
+    --border:              #DDD9D5;
+    --input:               #DDD9D5;
+    --ring:                #8A6152;   /* Focus ring = Primary                */
+
+    /* ── Misc ──────────────────────────────────────────────────────────── */
+    --radius:              0.625rem;
 }
 
+/* ── Dark mode ─────────────────────────────────────────────────────────────
+   Warm-charcoal direction: the palette deepens but stays earthy, never cold.
+   Usage: add class="dark" to <html> (or toggle via JS).
+   ───────────────────────────────────────────────────────────────────────── */
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.145 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.985 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --border: oklch(0.269 0 0);
+    --background:          #1F1A18;   /* Deepest warm near-black             */
+    --foreground:          #FDFBF9;   /* Neutral for readable text           */
+
+    --card:                #2A2320;   /* Slightly lifted dark surface        */
+    --card-foreground:     #FDFBF9;
+
+    --primary:             #B08070;   /* Lightened terracotta for contrast   */
+    --primary-foreground:  #1F1A18;
+
+    --secondary:           #4A4240;   /* Mid warm-brown surface              */
+    --secondary-foreground:#FDFBF9;
+
+    --tertiary:            #6A9391;   /* Lighter teal for dark bg contrast   */
+    --tertiary-foreground: #1F1A18;
+
+    --muted:               #332E2B;
+    --muted-foreground:    #A09590;
+
+    --border:              #3A3330;
+    --input:               #3A3330;
+    --ring:                #B08070;
 }
 
-
-/* -----------------------------------------------------------------------------
-   2. RESET & BASE
------------------------------------------------------------------------------ */
-* {
+/* =============================================================================
+   RESET & BASE
+============================================================================= */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
 }

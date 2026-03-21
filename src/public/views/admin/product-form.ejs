@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= product ? 'Edit' : 'New' %> Product | Sway Admin</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--background);
+            color: var(--foreground);
+            min-height: 100vh;
+        }
+        .admin-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .admin-header h1 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            transition: opacity 0.15s;
+        }
+        .btn:hover { opacity: 0.85; }
+        .btn-primary { background: var(--primary); color: var(--primary-foreground); }
+        .btn-ghost { background: none; border: 1px solid var(--border); color: var(--muted-foreground); }
+        .form-wrap { max-width: 640px; margin: 2.5rem auto; padding: 0 1.5rem; }
+        .form-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.75rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+        .error-banner {
+            background: #f5ede9;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+        .field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
+        label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted-foreground);
+        }
+        input[type="text"],
+        input[type="number"] {
+            padding: 0.6rem 0.875rem;
+            border: 1px solid var(--input);
+            border-radius: var(--radius);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            color: var(--foreground);
+            background: var(--background);
+            outline: none;
+            width: 100%;
+            transition: border-color 0.15s;
+        }
+        input:focus { border-color: var(--ring); }
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .image-upload-area {
+            border: 1.5px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            position: relative;
+        }
+        .image-upload-area:hover { border-color: var(--primary); background: #faf7f5; }
+        .image-upload-area input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+        .upload-icon { width: 2rem; height: 2rem; color: var(--muted-foreground); margin: 0 auto 0.75rem; }
+        .upload-label { font-size: 0.875rem; color: var(--foreground); font-weight: 500; }
+        .upload-sub { font-size: 0.75rem; color: var(--muted-foreground); margin-top: 0.25rem; }
+        .current-image {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: var(--muted);
+            border-radius: var(--radius);
+            margin-bottom: 0.75rem;
+        }
+        .current-image img {
+            width: 3.5rem;
+            height: 4.375rem;
+            object-fit: cover;
+            border-radius: 0.25rem;
+        }
+        .current-image-info { font-size: 0.8rem; color: var(--muted-foreground); }
+        .current-image-info strong { display: block; color: var(--foreground); margin-bottom: 0.2rem; }
+        #image-preview { display: none; margin-top: 1rem; }
+        #image-preview img { width: 100%; max-height: 200px; object-fit: cover; border-radius: var(--radius); }
+        .form-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .optional { font-weight: 400; text-transform: none; font-size: 0.7rem; }
+    </style>
+</head>
+<body>
+
+<header class="admin-header">
+    <h1>Sway — Admin</h1>
+    <a href="/admin" class="btn btn-ghost">← Back to products</a>
+</header>
+
+<div class="form-wrap">
+    <h2 class="form-title"><%= product ? 'Edit Product' : 'Add New Product' %></h2>
+
+    <% if (error) { %>
+        <div class="error-banner"><%= error %></div>
+    <% } %>
+
+    <form
+        method="POST"
+        action="<%= product ? '/admin/products/' + product.id : '/admin/products' %>"
+        enctype="multipart/form-data"
+    >
+        <!-- Image -->
+        <div class="field">
+            <label>Product Image</label>
+
+            <% if (product && product.image && !product.image.startsWith('/')) { %>
+                <div class="current-image">
+                    <img
+                        src="https://res.cloudinary.com/<%= cloudName %>/image/upload/w_140,q_auto,f_auto/<%= product.image %>"
+                        alt="Current image"
+                    />
+                    <div class="current-image-info">
+                        <strong>Current image</strong>
+                        Upload a new file below to replace it
+                    </div>
+                </div>
+            <% } else if (product && product.image) { %>
+                <div class="current-image">
+                    <img src="<%= product.image %>" alt="Current image" />
+                    <div class="current-image-info">
+                        <strong>Current image (local)</strong>
+                        Upload a new file to replace with Cloudinary
+                    </div>
+                </div>
+            <% } %>
+
+            <div class="image-upload-area">
+                <input type="file" name="image" accept="image/*" id="image-input" />
+                <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <p class="upload-label">Click to upload or drag & drop</p>
+                <p class="upload-sub">PNG, JPG, WEBP — max 10MB</p>
+            </div>
+            <div id="image-preview"><img id="preview-img" src="" alt="Preview" /></div>
+        </div>
+
+        <!-- Name -->
+        <div class="field">
+            <label for="name">Product Name</label>
+            <input type="text" id="name" name="name"
+                   value="<%= product ? product.name : '' %>"
+                   placeholder="e.g. Linen Shirt" required />
+        </div>
+
+        <!-- Prices -->
+        <div class="field-row">
+            <div class="field">
+                <label for="price">Price ($)</label>
+                <input type="number" id="price" name="price"
+                       value="<%= product ? product.price : '' %>"
+                       placeholder="89.00" step="0.01" min="0" required />
+            </div>
+            <div class="field">
+                <label for="original_price">
+                    Original Price ($) <span class="optional">— leave blank if not on sale</span>
+                </label>
+                <input type="number" id="original_price" name="original_price"
+                       value="<%= product && product.original_price ? product.original_price : '' %>"
+                       placeholder="e.g. 120.00" step="0.01" min="0" />
+            </div>
+        </div>
+
+        <!-- Variant -->
+        <div class="field">
+            <label for="variant">Variant <span class="optional">— optional</span></label>
+            <input type="text" id="variant" name="variant"
+                   value="<%= product ? product.variant || '' : '' %>"
+                   placeholder="e.g. Camel / Size M" />
+        </div>
+
+        <!-- Stock -->
+        <div class="field">
+            <label for="stock">Stock Quantity</label>
+            <input type="number" id="stock" name="stock"
+                   value="<%= product ? product.stock : 0 %>"
+                   min="0" required />
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                <%= product ? 'Save Changes' : 'Add Product' %>
+            </button>
+            <a href="/admin" class="btn btn-ghost">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('image-input').addEventListener('change', function () {
+        const file = this.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = e => {
+            document.getElementById('preview-img').src = e.target.result;
+            document.getElementById('image-preview').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    });
+</script>
+
+</body>
+</html>
